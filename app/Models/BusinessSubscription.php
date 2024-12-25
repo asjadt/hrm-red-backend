@@ -9,7 +9,7 @@ class BusinessSubscription extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['business_id', 'service_plan_id', 'start_date', 'end_date', 'status', 'amount', 'paid_at'];
+    protected $fillable = ['business_id', 'service_plan_id', 'start_date', 'end_date', 'status', 'amount', 'paid_at', "transaction_id"];
 
 
     public function business()

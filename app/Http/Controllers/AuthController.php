@@ -538,6 +538,8 @@ $datediff = $now - $user_created_date;
             });
             $user->permissions = $user->permissions->pluck("name");
 
+            $business = $user->business;
+
 // Extracting only the required data
 $responseData = [
     'id' => $user->id,
@@ -558,6 +560,7 @@ $responseData = [
         'start_date' => $user->business ? $user->business->start_date : null,
         'currency' => $user->business ? $user->business->currency : null,
         'flexible_rota_enabled' => $user->business ? $user->business->flexible_rota_enabled : null,
+        'reseller_id' => $business ? $business->reseller_id : null,
 
 
     ]
@@ -1326,6 +1329,7 @@ public function getUser (Request $request) {
             });
 
             $user->permissions = $user->permissions->pluck("name");
+            $business = $user->business;
 
             // Extracting only the required data
 $responseData = [
@@ -1347,6 +1351,7 @@ $responseData = [
         'start_date' => $user->business ? $user->business->start_date : null,
         'currency' => $user->business ? $user->business->currency : null,
         'flexible_rota_enabled' => $user->business ? $user->business->flexible_rota_enabled : null,
+        'reseller_id' => $business ? $business->reseller_id : null,
 
     ]
 ];
