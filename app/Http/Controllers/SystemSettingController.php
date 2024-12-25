@@ -212,6 +212,8 @@ class SystemSettingController extends Controller
 
              $systemSetting = SystemSetting::first();
 
+             $systemSettingArray = NULL;
+
              if(!empty($systemSetting)) {
                 $systemSettingArray = $systemSetting->toArray();
 
