@@ -3200,12 +3200,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "admin@gmail.com"
+                                        "example": "asjadtariq@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "12345678"
+                                        "example": "12345678@We"
                                     }
                                 },
                                 "type": "object"
@@ -3291,12 +3291,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "admin@gmail.com"
+                                        "example": "asjadtariq@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "12345678"
+                                        "example": "12345678@We"
                                     }
                                 },
                                 "type": "object"
@@ -5998,99 +5998,6 @@
                 ]
             }
         },
-        "/v1.0/businesses-part-4": {
-            "put": {
-                "tags": [
-                    "business_management"
-                ],
-                "summary": "This method is to update user with business",
-                "description": "This method is to update user with business",
-                "operationId": "updateBusinessPart4",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "user",
-                                    "business"
-                                ],
-                                "properties": {
-                                    "business": {
-                                        "type": "string",
-                                        "format": "array",
-                                        "example": {
-                                            "id": 1,
-                                            "trail_end_date": "",
-                                            "is_self_registered_businesses": 1,
-                                            "service_plan_id": 0,
-                                            "service_plan_discount_code": 0,
-                                            "number_of_employees_allowed": 20
-                                        }
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthenticated",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocesseble Content",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
         "/v1.0/businesses-take-over": {
             "put": {
                 "tags": [
@@ -7096,6 +7003,80 @@
                         "name": "id",
                         "in": "path",
                         "description": "id",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocesseble Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/v1.0/businesses-id-by-email/{email}": {
+            "get": {
+                "tags": [
+                    "business_management"
+                ],
+                "summary": "This method is to get business id by email",
+                "description": "This method is to get business id by email",
+                "operationId": "getBusinessIdByEmail",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "email",
                         "required": true,
                         "example": "1"
                     }
@@ -39085,6 +39066,115 @@
                 ]
             }
         },
+        "/v7.0/users": {
+            "get": {
+                "tags": [
+                    "user_management"
+                ],
+                "summary": "This method is to get user",
+                "description": "This method is to get user",
+                "operationId": "getUsersV7",
+                "parameters": [
+                    {
+                        "name": "response_type",
+                        "in": "query",
+                        "description": "response_type: in pdf,csv,json",
+                        "required": true,
+                        "example": "json"
+                    },
+                    {
+                        "name": "file_name",
+                        "in": "query",
+                        "description": "file_name",
+                        "required": true,
+                        "example": "employee"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "per_page",
+                        "required": true,
+                        "example": "6"
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "start_date",
+                        "required": true,
+                        "example": "2019-06-29"
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "end_date",
+                        "required": true,
+                        "example": "2019-06-29"
+                    },
+                    {
+                        "name": "full_name",
+                        "in": "query",
+                        "description": "full_name",
+                        "required": true,
+                        "example": "full_name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocesseble Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/v1.0/users/{id}": {
             "get": {
                 "tags": [
@@ -39934,6 +40024,80 @@
                 "summary": "This method is to get user by id",
                 "description": "This method is to get user by id",
                 "operationId": "getUserByIdV3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "example": "6"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocesseble Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/v4.0/users/{id}": {
+            "get": {
+                "tags": [
+                    "user_management.employee"
+                ],
+                "summary": "This method is to get user by id",
+                "description": "This method is to get user by id",
+                "operationId": "getUserByIdV4",
                 "parameters": [
                     {
                         "name": "id",

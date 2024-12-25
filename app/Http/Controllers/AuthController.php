@@ -168,9 +168,9 @@ class AuthController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *            required={"email","password"},
-     *            @OA\Property(property="email", type="string", format="string",example="admin@gmail.com"),
+     *            @OA\Property(property="email", type="string", format="string",example="asjadtariq@gmail.com"),
 
-     * *  @OA\Property(property="password", type="string", format="string",example="12345678"),
+     * *  @OA\Property(property="password", type="string", format="string",example="12345678@We"),
      *
      *         ),
      *      ),
@@ -362,9 +362,9 @@ $datediff = $now - $user_created_date;
      *         required=true,
      *         @OA\JsonContent(
      *            required={"email","password"},
-     *            @OA\Property(property="email", type="string", format="string",example="admin@gmail.com"),
+     *            @OA\Property(property="email", type="string", format="string",example="asjadtariq@gmail.com"),
 
-     * *  @OA\Property(property="password", type="string", format="string",example="12345678"),
+     * *  @OA\Property(property="password", type="string", format="string",example="12345678@We"),
      *
      *         ),
      *      ),

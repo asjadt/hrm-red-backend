@@ -125,6 +125,15 @@ Artisan::call('l5-swagger:generate');
 return "swagger generated";
     }
 
+    public function clearCache() {
+
+        Artisan::call('optimize:clear');
+        Artisan::call('passport:install');
+        Artisan::call('l5-swagger:generate');
+        return "ok";
+    }
+
+
     public function setUp(Request $request)
     {
         $this->storeActivity($request, "DUMMY activity","DUMMY description");

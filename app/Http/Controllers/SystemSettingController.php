@@ -122,7 +122,7 @@ class SystemSettingController extends Controller
                 ], 404);
             }
 
-            
+
                 $systemSettingArray = $systemSetting->toArray();
                 $systemSettingArray["STRIPE_KEY"] = $systemSetting->STRIPE_KEY;
                 $systemSettingArray["STRIPE_SECRET"] = $systemSetting->STRIPE_SECRET;
@@ -212,10 +212,12 @@ class SystemSettingController extends Controller
 
              $systemSetting = SystemSetting::first();
 
-             $systemSettingArray = $systemSetting->toArray();
+             if(!empty($systemSetting)) {
+                $systemSettingArray = $systemSetting->toArray();
 
-             $systemSettingArray["STRIPE_KEY"] = $systemSetting->STRIPE_KEY;
-             $systemSettingArray["STRIPE_SECRET"] = $systemSetting->STRIPE_SECRET;
+                $systemSettingArray["STRIPE_KEY"] = $systemSetting->STRIPE_KEY;
+                $systemSettingArray["STRIPE_SECRET"] = $systemSetting->STRIPE_SECRET;
+             }
 
 
              return response()->json($systemSettingArray, 200);

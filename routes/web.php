@@ -61,6 +61,7 @@ Route::middleware(['developer'])->group(function () {
     Route::get('/activity-log', [SetUpController::class, "getActivityLogs"])->name("activity-log");
 
 
+    Route::get('/clear', [SetUpController::class, "clearCache"])->name("clear");
 
     Route::get('/setup', [SetUpController::class, "setUp"])->name("setup");
     Route::get('/backup', [SetUpController::class, "backup"])->name("backup");
