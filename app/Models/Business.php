@@ -170,32 +170,32 @@ class Business extends Model
             ->latest();
     }
 
-    public function stripe_subscription_enabled()
-    {
-        $systemSetting = SystemSetting::where("reseller_id", $this->reseller_id)
-            ->first();
+    public function getStripeSubscriptionEnabledAttribute()
+{
+    $systemSetting = SystemSetting::where("reseller_id", $this->reseller_id)
+        ->first();
 
-        if (empty($systemSetting)) {
-            return 0;
-        }
-        if (empty($systemSetting->self_registration_enabled)) {
-            return 0;
-        }
-
-        Stripe::setApiKey($systemSetting->STRIPE_SECRET);
-        Stripe::setClientId($systemSetting->STRIPE_KEY);
-
-        if (!empty($this->owner->stripe_id)) {
-            $subscriptions = \Stripe\Subscription::all([
-                'customer' => $this->owner->stripe_id,
-                'status' => 'active',
-            ]);
-            return count($subscriptions) > 0;
-        }
-
-        return 0;
-
+    if (empty($systemSetting)) {
+        return false;
     }
+    if (empty($systemSetting->self_registration_enabled)) {
+        return false;
+    }
+
+    Stripe::setApiKey($systemSetting->STRIPE_SECRET);
+    Stripe::setClientId($systemSetting->STRIPE_KEY);
+
+    if (!empty($this->owner->stripe_id)) {
+        $subscriptions = \Stripe\Subscription::all([
+            'customer' => $this->owner->stripe_id,
+            'status' => 'active',
+        ]);
+        return count($subscriptions) > 0;
+    }
+
+    return false;
+}
+
 
     public function default_work_shift()
     {
