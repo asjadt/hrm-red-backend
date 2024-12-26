@@ -197,6 +197,7 @@ class AuthRegisterBusinessRequest extends BaseFormRequest
 
         if (request()->input('business.is_self_registered_businesses')) {
             $rules['business.service_plan_discount_code'] = 'nullable|string';
+            unset($rules['business.trail_end_date']);
 
         }
 
@@ -279,10 +280,6 @@ class AuthRegisterBusinessRequest extends BaseFormRequest
             'work_shift.details.*.start_at.date_format' => 'The start_at value must be a valid time format (H:i:s).',
             'work_shift.details.*.end_at.nullable' => 'The end_at field must be nullable.',
             'work_shift.details.*.end_at.date_format' => 'The end_at value must be a valid time format (H:i:s).',
-
-
-
-
 
 
         ];

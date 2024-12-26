@@ -878,6 +878,9 @@ class BusinessController extends Controller
                    }
                }
            }
+           if(auth()->user()->id == $business->owner_id) {
+            $request_data['business']["trail_end_date"] = $business->trail_end_date;
+        }
             $business->fill(collect($request_data['business'])->only([
                 "name",
                 "start_date",
