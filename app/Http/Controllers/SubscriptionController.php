@@ -38,10 +38,15 @@ else {
 
         $systemSetting = SystemSetting::first();
 
-        if(!$systemSetting && !$systemSetting->self_registration_enabled) {
+        if (empty($systemSetting)) {
             return response()->json([
                 "message" => "self registration is not supported"
-            ],403);
+            ], 403);
+        }
+        if (empty($systemSetting->self_registration_enabled)) {
+            return response()->json([
+                "message" => "self registration is not supported"
+            ], 403);
         }
 
         Stripe::setApiKey($systemSetting->STRIPE_SECRET);
@@ -60,7 +65,6 @@ $webhookEndpoint = WebhookEndpoint::create([
     'url' => route('stripe.webhook'),
     'enabled_events' => ['checkout.session.completed'], // Specify the events you want to listen to
 ]);
-
 }
 
 

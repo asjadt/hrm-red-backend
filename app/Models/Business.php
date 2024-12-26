@@ -5,8 +5,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Support\Facades\File;
+use Stripe\Stripe;
 
 class Business extends Model
 {
@@ -172,6 +172,19 @@ class Business extends Model
 
     public function stripe_subscription_enabled()
     {
+        $systemSetting = SystemSetting::where("reseller_id", $this->reseller_id)
+            ->first();
+
+        if (empty($systemSetting)) {
+            return 0;
+        }
+        if (empty($systemSetting->self_registration_enabled)) {
+            return 0;
+        }
+
+        Stripe::setApiKey($systemSetting->STRIPE_SECRET);
+        Stripe::setClientId($systemSetting->STRIPE_KEY);
+
         if (!empty($this->owner->stripe_id)) {
             $subscriptions = \Stripe\Subscription::all([
                 'customer' => $this->owner->stripe_id,
