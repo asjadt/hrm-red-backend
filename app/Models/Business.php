@@ -163,6 +163,13 @@ class Business extends Model
             ->latest();
     }
 
+    public function current_subscription()
+    {
+        return $this->hasOne(BusinessSubscription::class, 'business_id', 'id')
+         ->where('business_subscriptions.service_plan_id', $this->service_plan_id)
+            ->latest();
+    }
+
 
     public function default_work_shift()
     {

@@ -2638,7 +2638,7 @@ class BusinessController extends Controller
 
                  $business_subscription_end_date = Carbon::parse($last_business_subscription->end_date);
 
-                 // $upcoming_business_subscription_start_date = Carbon::parse($business_subscription_end_date->addDays($last_subscription->service_plan->duration_months));
+                 // $upcoming_business_subscription_start_date = Carbon::parse($business_subscription_end_date->addDays($current_subscription->service_plan->duration_months));
 
                  $upcoming_business_subscription_start_date = $business_subscription_end_date;
 

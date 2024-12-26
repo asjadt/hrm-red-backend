@@ -540,13 +540,7 @@ $datediff = $now - $user_created_date;
             $user->permissions = $user->permissions->pluck("name");
 
             $business = $user->business;
-            $last_subscription=NULL;
-            if(!empty($business)){
-                $last_subscription = BusinessSubscription::where('business_id', $business->id)
-               ->where('service_plan_id', $business->service_plan_id)
-               ->latest()
-               ->first();
-            }
+
 
             // Extracting only the required data
 $responseData = [
@@ -570,7 +564,7 @@ $responseData = [
         'currency' => $business ? $business->currency : null,
         'is_self_registered_businesses' => $business ? $business->is_self_registered_businesses : 0,
         'trail_end_date' => $business ? $business->trail_end_date : "",
-        'last_subscription' => $last_subscription,
+        'current_subscription' =>  $business ? $business->current_subscription:"",
         'reseller_id' => $business ? $business->reseller_id : null,
     ]
 ];
@@ -1341,13 +1335,6 @@ public function getUser (Request $request) {
             $business = $user->business;
 
 
-            $last_subscription=NULL;
-            if(!empty($business)){
-                $last_subscription = BusinessSubscription::where('business_id', $business->id)
-               ->where('service_plan_id', $business->service_plan_id)
-               ->latest()
-               ->first();
-            }
 
             // Extracting only the required data
 $responseData = [
@@ -1372,7 +1359,7 @@ $responseData = [
 
         'is_self_registered_businesses' => $business ? $business->is_self_registered_businesses : 0,
         'trail_end_date' => $business ? $business->trail_end_date : "",
-        'last_subscription' => $last_subscription,
+        'current_subscription' =>  $business ? $business->current_subscription:"",
         'reseller_id' => $business ? $business->reseller_id : null,
     ]
 ];

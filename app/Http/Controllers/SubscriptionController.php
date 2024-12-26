@@ -80,7 +80,19 @@ $webhookEndpoint = WebhookEndpoint::create([
         }
 
 
-        if (empty($user->stripe_id)) {
+        if (!empty($user->stripe_id)) {
+            $subscriptions = \Stripe\Subscription::all([
+                'customer' => $user->stripe_id,
+                'status' => 'active',
+            ]);
+
+            foreach ($subscriptions->data as $subscription) {
+                // Cancel the subscription
+                \Stripe\Subscription::update($subscription->id, [
+                    'cancel_at_period_end' => true, // Optional: Keep the subscription active until the end of the current billing period
+                ]);
+            }
+        } else {
             $stripe_customer = \Stripe\Customer::create([
                 'email' => $user->email,
             ]);
