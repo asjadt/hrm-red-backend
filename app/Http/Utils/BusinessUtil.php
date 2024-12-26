@@ -946,7 +946,9 @@ trait BusinessUtil
         $request_data['business']["pension_scheme_letters"] = [];
         $request_data['business']['service_plan_discount_amount'] = $this->getDiscountAmount($request_data['business']);
 
-
+        if(empty($request_data['business']["trail_end_date"])) {
+            $request_data['business']["trail_end_date"] = now()->subDay();
+        }
 
         $business =  Business::create($request_data['business']);
 
