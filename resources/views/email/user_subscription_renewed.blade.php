@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New User Registration Notification</title>
+    <title>Subscription Renewal Notification</title>
 </head>
 <body>
-    <h1>New User Registration Notification</h1>
+    <h1>Subscription Renewal Notification</h1>
     <p>Dear {{ $resellerName }},</p>
 
-    <p>We are excited to inform you that a new user has registered through self-registration using your referral. They have paid using Stripe. Here are the details of the new registration:</p>
+    <p>We are excited to inform you that a user has renewed their subscription through your referral. Here are the details:</p>
 
     <h2>User Information</h2>
     <p><strong>Name:</strong> {{ $userName }}</p>
@@ -17,7 +17,9 @@
     <h2>Business Details</h2>
     <p><strong>Business Name:</strong> {{ $businessName }}</p>
     <p><strong>Package Details:</strong> {{ $subscriptionName }}</p>
-    <p><strong>Discount Code (if any):</strong> {{ $discountCode }}</p>
+
+    <h2>Payment Information</h2>
+    <p><strong>Renewal Amount:</strong> £{{ $renewalAmount }}</p>
 
     <p>Thank you for your collaboration and ongoing support!</p>
 

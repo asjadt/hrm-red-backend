@@ -6,12 +6,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegistered extends Mailable
+class UserPaymentFailed extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
-
 
     /**
      * Create a new message instance.
@@ -19,7 +18,6 @@ class UserRegistered extends Mailable
     public function __construct($user)
     {
         $this->user = $user;
-
     }
 
     /**
@@ -33,10 +31,9 @@ class UserRegistered extends Mailable
         $reseller_name  = trim($reseller->first_Name . " " . $reseller->middle_Name . " " . $reseller->last_Name);
         $user_name  = trim($this->user->first_Name . " " . $this->user->middle_Name . " " . $this->user->last_Name);
 
-
         return $this
-            ->subject(('New User Registration Notification - ' . base64_encode($business->id) ))
-            ->view('email.user_registered', [
+        ->subject(('New User Registration Notification - ' . base64_encode($business->id) ))
+            ->view('email.user_payment_failed', [
                 'resellerName' => $reseller_name,
                 'userName' => $user_name,
                 'userEmail' => $this->user->email,

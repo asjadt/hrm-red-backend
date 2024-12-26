@@ -19,6 +19,7 @@ use App\Http\Utils\UserActivityUtil;
 use App\Mail\ForgetPasswordMail;
 use App\Mail\VerifyMail;
 use App\Models\Business;
+use App\Models\BusinessSubscription;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -539,8 +540,15 @@ $datediff = $now - $user_created_date;
             $user->permissions = $user->permissions->pluck("name");
 
             $business = $user->business;
+            $last_subscription=NULL;
+            if(!empty($business)){
+                $last_subscription = BusinessSubscription::where('business_id', $business->id)
+               ->where('service_plan_id', $business->service_plan_id)
+               ->latest()
+               ->first();
+            }
 
-// Extracting only the required data
+            // Extracting only the required data
 $responseData = [
     'id' => $user->id,
     "token" =>  $user->createToken('Laravel Password Grant Client')->accessToken,
@@ -554,15 +562,16 @@ $responseData = [
     'manages_department' => $user->manages_department,
     'color_theme_name' => $user->color_theme_name,
     'business' => [
-        'is_subscribed' => $user->business ? $user->business->is_subscribed : null,
-        'name' => $user->business ? $user->business->name : null,
-        'logo' => $user->business ? $user->business->logo : null,
-        'start_date' => $user->business ? $user->business->start_date : null,
-        'currency' => $user->business ? $user->business->currency : null,
-        'flexible_rota_enabled' => $user->business ? $user->business->flexible_rota_enabled : null,
+        'is_subscribed' => $business ? $business->is_subscribed : null,
+        'is_active' => $business ? $business->is_active : null,
+        'name' => $business ? $business->name : null,
+        'logo' => $business ? $business->logo : null,
+        'start_date' => $business ? $business->start_date : null,
+        'currency' => $business ? $business->currency : null,
+        'is_self_registered_businesses' => $business ? $business->is_self_registered_businesses : 0,
+        'trail_end_date' => $business ? $business->trail_end_date : "",
+        'last_subscription' => $last_subscription,
         'reseller_id' => $business ? $business->reseller_id : null,
-
-
     ]
 ];
 
@@ -1331,6 +1340,15 @@ public function getUser (Request $request) {
             $user->permissions = $user->permissions->pluck("name");
             $business = $user->business;
 
+
+            $last_subscription=NULL;
+            if(!empty($business)){
+                $last_subscription = BusinessSubscription::where('business_id', $business->id)
+               ->where('service_plan_id', $business->service_plan_id)
+               ->latest()
+               ->first();
+            }
+
             // Extracting only the required data
 $responseData = [
     'id' => $user->id,
@@ -1345,14 +1363,17 @@ $responseData = [
     'manages_department' => $user->manages_department,
     'color_theme_name' => $user->color_theme_name,
     'business' => [
-        'is_subscribed' => $user->business ? $user->business->is_subscribed : null,
-        'name' => $user->business ? $user->business->name : null,
-        'logo' => $user->business ? $user->business->logo : null,
-        'start_date' => $user->business ? $user->business->start_date : null,
-        'currency' => $user->business ? $user->business->currency : null,
-        'flexible_rota_enabled' => $user->business ? $user->business->flexible_rota_enabled : null,
-        'reseller_id' => $business ? $business->reseller_id : null,
+        'is_subscribed' => $business ? $business->is_subscribed : null,
+        'is_active' => $business ? $business->is_active : null,
+        'name' => $business ? $business->name : null,
+        'logo' => $business ? $business->logo : null,
+        'start_date' => $business ? $business->start_date : null,
+        'currency' => $business ? $business->currency : null,
 
+        'is_self_registered_businesses' => $business ? $business->is_self_registered_businesses : 0,
+        'trail_end_date' => $business ? $business->trail_end_date : "",
+        'last_subscription' => $last_subscription,
+        'reseller_id' => $business ? $business->reseller_id : null,
     ]
 ];
 

@@ -7,7 +7,7 @@
     <h1>New User Registration Notification</h1>
     <p>Dear {{ $resellerName }},</p>
 
-    <p>We are excited to inform you that a new user has registered through self-registration using your referral. They have paid using Stripe. Here are the details of the new registration:</p>
+    <p>We regret to inform you that a new user has registered through self-registration using your referral but did not complete the payment setup. Here are the details of the new registration:</p>
 
     <h2>User Information</h2>
     <p><strong>Name:</strong> {{ $userName }}</p>

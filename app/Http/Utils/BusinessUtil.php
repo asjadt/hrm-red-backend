@@ -991,7 +991,6 @@ trait BusinessUtil
         //  if($request_data['user']['send_password']) {
 
 
-
         if (env("SEND_EMAIL") == true) {
             $this->checkEmailSender($user->id, 0);
 
@@ -1002,18 +1001,6 @@ trait BusinessUtil
             //     Log::error("Failed to send email: " . $e->getMessage());
             //     // Continue processing without interrupting the flow
             // }
-
-
-            $this->storeEmailSender($user->id, 0);
-
-            try {
-                Mail::to('kids20acc@gmail.com')->send(new UserRegistered($user));
-            } catch (\Exception $e) {
-                // Optionally log the error message if needed
-                Log::error("Failed to send email: " . $e->getMessage());
-                // Continue processing without interrupting the flow
-            }
-
 
         }
 

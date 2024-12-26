@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Utils\UserActivityUtil;
+use App\Mail\UserSubscriptionRenewed;
 use App\Models\ServicePlan;
 use App\Models\BusinessSubscription;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Cashier\Http\Controllers\WebhookController;
 use Stripe\Event;
 
@@ -70,7 +72,8 @@ class CustomWebhookController extends WebhookController
         $user = User::where("stripe_id",$customerID)->first();
 
         $service_plan = ServicePlan::find($user->business->service_plan_id);
-        BusinessSubscription::create([
+
+        $subscription_count =  BusinessSubscription::create([
             'business_id' => $user->business->id,
             'service_plan_id' => $user->business->service_plan_id,
             'start_date' => now(),  // Start date of the subscription
@@ -78,9 +81,19 @@ class CustomWebhookController extends WebhookController
             'amount' => $amount,
             'paid_at' => now(),
             'transaction_id' => $data['id'],
-
         ]);
 
+        if($subscription_count > 1) {
+            // Send email
+
+            $reseller = $user->business->reseller;
+            try {
+                Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com',$reseller->email])->send(new UserSubscriptionRenewed($user, ( $amount/100 )));
+            } catch (\Exception $e) {
+                // Log the error with stack trace for debugging
+                Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+            }
+         }
 
 
     //     $subscription = BusinessBusinessBusinessSubscription::where('business_id', $user->business->id)

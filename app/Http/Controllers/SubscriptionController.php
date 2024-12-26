@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserPaymentFailed;
+use App\Mail\UserRegistered;
 use App\Models\Business;
 use App\Models\ServicePlan;
 use App\Models\SystemSetting;
@@ -12,6 +14,8 @@ use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Stripe\WebhookEndpoint;
 
 class SubscriptionController extends Controller
@@ -74,8 +78,6 @@ $webhookEndpoint = WebhookEndpoint::create([
                 "message" => "no service plan found"
             ],404);
         }
-
-
 
 
         if (empty($user->stripe_id)) {
@@ -172,15 +174,49 @@ $session_data["discounts"] =  [ // Add the discount information here
 
 
 
-    public function stripePaymentSuccess (Request $request) {
-        return redirect()->away(env("FRONT_END_URL") . '/auth/login');
+    public function stripePaymentSuccess(Request $request)
+    {
+        $user_id = base64_decode($request->query('user_id'));
+
+        // Validate the decoded user_id
+        $user = User::find($user_id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        $reseller = $user->business->reseller;
+        try {
+            Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user));
+        } catch (\Exception $e) {
+            // Log the error with stack trace for debugging
+            Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+            // Optionally, handle specific actions if email fails (e.g., notify admin)
+        }
+
+        return redirect()->to(env("FRONT_END_URL") . "/verify/business?status=success");
     }
 
 
-    public function stripePaymentFailed (Request $request) {
-        return redirect()->away(env("FRONT_END_URL") . '/auth/login');
-    }
+    public function stripePaymentFailed(Request $request)
+    {
+        $user_id = base64_decode($request->query('user_id'));
 
+        // Validate the decoded user_id
+        $user = User::find($user_id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        $reseller = $user->business->reseller;
+
+
+        try {
+            Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserPaymentFailed($user));
+        } catch (\Exception $e) {
+            // Log the error with stack trace for debugging
+            Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+        }
+
+        return redirect()->to(env("FRONT_END_URL") . "/verify/business?status=failed");
+    }
 
 
 
