@@ -30,6 +30,7 @@ use App\Models\BusinessPensionHistory;
 use App\Models\BusinessSubscription;
 use App\Models\BusinessTime;
 use App\Models\ServicePlan;
+use App\Models\SystemSetting;
 use App\Models\User;
 // use App\Models\WorkShift;
 // use App\Models\WorkShiftHistory;
@@ -42,6 +43,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Stripe\Stripe;
 
 class BusinessController extends Controller
 {
@@ -862,22 +864,43 @@ class BusinessController extends Controller
                 $request_data['business']['service_plan_discount_amount'] = $this->getDiscountAmount($request_data['business']);
             }
 
-            if(isset($request_data["service_plan_id"]) && $business->service_plan_id !== $request_data["service_plan_id"])
-            {
-               if (!empty($user->stripe_id)) {
-                   $subscriptions = \Stripe\Subscription::all([
-                       'customer' => $user->stripe_id,
-                       'status' => 'active',
-                   ]);
+            $valid_stripe = false;
+        $systemSetting = SystemSetting::where("reseller_id", $business->reseller_id)
+            ->first();
 
-                   foreach ($subscriptions->data as $subscription) {
-                       // Cancel the subscription
-                       \Stripe\Subscription::update($subscription->id, [
-                           'cancel_at_period_end' => true, // Optional: Keep the subscription active until the end of the current billing period
-                       ]);
-                   }
-               }
-           }
+        if (!empty($systemSetting) && $systemSetting->self_registration_enabled) {
+            $valid_stripe = true;
+        }
+
+
+        if($valid_stripe) {
+            Stripe::setApiKey($systemSetting->STRIPE_SECRET);
+            Stripe::setClientId($systemSetting->STRIPE_KEY);
+
+                if(isset($request_data["business"]["service_plan_id"]) && $business->service_plan_id !== $request_data["business"]["service_plan_id"])
+                 {
+
+                    if (!empty($user->stripe_id)) {
+
+                        $subscriptions = \Stripe\Subscription::all([
+                            'customer' => $user->stripe_id,
+                            'status' => 'active',
+                        ]);
+
+                        foreach ($subscriptions->data as $subscription) {
+                            // Cancel the subscription
+                            \Stripe\Subscription::update($subscription->id, [
+                                'cancel_at_period_end' => true,
+
+                            ]);
+                        }
+                    }
+                }
+
+        }
+
+
+
            if(auth()->user()->id == $business->owner_id) {
             $request_data['business']["trail_end_date"] = $business->trail_end_date;
         }

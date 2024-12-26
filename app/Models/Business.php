@@ -171,30 +171,42 @@ class Business extends Model
     }
 
     public function getStripeSubscriptionEnabledAttribute()
-{
-    $systemSetting = SystemSetting::where("reseller_id", $this->reseller_id)
-        ->first();
+    {
+        $systemSetting = SystemSetting::where("reseller_id", $this->reseller_id)
+            ->first();
 
-    if (empty($systemSetting)) {
+        if (empty($systemSetting)) {
+            return false;
+        }
+        if (empty($systemSetting->self_registration_enabled)) {
+            return false;
+        }
+
+        Stripe::setApiKey($systemSetting->STRIPE_SECRET);
+        Stripe::setClientId($systemSetting->STRIPE_KEY);
+
+
+        if (!empty($this->owner->stripe_id)) {
+             // Fetch active subscriptions
+    $subscriptions = \Stripe\Subscription::all([
+        'customer' => $this->owner->stripe_id,
+        'status' => 'active',
+    ]);
+            $subscriptions_not_ending = [];
+             // Loop through subscriptions and check cancel_at_period_end
+    foreach ($subscriptions->data as $subscription) {
+        if ($subscription->cancel_at_period_end === false) {
+            // Add the subscription to the list if it's not set to cancel
+            $subscriptions_not_ending[] = $subscription;
+        }
+    }
+
+    // Return the count of subscriptions that will not end
+    return count($subscriptions_not_ending) > 0;
+        }
+
         return false;
     }
-    if (empty($systemSetting->self_registration_enabled)) {
-        return false;
-    }
-
-    Stripe::setApiKey($systemSetting->STRIPE_SECRET);
-    Stripe::setClientId($systemSetting->STRIPE_KEY);
-
-    if (!empty($this->owner->stripe_id)) {
-        $subscriptions = \Stripe\Subscription::all([
-            'customer' => $this->owner->stripe_id,
-            'status' => 'active',
-        ]);
-        return count($subscriptions) > 0;
-    }
-
-    return false;
-}
 
 
     public function default_work_shift()
