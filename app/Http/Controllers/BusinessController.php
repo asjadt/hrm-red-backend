@@ -862,7 +862,22 @@ class BusinessController extends Controller
                 $request_data['business']['service_plan_discount_amount'] = $this->getDiscountAmount($request_data['business']);
             }
 
+            if(isset($request_data["service_plan_id"]) && $business->service_plan_id !== $request_data["service_plan_id"])
+            {
+               if (!empty($user->stripe_id)) {
+                   $subscriptions = \Stripe\Subscription::all([
+                       'customer' => $user->stripe_id,
+                       'status' => 'active',
+                   ]);
 
+                   foreach ($subscriptions->data as $subscription) {
+                       // Cancel the subscription
+                       \Stripe\Subscription::update($subscription->id, [
+                           'cancel_at_period_end' => true, // Optional: Keep the subscription active until the end of the current billing period
+                       ]);
+                   }
+               }
+           }
             $business->fill(collect($request_data['business'])->only([
                 "name",
                 "start_date",

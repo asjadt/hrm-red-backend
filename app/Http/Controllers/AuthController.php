@@ -565,6 +565,7 @@ $responseData = [
         'is_self_registered_businesses' => $business ? $business->is_self_registered_businesses : 0,
         'trail_end_date' => $business ? $business->trail_end_date : "",
         'current_subscription' =>  $business ? $business->current_subscription:"",
+        "stripe_subscription_enabled" =>   $business ? $business->stripe_subscription_enabled:0,
         'reseller_id' => $business ? $business->reseller_id : null,
     ]
 ];
@@ -1360,6 +1361,7 @@ $responseData = [
         'is_self_registered_businesses' => $business ? $business->is_self_registered_businesses : 0,
         'trail_end_date' => $business ? $business->trail_end_date : "",
         'current_subscription' =>  $business ? $business->current_subscription:"",
+        "stripe_subscription_enabled" =>  $business ? $business->stripe_subscription_enabled:0,
         'reseller_id' => $business ? $business->reseller_id : null,
     ]
 ];

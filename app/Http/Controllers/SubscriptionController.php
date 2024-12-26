@@ -80,19 +80,7 @@ $webhookEndpoint = WebhookEndpoint::create([
         }
 
 
-        if (!empty($user->stripe_id)) {
-            $subscriptions = \Stripe\Subscription::all([
-                'customer' => $user->stripe_id,
-                'status' => 'active',
-            ]);
-
-            foreach ($subscriptions->data as $subscription) {
-                // Cancel the subscription
-                \Stripe\Subscription::update($subscription->id, [
-                    'cancel_at_period_end' => true, // Optional: Keep the subscription active until the end of the current billing period
-                ]);
-            }
-        } else {
+        if (empty($user->stripe_id)) {
             $stripe_customer = \Stripe\Customer::create([
                 'email' => $user->email,
             ]);
@@ -139,8 +127,8 @@ $webhookEndpoint = WebhookEndpoint::create([
             'customer' => $user->stripe_id  ?? null,
 
             'mode' => 'subscription',
-            'success_url' => env("FRONT_END_URL_DASHBOARD")."/verify/business",
-            'cancel_url' => env("FRONT_END_URL_DASHBOARD")."/verify/business",
+            'success_url' => route('subscription.success_payment', ['user_id' => base64_encode($user->id)]),
+            'cancel_url' => route('subscription.failed_payment', ['user_id' => base64_encode($user->id)]),
         ];
 
 

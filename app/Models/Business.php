@@ -170,6 +170,19 @@ class Business extends Model
             ->latest();
     }
 
+    public function stripe_subscription_enabled()
+    {
+        if (!empty($this->owner->stripe_id)) {
+            $subscriptions = \Stripe\Subscription::all([
+                'customer' => $this->owner->stripe_id,
+                'status' => 'active',
+            ]);
+            return count($subscriptions) > 0;
+        }
+
+        return 0;
+
+    }
 
     public function default_work_shift()
     {
