@@ -218,7 +218,9 @@ $session_data["discounts"] =  [ // Add the discount information here
             // Log the error with stack trace for debugging
             Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
         }
-
+        return response()->json([
+          "tester is working"
+        ],400);
         return redirect()->to(env("FRONT_END_URL") . "/verify/business?status=failed");
     }
 
