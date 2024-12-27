@@ -69,7 +69,11 @@ class Business extends Model
     // {
     //     return $this->hasOne(BusinessEmailSetting::class);
     // }
-
+    
+    public function reseller()
+    {
+        return $this->hasOne(User::class,"id","reseller_id");
+    }
 
     private function isValidSubscription($subscription)
     {
