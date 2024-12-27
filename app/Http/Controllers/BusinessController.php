@@ -891,12 +891,10 @@ class BusinessController extends Controller
                             // Cancel the subscription
                             \Stripe\Subscription::update($subscription->id, [
                                 'cancel_at_period_end' => true,
-
                             ]);
                         }
                     }
                 }
-
         }
 
 
