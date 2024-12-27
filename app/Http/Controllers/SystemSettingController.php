@@ -83,8 +83,7 @@ class SystemSettingController extends Controller
 
 
 
-             $systemSetting = SystemSetting::where("reseller_id",auth()->user()->id)
-             ->first();
+
 
              if (!empty($request_data['self_registration_enabled'])) {
                  // Verify the Stripe credentials before updating
@@ -119,7 +118,7 @@ class SystemSettingController extends Controller
              }
 
 
-
+             $systemSetting = SystemSetting::first();
 
              if ($systemSetting) {
                  $systemSetting->fill(collect($request_data)->only([
