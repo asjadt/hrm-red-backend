@@ -2405,7 +2405,7 @@ class BusinessController extends Controller
                     "message" => "You can not perform this action"
                 ], 401);
             }
-
+            \Log::info('Memory Usage: ' . memory_get_peak_usage(true));
             $businesses = Business::with([
                 "owner" => function ($query) {
                     $query->select(
