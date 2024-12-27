@@ -172,8 +172,9 @@ class Business extends Model
 
     public function getStripeSubscriptionEnabledAttribute()
     {
-        $systemSetting = SystemSetting::where("reseller_id", $this->reseller_id)
-            ->first();
+        $systemSetting = SystemSetting::
+        // where("reseller_id", $this->reseller_id)
+            first();
 
         if (empty($systemSetting)) {
             return false;
