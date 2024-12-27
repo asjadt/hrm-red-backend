@@ -4,13 +4,14 @@ namespace App\Http\Middleware;
 
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Support\Facades\Log;
 
 class FormatDatesInRequest
 {
     public function handle($request, Closure $next)
     {
         $data = $request->all();
-
+        Log::info('Memory Usage: ' . memory_get_peak_usage(true));
         foreach ($data as $key => $value) {
 
 

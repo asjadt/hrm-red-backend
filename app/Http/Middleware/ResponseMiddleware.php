@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class ResponseMiddleware
@@ -19,7 +20,7 @@ class ResponseMiddleware
      // Define your API project's base URL
      $apiBaseUrl = config('app.url'); // This gets the base URL from the app configuration
 
-
+     Log::info('Memory Usage: ' . memory_get_peak_usage(true));
 
 
         $response = $next($request);

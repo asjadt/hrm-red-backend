@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class FormatDatesInResponse
@@ -15,7 +16,7 @@ class FormatDatesInResponse
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-
+        Log::info('Memory Usage: ' . memory_get_peak_usage(true));
         if ($response->headers->get('content-type') === 'application/json') {
             Session::flush();
             $content = $response->getContent();
@@ -43,11 +44,11 @@ class FormatDatesInResponse
                 if (env("APP_DEBUG") === false) {
                     $errorMessage = "something went wrong";
                     $response->setContent(json_encode(['error' => $errorMessage]));
-                } 
+                }
 
-               
 
-            
+
+
             }
         }
 
