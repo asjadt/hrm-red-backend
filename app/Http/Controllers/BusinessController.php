@@ -43,6 +43,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 
 class BusinessController extends Controller
@@ -2405,7 +2406,7 @@ class BusinessController extends Controller
                     "message" => "You can not perform this action"
                 ], 401);
             }
-            \Log::info('Memory Usage: ' . memory_get_peak_usage(true));
+            Log::info('Memory Usage: ' . memory_get_peak_usage(true));
             $businesses = Business::with([
                 "owner" => function ($query) {
                     $query->select(
