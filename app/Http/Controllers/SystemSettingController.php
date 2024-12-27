@@ -81,67 +81,63 @@ class SystemSettingController extends Controller
              $request_data = $request->validated();
 
 
-            $systemSetting = SystemSetting::first();
 
 
-            if (!empty($request_data['self_registration_enabled'])) {
-                // Verify the Stripe credentials before updating
-                $stripeValid = false;
+             $systemSetting = SystemSetting::where("reseller_id",auth()->user()->id)
+             ->first();
 
-                try {
-                    // Set Stripe client with the provided secret
-                    $stripe = new \Stripe\StripeClient($request_data['STRIPE_SECRET']);
+             if (!empty($request_data['self_registration_enabled'])) {
+                 // Verify the Stripe credentials before updating
+                 $stripeValid = false;
 
-                    // Make a test API call to check balance instead of account details
-                    $balance = $stripe->balance->retrieve();
+                 try {
+                     // Set Stripe client with the provided secret
+                     $stripe = new \Stripe\StripeClient($request_data['STRIPE_SECRET']);
 
-                    // If the request is successful, mark the Stripe credentials as valid
-                    $stripeValid = true;
-                } catch (\Stripe\Exception\AuthenticationException $e) {
-                    return response()->json([
-                        "message" => "Something went wrong with the payment setup. It looks like the Stripe key you provided is invalid. Please double-check the key and try again. If you continue to experience issues, contact support."
-                    ], 401);
-                } catch (\Stripe\Exception\ApiConnectionException $e) {
-                    return response()->json([
-                        "message" => "Something went wrong with the payment setup. There was a network error while connecting to Stripe. Please try again later or contact support."
-                    ], 502);
-                } catch (\Stripe\Exception\InvalidRequestException $e) {
-                    return response()->json([
-                        "message" => "Something went wrong with the payment setup. The request to Stripe was invalid. Please check the details and try again."
-                    ], 400);
-                } catch (\Exception $e) {
-                    return response()->json([
-                        "message" => "Something went wrong with the payment setup. An unexpected error occurred while verifying Stripe credentials. Please try again later or contact support."
-                    ], 500);
-                }
-            }
+                     // Make a test API call to check balance instead of account details
+                     $balance = $stripe->balance->retrieve();
 
-            if (!$systemSetting) {
-                return response()->json([
-                    "message" => "no system setting found"
-                ], 404);
-            }
+                     // If the request is successful, mark the Stripe credentials as valid
+                     $stripeValid = true;
+                 } catch (\Stripe\Exception\AuthenticationException $e) {
+                     return response()->json([
+                         "message" => "Something went wrong with the payment setup. It looks like the Stripe key you provided is invalid. Please double-check the key and try again. If you continue to experience issues, contact support."
+                     ], 401);
+                 } catch (\Stripe\Exception\ApiConnectionException $e) {
+                     return response()->json([
+                         "message" => "Something went wrong with the payment setup. There was a network error while connecting to Stripe. Please try again later or contact support."
+                     ], 502);
+                 } catch (\Stripe\Exception\InvalidRequestException $e) {
+                     return response()->json([
+                         "message" => "Something went wrong with the payment setup. The request to Stripe was invalid. Please check the details and try again."
+                     ], 400);
+                 } catch (\Exception $e) {
+                     return response()->json([
+                         "message" => "Something went wrong with the payment setup. An unexpected error occurred while verifying Stripe credentials. Please try again later or contact support."
+                     ], 500);
+                 }
+             }
 
 
-                $systemSettingArray = $systemSetting->toArray();
-                $systemSettingArray["STRIPE_KEY"] = $systemSetting->STRIPE_KEY;
-                $systemSettingArray["STRIPE_SECRET"] = $systemSetting->STRIPE_SECRET;
 
-                if ($systemSetting) {
-                    $systemSetting->fill(collect($request_data)->only([
-                       'self_registration_enabled',
-                    'STRIPE_KEY',
-                    "STRIPE_SECRET"
-                    ])->toArray());
-                    $systemSetting->save();
 
-                    $systemSettingArray = $systemSetting->toArray();
+             if ($systemSetting) {
+                 $systemSetting->fill(collect($request_data)->only([
+                     'self_registration_enabled',
+                     'STRIPE_KEY',
+                     "STRIPE_SECRET",
+                     "is_frontend_setup"
+                 ])->toArray());
+                 $systemSetting->save();
 
-                    $systemSettingArray["STRIPE_KEY"] = $systemSetting->STRIPE_KEY;
-                    $systemSettingArray["STRIPE_SECRET"] = $systemSetting->STRIPE_SECRET;
-                } else {
-                  $systemSettingArray =  SystemSetting::create($request_data);
-                }
+
+             } else {
+               $systemSetting =  SystemSetting::create($request_data);
+             }
+             $systemSettingArray = $systemSetting->toArray();
+
+             $systemSettingArray["STRIPE_KEY"] = $systemSetting->STRIPE_KEY;
+             $systemSettingArray["STRIPE_SECRET"] = $systemSetting->STRIPE_SECRET;
 
              return response()->json($systemSettingArray, 200);
          } catch (Exception $e) {
