@@ -89,6 +89,7 @@ class SystemSettingController extends Controller
                  // Verify the Stripe credentials before updating
                  $stripeValid = false;
 
+
                  try {
                      // Set Stripe client with the provided secret
                      $stripe = new \Stripe\StripeClient($request_data['STRIPE_SECRET']);
@@ -98,7 +99,9 @@ class SystemSettingController extends Controller
 
                      // If the request is successful, mark the Stripe credentials as valid
                      $stripeValid = true;
+
                  } catch (\Stripe\Exception\AuthenticationException $e) {
+                 
                      return response()->json([
                          "message" => "Something went wrong with the payment setup. It looks like the Stripe key you provided is invalid. Please double-check the key and try again. If you continue to experience issues, contact support."
                      ], 401);

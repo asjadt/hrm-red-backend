@@ -32,7 +32,7 @@ class UserPaymentFailed extends Mailable
         $user_name  = trim($this->user->first_Name . " " . $this->user->middle_Name . " " . $this->user->last_Name);
 
         return $this
-        ->subject(('New User Registration Notification - ' . base64_encode($business->id) ))
+        ->subject(('New User Registration Notification Pending Payment - ' . base64_encode($business->id) ))
             ->view('email.user_payment_failed', [
                 'resellerName' => $reseller_name,
                 'userName' => $user_name,
