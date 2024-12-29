@@ -23,15 +23,6 @@ jobs:
           password: "f2QTCql#UqXT" # FTP Password (add in GitHub Secrets)
           local-dir: ./ # Upload files from the root directory
           server-dir: / # Target directory on the cPanel server
-          include: |
-            app/**
-            bootstrap/**
-            config/**
-            database/**
-            resources/**
-            routes/**
-            tests/**
-            *
           exclude: |
             public/
             storage/

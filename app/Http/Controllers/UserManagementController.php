@@ -894,21 +894,15 @@ class UserManagementController extends Controller
              }
              $request_data = $request->validated();
 
-
-
              $updatableUser = User::where([
                  "id" => $request["id"]
              ])->first();
-
 
              if (!$updatableUser) {
                  return response()->json([
                      "message" => "no user found"
                  ], 404);
              }
-
-
-
 
              if (empty(auth()->user()->business_id)) {
                  if (empty($updatableUser->business_id)) {
