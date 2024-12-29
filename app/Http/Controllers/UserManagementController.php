@@ -22,6 +22,7 @@ use App\Http\Requests\MultipleFileUploadRequest;
 use App\Http\Requests\SingleFileUploadRequest;
 use App\Http\Requests\UserCreateRecruitmentProcessRequest;
 use App\Http\Requests\UserCreateV2Request;
+use App\Http\Requests\UserPasswordUpdateRequest;
 use App\Http\Requests\UserStoreDetailsRequest;
 use App\Http\Requests\UserUpdateAddressRequest;
 use App\Http\Requests\UserUpdateBankDetailsRequest;
@@ -821,6 +822,150 @@ class UserManagementController extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
+
+
+
+/**
+     *
+     * @OA\Put(
+     *      path="/v1.0/users/update-password",
+     *      operationId="updatePassword",
+     *      tags={"user_management"},
+     *       security={
+     *           {"bearerAuth": {}}
+     *       },
+     *      summary="This method is to update user",
+     *      description="This method is to update user",
+     *
+     *  @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"id","first_Name","last_Name","email","password","password_confirmation","phone","address_line_1","address_line_2","country","city","postcode","role"},
+     *           @OA\Property(property="id", type="string", format="number",example="1"),
+     *             @OA\Property(property="password", type="string", format="string",example="Rifat"),
+
+
+     *
+     *         ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       @OA\JsonContent(),
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     * @OA\JsonContent(),
+     *      ),
+     *        @OA\Response(
+     *          response=422,
+     *          description="Unprocesseble Content",
+     *    @OA\JsonContent(),
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden",
+     *   @OA\JsonContent()
+     * ),
+     *  * @OA\Response(
+     *      response=400,
+     *      description="Bad Request",
+     *   *@OA\JsonContent()
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found",
+     *   *@OA\JsonContent()
+     *   )
+     *      )
+     *     )
+     */
+
+     public function updatePassword(UserPasswordUpdateRequest $request)
+     {
+
+         try {
+             $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+             if (!$request->user()->hasPermissionTo('user_update')) {
+                 return response()->json([
+                     "message" => "You can not perform this action"
+                 ], 401);
+             }
+             $request_data = $request->validated();
+
+
+
+             $updatableUser = User::where([
+                 "id" => $request["id"]
+             ])->first();
+
+
+             if (!$updatableUser) {
+                 return response()->json([
+                     "message" => "no user found"
+                 ], 404);
+             }
+
+
+
+
+             if (empty(auth()->user()->business_id)) {
+                 if (empty($updatableUser->business_id)) {
+                     if (!auth()->user()->hasRole("superadmin")) {
+                         throw new Exception("you can not update this user's password", 401);
+                     }
+                 } else {
+                     $business = Business::where([
+                         "id" => $updatableUser->business_id
+                     ])
+                         ->first();
+
+                     if ($business->reseller_id !== auth()->user()->id && !auth()->user()->hasRole("superadmin")) {
+                         throw new Exception("you can not update this user's password", 401);
+                     }
+                 }
+             } else {
+                 $all_manager_department_ids = $this->get_all_departments_of_manager();
+
+                 $verifiedUser = User::where([
+                     "id" => $updatableUser->id
+                 ])
+                     ->whereHas("department_user.department", function ($query) use ($all_manager_department_ids) {
+                         $query->whereIn("departments.id", $all_manager_department_ids);
+                     })
+                     ->first();
+
+                 if (empty($verifiedUser)) {
+                     throw new Exception("you can not update this user's password dd", 401);
+                 }
+             }
+
+
+             if (!empty($request_data['password'])) {
+                 $request_data['password'] = Hash::make($request_data['password']);
+             } else {
+                 unset($request_data['password']);
+             }
+
+             if ($updatableUser) {
+                 $updatableUser->fill(collect($request_data)->only([
+                     'password',
+                 ])->toArray());
+
+                 $updatableUser->save();
+             }
+
+             $updatableUser->roles = $updatableUser->roles->pluck('name');
+
+             return response($updatableUser, 201);
+         } catch (Exception $e) {
+             error_log($e->getMessage());
+             return $this->sendError($e, 500, $request);
+         }
+     }
+
+
 
     /**
      *
