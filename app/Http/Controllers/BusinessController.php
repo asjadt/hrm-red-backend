@@ -45,6 +45,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
+use Stripe\Invoice;
 
 class BusinessController extends Controller
 {
@@ -156,7 +157,7 @@ class BusinessController extends Controller
             }
             $request_data = $request->validated();
 
-             $request_data["business"] = $this->businessImageStore($request_data["business"]);
+            $request_data["business"] = $this->businessImageStore($request_data["business"]);
 
 
             $user = User::where([
@@ -323,7 +324,7 @@ class BusinessController extends Controller
                 //     "conflicted_work_shifts" => $conflicted_work_shifts
                 // ], 200);
 
-                throw new Exception("this feature is not available now",404);
+                throw new Exception("this feature is not available now", 404);
             });
         } catch (Exception $e) {
 
@@ -639,7 +640,6 @@ class BusinessController extends Controller
                 ],
                 201
             );
-
         } catch (Exception $e) {
 
 
@@ -779,7 +779,7 @@ class BusinessController extends Controller
 
             $business = $this->businessOwnerCheck($request_data['business']["id"], FALSE);
 
-            $request_data["business"] = $this->businessImageStore($request_data["business"],$business->id);
+            $request_data["business"] = $this->businessImageStore($request_data["business"], $business->id);
 
 
 
@@ -800,8 +800,6 @@ class BusinessController extends Controller
             if (!$userPrev) {
                 throw new Exception("no user found with this id", 404);
             }
-
-
 
 
             //  $businessPrev = Business::where([
@@ -866,20 +864,18 @@ class BusinessController extends Controller
             }
 
             $valid_stripe = false;
-        $systemSetting = SystemSetting::where("reseller_id", $business->reseller_id)
-            ->first();
+            $systemSetting = SystemSetting::first();
 
-        if (!empty($systemSetting) && $systemSetting->self_registration_enabled) {
-            $valid_stripe = true;
-        }
+            if (!empty($systemSetting) && $systemSetting->self_registration_enabled) {
+                $valid_stripe = true;
+            }
 
 
-        if($valid_stripe) {
-            Stripe::setApiKey($systemSetting->STRIPE_SECRET);
-            Stripe::setClientId($systemSetting->STRIPE_KEY);
+            if ($valid_stripe) {
+                Stripe::setApiKey($systemSetting->STRIPE_SECRET);
+                Stripe::setClientId($systemSetting->STRIPE_KEY);
 
-                if(isset($request_data["business"]["service_plan_id"]) && $business->service_plan_id !== $request_data["business"]["service_plan_id"])
-                 {
+                if (isset($request_data["business"]["service_plan_id"]) && $business->service_plan_id !== $request_data["business"]["service_plan_id"]) {
 
                     if (!empty($user->stripe_id)) {
 
@@ -896,13 +892,13 @@ class BusinessController extends Controller
                         }
                     }
                 }
-        }
+            }
 
 
 
-           if(auth()->user()->id == $business->owner_id) {
-            $request_data['business']["trail_end_date"] = $business->trail_end_date;
-        }
+            if (auth()->user()->id == $business->owner_id) {
+                $request_data['business']["trail_end_date"] = $business->trail_end_date;
+            }
             $business->fill(collect($request_data['business'])->only([
                 "name",
                 "start_date",
@@ -1108,7 +1104,7 @@ class BusinessController extends Controller
             $request_data = $request->validated();
 
 
-            $business = $this->businessOwnerCheck($request_data["id"],FALSE);
+            $business = $this->businessOwnerCheck($request_data["id"], FALSE);
 
 
             $business->reseller_id = auth()->user()->id;
@@ -2573,7 +2569,7 @@ class BusinessController extends Controller
                 ], 401);
             }
 
-            $business = $this->businessOwnerCheck($id,FALSE);
+            $business = $this->businessOwnerCheck($id, FALSE);
 
             $business->load('owner', 'times', 'service_plan');
 
@@ -2588,7 +2584,7 @@ class BusinessController extends Controller
         }
     }
 
- /**
+    /**
      *
      * @OA\Get(
      *      path="/v1.0/business-subscriptions/{id}",
@@ -2650,87 +2646,94 @@ class BusinessController extends Controller
      */
 
      public function getSubscriptionsByBusinessId($id, Request $request)
-     {
+{
+    try {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
 
-         try {
-             $this->storeActivity($request, "DUMMY activity", "DUMMY description");
-             if (!$request->user()->hasPermissionTo('business_view')) {
-                 return response()->json([
-                     "message" => "You can not perform this action"
-                 ], 401);
-             }
+        if (!$request->user()->hasPermissionTo('business_view')) {
+            return response()->json([
+                "message" => "You can not perform this action"
+            ], 401);
+        }
 
-             $business = $this->businessOwnerCheck($id,FALSE);
+        $business = $this->businessOwnerCheck($id, false);
 
-             $businessSubscriptionsQuery = BusinessSubscription::with("service_plan")
-                 ->where([
-                     "business_id" => $business->id
-                 ]);
+        $valid_stripe = false;
+        $systemSetting = SystemSetting::first();
 
+        if (!empty($systemSetting) && $systemSetting->self_registration_enabled) {
+            $valid_stripe = true;
+        }
 
-             $business_subscriptions = $this->retrieveData($businessSubscriptionsQuery, "business_subscriptions.id");
-             $upcoming_business_subscription = [];
+        $business_subscriptions = [];
+        $upcoming_business_subscriptions = [];
 
+        if ($valid_stripe) {
+            Stripe::setApiKey($systemSetting->STRIPE_SECRET);
+            Stripe::setClientId($systemSetting->STRIPE_KEY);
 
-             $last_business_subscription = $businessSubscriptionsQuery->latest()->first();
+            $stripeCustomerId = $business?->owner?->stripe_id ?? null;
 
-             if (!empty($last_business_subscription)) {
-
-                 $business_subscription_end_date = Carbon::parse($last_business_subscription->end_date);
-
-                 // $upcoming_business_subscription_start_date = Carbon::parse($business_subscription_end_date->addDays($current_subscription->service_plan->duration_months));
-
-                 $upcoming_business_subscription_start_date = $business_subscription_end_date;
-
-                 $upcoming_service_plan = $last_business_subscription->service_plan;
-
-                 $upcoming_business_subscription = [
-                     'service_plan_id' => $upcoming_service_plan->id,
-                     'start_date' => $upcoming_business_subscription_start_date,  // Start date of the subscription
-                     'end_date' => Carbon::parse($upcoming_business_subscription_start_date)->addDays($last_business_subscription->service_plan->duration_months),  // End date based on plan duration
-                     'amount' => $upcoming_service_plan->price,
-                     "service_plan" => $upcoming_service_plan
-                 ];
-             } else {
-                 $service_plan =    ServicePlan::where("id", $business->service_plan_id)->first();
-
-                 if ($service_plan) {
-
-                     // Check if trail_end_date is empty or a past date
-                     if (empty($business->trail_end_date) || Carbon::parse($business->trail_end_date)->isPast()) {
-                         $start_date = today();
-                     } else {
-                         // If trail_end_date is a future date
-                         $start_date = Carbon::parse($business->trail_end_date);
-                     }
-                     $upcoming_business_subscription = [
-                         'service_plan_id' => $service_plan->id,
-                         'start_date' => $start_date,
-                         'end_date' => Carbon::parse($start_date)->addDays($service_plan->duration_months),
-                         'amount' => $service_plan->price,
-                         "service_plan" => $service_plan
-                     ];
-                 }
-             }
+            if (!empty($stripeCustomerId)) {
+                // Fetch all subscriptions from Stripe
+                $stripeSubscriptions = \Stripe\Subscription::all([
+                    'customer' => $stripeCustomerId,
+                    'status' => 'all', // You can use 'active' to filter active subscriptions
+                ]);
 
 
-             $responseData = [
-                 "subscriptions" => $business_subscriptions,
-                 "upcoming_subscription" => $upcoming_business_subscription
-             ];
+                foreach ($stripeSubscriptions->data as $subscription) {
 
+                    $business_subscriptions[] = [
+                        'id' => $subscription->id,
+                        'start_date' => Carbon::createFromTimestamp($subscription->current_period_start),
+                        'end_date' => Carbon::createFromTimestamp($subscription->current_period_end),
+                        'status' => $subscription->status,
+                        'amount' => $subscription->items->data[0]->price->unit_amount / 100, // Convert cents to dollars
+                        'service_plan_id' => $subscription?->metadata?->service_plan_id??"",
+                        'service_plan_name' => $subscription?->metadata?->service_plan_name??"",
+                        'url' => "https://dashboard.stripe.com/subscriptions/{$subscription->id}",
 
+                    ];
+                }
 
+                // Fetch the upcoming invoice (for upcoming subscription details)
+                $upcomingInvoice = null;
+                try {
+                    $upcomingInvoice = \Stripe\Invoice::upcoming([
+                        'customer' => $stripeCustomerId,
+                    ]);
+                } catch (\Stripe\Exception\InvalidRequestException $e) {
+                    // Handle case where no upcoming invoice exists
+                    $upcomingInvoice = null;
+                }
 
+                if (!empty($upcomingInvoice) && !empty($upcomingInvoice->lines->data)) {
+                    foreach ($upcomingInvoice->lines->data as $subscriptionDetails) {
+                        $upcoming_business_subscriptions[] = [
+                            'service_plan_id' => $subscriptionDetails->price->id,
+                            'start_date' => Carbon::createFromTimestamp($upcomingInvoice->period_start),
+                            'end_date' => Carbon::createFromTimestamp($upcomingInvoice->period_end),
+                            'amount' => $subscriptionDetails->amount / 100, // Convert cents to dollars
+                            'service_plan_id' => $subscriptionDetails?->metadata?->service_plan_id??"",
+                        'service_plan_name' => $subscriptionDetails?->metadata?->service_plan_name??"",
+                        'url' => "https://dashboard.stripe.com/subscriptions/{$subscription->id}",
+                        ];
+                    }
+                }
+            }
+        }
 
+        $responseData = [
+            "subscriptions" => $business_subscriptions,
+            "upcoming_subscriptions" => $upcoming_business_subscriptions // Changed to plural for multiple subscriptions
+        ];
 
-             return response()->json($responseData, 200);
-         } catch (Exception $e) {
-
-             return $this->sendError($e, 500, $request);
-         }
-     }
-
+        return response()->json($responseData, 200);
+    } catch (Exception $e) {
+        return $this->sendError($e, 500, $request);
+    }
+}
 
 
 
@@ -2844,7 +2847,7 @@ class BusinessController extends Controller
         }
     }
 
-  /**
+    /**
      *
      * @OA\Get(
      *      path="/v1.0/businesses-id-by-email/{email}",
@@ -2898,46 +2901,46 @@ class BusinessController extends Controller
      *     )
      */
 
-     public function getBusinessIdByEmail($email, Request $request)
-     {
+    public function getBusinessIdByEmail($email, Request $request)
+    {
 
-         try {
-             $this->storeActivity($request, "DUMMY activity", "DUMMY description");
-             if (!$request->user()->hasPermissionTo('business_view')) {
-                 return response()->json([
-                     "message" => "You can not perform this action"
-                 ], 401);
-             }
+        try {
+            $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+            if (!$request->user()->hasPermissionTo('business_view')) {
+                return response()->json([
+                    "message" => "You can not perform this action"
+                ], 401);
+            }
 
-             $business  = Business::where(["email" => $email])
-                 ->when(
-                     !$request->user()->hasRole('superadmin'),
-                     function ($query) use ($request) {
-                         $query->where(function ($query) {
-                             $query
-                                 // ->where('id', auth()->user()->business_id)
-                                 // ->orWhere('created_by', auth()->user()->id)
-                                 ->orWhere('owner_id', auth()->user()->id)
-                                 ->orWhere('reseller_id', auth()->user()->id)
-                             ;
-                         });
-                     },
-                 )
-                 ->select(
-                     "id"
-                 )
-                 ->first();
+            $business  = Business::where(["email" => $email])
+                ->when(
+                    !$request->user()->hasRole('superadmin'),
+                    function ($query) use ($request) {
+                        $query->where(function ($query) {
+                            $query
+                                // ->where('id', auth()->user()->business_id)
+                                // ->orWhere('created_by', auth()->user()->id)
+                                ->orWhere('owner_id', auth()->user()->id)
+                                ->orWhere('reseller_id', auth()->user()->id)
+                            ;
+                        });
+                    },
+                )
+                ->select(
+                    "id"
+                )
+                ->first();
 
-             if (empty($business)) {
-                 throw new Exception("you are not the owner of the business or the requested business does not exist.", 401);
-             }
+            if (empty($business)) {
+                throw new Exception("you are not the owner of the business or the requested business does not exist.", 401);
+            }
 
-             return response()->json($business, 200);
-         } catch (Exception $e) {
+            return response()->json($business, 200);
+        } catch (Exception $e) {
 
-             return $this->sendError($e, 500, $request);
-         }
-     }
+            return $this->sendError($e, 500, $request);
+        }
+    }
 
 
 
@@ -3012,7 +3015,7 @@ class BusinessController extends Controller
                     "message" => "You can not perform this action"
                 ], 401);
             }
-            $business = $this->businessOwnerCheck($id,FALSE);
+            $business = $this->businessOwnerCheck($id, FALSE);
 
             if (!is_array($business->pension_scheme_letters) || empty($business->pension_scheme_letters)) {
                 $business->pension_scheme_letters = [];
@@ -3101,7 +3104,7 @@ class BusinessController extends Controller
                     "message" => "You can not perform this action"
                 ], 401);
             }
-            $business = $this->businessOwnerCheck($id,FALSE);
+            $business = $this->businessOwnerCheck($id, FALSE);
 
             $businessPensionHistoriesQuery =  BusinessPensionHistory::where([
                 "business_id" => $id
@@ -3290,18 +3293,17 @@ class BusinessController extends Controller
 
             $idsArray = explode(',', $ids);
             $existingIds = Business::whereIn('id', $idsArray)
-            ->when(
-               !request()->user()->hasRole('superadmin'),
-                 function ($query)  {
-                     $query->where(function ($query) {
-                         $query
-                         // ->where('id', auth()->user()->business_id)
-                         // ->orWhere('created_by', auth()->user()->id)
-                             ->orWhere('reseller_id', auth()->user()->id)
-                             ;
-                     });
-                 },
-             )
+                ->when(
+                    !request()->user()->hasRole('superadmin'),
+                    function ($query) {
+                        $query->where(function ($query) {
+                            $query
+                                // ->where('id', auth()->user()->business_id)
+                                // ->orWhere('created_by', auth()->user()->id)
+                                ->orWhere('reseller_id', auth()->user()->id);
+                        });
+                    },
+                )
                 ->select('id')
                 ->get()
                 ->pluck('id')

@@ -126,8 +126,8 @@ return "swagger generated";
     }
 
     public function clearCache() {
-        Artisan::call('key:generate');
         Artisan::call('optimize:clear');
+        Artisan::call('key:generate');
         Artisan::call('passport:install');
         Artisan::call('l5-swagger:generate');
         return "ok";

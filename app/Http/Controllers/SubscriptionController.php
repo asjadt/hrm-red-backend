@@ -20,18 +20,18 @@ use Stripe\WebhookEndpoint;
 
 class SubscriptionController extends Controller
 {
-    public function redirectUserToStripe(Request $request) {
+    public function redirectUserToStripe(Request $request)
+    {
         $id = $request->id;
 
-// Check if the string is at least 20 characters long to ensure it has enough characters to remove
-if (strlen($id) >= 20) {
-    // Remove the first ten characters and the last ten characters
-    $trimmed_id = substr($id, 10, -10);
-    // $trimmedId now contains the string with the first ten and last ten characters removed
-}
-else {
-    throw new Exception("invalid id");
-}
+        // Check if the string is at least 20 characters long to ensure it has enough characters to remove
+        if (strlen($id) >= 20) {
+            // Remove the first ten characters and the last ten characters
+            $trimmed_id = substr($id, 10, -10);
+            // $trimmedId now contains the string with the first ten and last ten characters removed
+        } else {
+            throw new Exception("invalid id");
+        }
         $business = Business::findOrFail($trimmed_id);
         $user = User::findOrFail($business->owner_id);
         Auth::login($user);
@@ -53,19 +53,19 @@ else {
         Stripe::setClientId($systemSetting->STRIPE_KEY);
 
         // Retrieve all webhook endpoints from Stripe
-$webhookEndpoints = WebhookEndpoint::all();
+        $webhookEndpoints = WebhookEndpoint::all();
 
-// Check if a webhook endpoint with the desired URL already exists
-$existingEndpoint = collect($webhookEndpoints->data)->first(function ($endpoint) {
-    return $endpoint->url === route('stripe.webhook'); // Replace with your actual endpoint URL
-});
-if (!$existingEndpoint) {
-// Create the webhook endpoint
-$webhookEndpoint = WebhookEndpoint::create([
-    'url' => route('stripe.webhook'),
-    'enabled_events' => ['checkout.session.completed'], // Specify the events you want to listen to
-]);
-}
+        // Check if a webhook endpoint with the desired URL already exists
+        $existingEndpoint = collect($webhookEndpoints->data)->first(function ($endpoint) {
+            return $endpoint->url === route('stripe.webhook'); // Replace with your actual endpoint URL
+        });
+        if (!$existingEndpoint) {
+            // Create the webhook endpoint
+            $webhookEndpoint = WebhookEndpoint::create([
+                'url' => route('stripe.webhook'),
+                'enabled_events' => ['checkout.session.completed'], // Specify the events you want to listen to
+            ]);
+        }
 
 
 
@@ -74,13 +74,13 @@ $webhookEndpoint = WebhookEndpoint::create([
         $service_plan = ServicePlan::where([
             "id" => $business->service_plan_id
         ])
-        ->first();
+            ->first();
 
 
-        if(!$service_plan) {
+        if (!$service_plan) {
             return response()->json([
                 "message" => "no service plan found"
-            ],404);
+            ], 404);
         }
 
 
@@ -99,6 +99,8 @@ $webhookEndpoint = WebhookEndpoint::create([
             'payment_method_types' => ['card'],
             'metadata' => [
                 'our_url' => route('stripe.webhook'),
+                'service_plan_id' => $service_plan->id, // Add service plan ID
+                'service_plan_name' => $service_plan->name, // Add service plan name
 
             ],
             'line_items' => [
@@ -108,7 +110,7 @@ $webhookEndpoint = WebhookEndpoint::create([
                         'product_data' => [
                             'name' => 'Your Service set up amount',
                         ],
-                        'unit_amount' => $service_plan->set_up_amount * 100 , // Amount in cents
+                        'unit_amount' => $service_plan->set_up_amount * 100, // Amount in cents
                     ],
                     'quantity' => 1,
                 ],
@@ -125,9 +127,16 @@ $webhookEndpoint = WebhookEndpoint::create([
                         ],
                     ],
                     'quantity' => 1,
+                ]
+
+            ],
+            'subscription_data' => [
+                'metadata' => [
+                    'our_url' => route('stripe.webhook'),
+                    'service_plan_id' => $service_plan->id,
+                    'service_plan_name' => $service_plan->name,
                 ],
             ],
-
             'customer' => $user->stripe_id  ?? null,
 
             'mode' => 'subscription',
@@ -138,38 +147,37 @@ $webhookEndpoint = WebhookEndpoint::create([
 
 
 
-
         // Add discount line item only if discount amount is greater than 0 and not null
-if (!empty($business->service_plan_discount_amount) && $business->service_plan_discount_amount > 0) {
+        if (!empty($business->service_plan_discount_amount) && $business->service_plan_discount_amount > 0) {
 
-    // try {
-    //     $coupon = \Stripe\Coupon::retrieve($business->service_plan_discount_code, []);
-    //     $coupon->amount_off = $business->service_plan_discount_amount * 100;
-    //     $coupon->save();
-    // } catch (\Stripe\Exception\InvalidRequestException $e) {
-    //    return $e->getMessage();
-    //     $coupon = \Stripe\Coupon::create([
-    //         'amount_off' => $business->service_plan_discount_amount * 100, // Amount in cents
-    //         'currency' => 'GBP', // The currency
-    //         'duration' => 'once', // Can be once, forever, or repeating
-    //         'name' => $business->service_plan_discount_code, // Coupon name
-    //         'id' => $business->service_plan_discount_code, // Coupon code
-    //     ]);
-    // }
+            // try {
+            //     $coupon = \Stripe\Coupon::retrieve($business->service_plan_discount_code, []);
+            //     $coupon->amount_off = $business->service_plan_discount_amount * 100;
+            //     $coupon->save();
+            // } catch (\Stripe\Exception\InvalidRequestException $e) {
+            //    return $e->getMessage();
+            //     $coupon = \Stripe\Coupon::create([
+            //         'amount_off' => $business->service_plan_discount_amount * 100, // Amount in cents
+            //         'currency' => 'GBP', // The currency
+            //         'duration' => 'once', // Can be once, forever, or repeating
+            //         'name' => $business->service_plan_discount_code, // Coupon name
+            //         'id' => $business->service_plan_discount_code, // Coupon code
+            //     ]);
+            // }
 
-    $coupon = \Stripe\Coupon::create([
-        'amount_off' => $business->service_plan_discount_amount * 100, // Amount in cents
-        'currency' => 'GBP', // The currency
-        'duration' => 'once', // Can be once, forever, or repeating
-        'name' => $business->service_plan_discount_code, // Coupon name
-    ]);
+            $coupon = \Stripe\Coupon::create([
+                'amount_off' => $business->service_plan_discount_amount * 100, // Amount in cents
+                'currency' => 'GBP', // The currency
+                'duration' => 'once', // Can be once, forever, or repeating
+                'name' => $business->service_plan_discount_code, // Coupon name
+            ]);
 
-$session_data["discounts"] =  [ // Add the discount information here
-    [
-        'coupon' => $coupon, // Use coupon ID if created
-    ],
-];
-}
+            $session_data["discounts"] =  [ // Add the discount information here
+                [
+                    'coupon' => $coupon, // Use coupon ID if created
+                ],
+            ];
+        }
 
         $session = Session::create($session_data);
 
@@ -221,7 +229,4 @@ $session_data["discounts"] =  [ // Add the discount information here
 
         return redirect()->to(env("FRONT_END_URL") . "/verify/business?status=failed");
     }
-
-
-
 }
