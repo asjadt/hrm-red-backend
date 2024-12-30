@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Utils\ErrorUtil;
+use App\Http\Utils\SetupUtil;
 use App\Http\Utils\UserActivityUtil;
 use App\Models\ActivityLog;
 use App\Models\Bank;
@@ -31,11 +32,12 @@ use App\Models\TaskCategory;
 use App\Models\WorkLocation;
 use App\Models\WorkShift;
 use App\Models\WorkShiftHistory;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 class SetUpController extends Controller
 {
-    use ErrorUtil, UserActivityUtil;
+    use ErrorUtil, UserActivityUtil, SetupUtil;
 
     public function getFrontEndErrorLogs(Request $request) {
         $this->storeActivity($request, "DUMMY activity","DUMMY description");
@@ -126,11 +128,29 @@ return "swagger generated";
     }
 
     public function clearCache() {
-        Artisan::call('optimize:clear');
+        // Clear all caches
+        Artisan::call('optimize:clear');  // Clear all caches
+        Artisan::call('cache:clear');     // Clear application cache
+        Artisan::call('config:clear');    // Clear configuration cache
+        Artisan::call('route:clear');     // Clear route cache
+        Artisan::call('view:clear');      // Clear compiled views
+
+        // Manually clear session files
+        $sessionFiles = File::allFiles(storage_path('framework/sessions'));
+        foreach ($sessionFiles as $file) {
+            File::delete($file);  // Delete session files
+        }
+
+        // Regenerate application key
         Artisan::call('key:generate');
+
+        // Passport installation (if using Passport for API authentication)
         Artisan::call('passport:install');
+
+        // Swagger documentation generation (if using L5 Swagger)
         Artisan::call('l5-swagger:generate');
-        return "ok";
+
+        return "Cache cleared successfully!";
     }
 
 
@@ -986,127 +1006,12 @@ return "swagger generated";
 
         $this->storeActivity($request, "DUMMY activity","DUMMY description");
 
-
-
-
-   // ###############################
-        // permissions
-        // ###############################
-        $permissions =  config("setup-config.permissions");
-
-        // setup permissions
-        foreach ($permissions as $permission) {
-            if(!Permission::where([
-            'name' => $permission,
-            'guard_name' => 'api'
-            ])
-            ->exists()){
-                Permission::create(['guard_name' => 'api', 'name' => $permission]);
-            }
-
-        }
-        // setup roles
-        $roles = config("setup-config.roles");
-        foreach ($roles as $role) {
-            if(!Role::where([
-            'name' => $role,
-            'guard_name' => 'api',
-            "is_system_default" => 1,
-            "business_id" => NULL,
-            "is_default" => 1,
-            ])
-            ->exists()){
-             Role::create(['guard_name' => 'api', 'name' => $role,"is_system_default"=> 1, "business_id" => NULL,
-             "is_default" => 1,
-             "is_default_for_business" => (in_array($role ,["business_owner",
-             "business_admin",
-             "business_manager",
-             "business_employee"])?1:0)
-
-
-            ]);
-            }
-        }
-
-// setup roles and permissions
-// setup roles and permissions
-$role_permissions = config("setup-config.roles_permission");
-foreach ($role_permissions as $role_permission) {
-    $role = Role::where(["name" => $role_permission["role"]])->first();
-
-    $permissions = $role_permission["permissions"];
-
-    // Get current permissions associated with the role
-    $currentPermissions = $role->permissions()->pluck('name')->toArray();
-
-    // Determine permissions to remove
-    $permissionsToRemove = array_diff($currentPermissions, $permissions);
-
-    // Deassign permissions not included in the configuration
-    if (!empty($permissionsToRemove)) {
-        foreach ($permissionsToRemove as $permission) {
-            $role->revokePermissionTo($permission);
-        }
-    }
-
-    // Assign permissions from the configuration
-    $role->syncPermissions($permissions);
-}
-
-// $business_ids = Business::get()->pluck("id");
-
-
-// foreach ($role_permissions as $role_permission) {
-
-//     if($role_permission["role"] == "business_employee"){
-//         foreach($business_ids as $business_id){
-
-//             $role = Role::where(["name" => $role_permission["role"] . "#" . $business_id])->first();
-
-//            if(empty($role)){
-
-//             continue;
-//            }
-
-//                 $permissions = $role_permission["permissions"];
-
-//                 // Assign permissions from the configuration
-//     $role->syncPermissions($permissions);
-
-
-
-//         }
-
-//     }
-
-//     if($role_permission["role"] == "business_manager"){
-//         foreach($business_ids as $business_id){
-
-//             $role = Role::where(["name" => $role_permission["role"] . "#" . $business_id])->first();
-
-//            if(empty($role)){
-
-//             continue;
-//            }
-
-//                 $permissions = $role_permission["permissions"];
-
-//                 // Assign permissions from the configuration
-//     $role->syncPermissions($permissions);
-
-
-
-//         }
-
-//     }
-
-
-
-// }
-
+        $this->roleRefreshFunc();
 
         return "You are done with setup";
     }
+
+
 
 
     public function backup(Request $request) {

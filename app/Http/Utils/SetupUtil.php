@@ -6,6 +6,7 @@ use App\Models\AssetType;
 use App\Models\Attendance;
 use App\Models\AttendanceHistory;
 use App\Models\Bank;
+use App\Models\Business;
 use App\Models\CandidateJobPlatform;
 use App\Models\CandidateRecruitmentProcess;
 use App\Models\Department;
@@ -266,55 +267,33 @@ trait SetupUtil
         }
 
 
-        // $business_ids = Business::get()->pluck("id");
+        $business_ids = Business::get()->pluck("id");
 
-        // foreach ($role_permissions as $role_permission) {
+        foreach ($role_permissions as $role_permission) {
 
-        //     if($role_permission["role"] == "business_employee"){
-        //         foreach($business_ids as $business_id){
+            // if($role_permission["role"] == "business_manager"){
 
-        //             $role = Role::where(["name" => $role_permission["role"] . "#" . $business_id])->first();
+                foreach($business_ids as $business_id){
 
-        //            if(empty($role)){
+                    $role = Role::where(["name" => $role_permission["role"] . "#" . $business_id])->first();
 
-        //             continue;
-        //            }
+                   if(empty($role)){
 
-        //                 $permissions = $role_permission["permissions"];
+                    continue;
+                   }
 
-        //                 // Assign permissions from the configuration
-        //     $role->syncPermissions($permissions);
+                        $permissions = $role_permission["permissions"];
 
+                        // Assign permissions from the configuration
+            $role->syncPermissions($permissions);
 
+                }
 
-        //         }
-
-        //     }
-
-        //     if($role_permission["role"] == "business_manager"){
-        //         foreach($business_ids as $business_id){
-
-        //             $role = Role::where(["name" => $role_permission["role"] . "#" . $business_id])->first();
-
-        //            if(empty($role)){
-
-        //             continue;
-        //            }
-
-        //                 $permissions = $role_permission["permissions"];
-
-        //                 // Assign permissions from the configuration
-        //     $role->syncPermissions($permissions);
+            // }
 
 
 
-        //         }
-
-        //     }
-
-
-
-        // }
+        }
     }
 
 

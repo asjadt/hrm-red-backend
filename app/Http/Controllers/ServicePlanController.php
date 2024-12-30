@@ -91,7 +91,7 @@ class ServicePlanController extends Controller
         try {
             $this->storeActivity($request, "DUMMY activity","DUMMY description");
             return DB::transaction(function () use ($request) {
-                if (!$request->user()->hasPermissionTo('service_plan_create')) {
+                if (!$request->user()->hasPermissionTo('business_create')) {
                     return response()->json([
                         "message" => "You can not perform this action"
                     ], 401);
@@ -195,7 +195,7 @@ class ServicePlanController extends Controller
         try {
             $this->storeActivity($request, "DUMMY activity","DUMMY description");
             return DB::transaction(function () use ($request) {
-                if (!$request->user()->hasPermissionTo('service_plan_update')) {
+                if (!$request->user()->hasPermissionTo('business_create')) {
                     return response()->json([
                         "message" => "You can not perform this action"
                     ], 401);
@@ -335,7 +335,7 @@ class ServicePlanController extends Controller
     {
         try {
             $this->storeActivity($request, "DUMMY activity","DUMMY description");
-            if (!$request->user()->hasPermissionTo('service_plan_view')) {
+            if (!$request->user()->hasPermissionTo('business_create')) {
                 return response()->json([
                     "message" => "You can not perform this action"
                 ], 401);
@@ -584,7 +584,7 @@ class ServicePlanController extends Controller
     {
         try {
             $this->storeActivity($request, "DUMMY activity","DUMMY description");
-            if (!$request->user()->hasPermissionTo('service_plan_view')) {
+            if (!$request->user()->hasPermissionTo('business_create')) {
                 return response()->json([
                     "message" => "You can not perform this action"
                 ], 401);

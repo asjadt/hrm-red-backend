@@ -528,6 +528,8 @@ trait BusinessUtil
             "guard_name" => "api",
         ])->get();
 
+
+
         foreach ($defaultRoles as $defaultRole) {
             $insertableData = [
                 'name'  => ($defaultRole->name . "#" . $business->id),
@@ -546,7 +548,7 @@ trait BusinessUtil
                 }
             }
         }
-
+// throw new Exception("test",400);
 
         // $this->loadDefaultEmailTemplates($business->id);
 

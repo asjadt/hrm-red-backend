@@ -157,8 +157,9 @@ class BusinessController extends Controller
             }
             $request_data = $request->validated();
 
-            $request_data["business"] = $this->businessImageStore($request_data["business"]);
 
+
+            $request_data["business"] = $this->businessImageStore($request_data["business"]);
 
             $user = User::where([
                 "id" =>  $request_data['business']['owner_id']
@@ -182,9 +183,7 @@ class BusinessController extends Controller
             }
 
 
-
             $request_data['business']['status'] = "pending";
-
             $request_data['business']['created_by'] = $request->user()->id;
             $request_data['business']['reseller_id'] = $request->user()->id;
             $request_data['business']['is_active'] = true;
