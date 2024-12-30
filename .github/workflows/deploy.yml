@@ -28,4 +28,3 @@ jobs:
             **/storage/**
             **/vendor/**
             **/.env
-          clean: true # Remove files not in the current deployment
