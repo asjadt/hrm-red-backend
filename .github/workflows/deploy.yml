@@ -24,7 +24,8 @@ jobs:
           local-dir: ./ # Upload files from the root directory
           server-dir: / # Target directory on the cPanel server
           exclude: |
-            public/
-            storage/
-            vendor/
+            **/public/**
+            **/storage/**
+            **/vendor/**
             **/.env
+          clean: true # Remove files not in the current deployment
