@@ -2644,95 +2644,116 @@ class BusinessController extends Controller
      *     )
      */
 
-     public function getSubscriptionsByBusinessId($id, Request $request)
-{
-    try {
-        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+    public function getSubscriptionsByBusinessId($id, Request $request)
+    {
+        try {
+            $this->storeActivity($request, "DUMMY activity", "DUMMY description");
 
-        if (!$request->user()->hasPermissionTo('business_view')) {
-            return response()->json([
-                "message" => "You can not perform this action"
-            ], 401);
-        }
+            if (!$request->user()->hasPermissionTo('business_view')) {
+                return response()->json([
+                    "message" => "You can not perform this action"
+                ], 401);
+            }
 
-        $business = $this->businessOwnerCheck($id, false);
+            $business = $this->businessOwnerCheck($id, false);
 
-        $valid_stripe = false;
-        $systemSetting = SystemSetting::first();
+            $valid_stripe = false;
+            $systemSetting = SystemSetting::first();
 
-        if (!empty($systemSetting) && $systemSetting->self_registration_enabled) {
-            $valid_stripe = true;
-        }
+            if (!empty($systemSetting) && $systemSetting->self_registration_enabled) {
+                $valid_stripe = true;
+            }
 
-        $business_subscriptions = [];
-        $upcoming_business_subscriptions = [];
+            $business_subscriptions = [];
+            $upcoming_business_subscriptions = [];
+            $failed_attempts = [];
 
-        if ($valid_stripe) {
-            Stripe::setApiKey($systemSetting->STRIPE_SECRET);
-            Stripe::setClientId($systemSetting->STRIPE_KEY);
+            if ($valid_stripe) {
+                Stripe::setApiKey($systemSetting->STRIPE_SECRET);
+                Stripe::setClientId($systemSetting->STRIPE_KEY);
 
-            $stripeCustomerId = $business?->owner?->stripe_id ?? null;
+                $stripeCustomerId = $business?->owner?->stripe_id ?? null;
 
-            if (!empty($stripeCustomerId)) {
-                // Fetch all subscriptions from Stripe
-                $stripeSubscriptions = \Stripe\Subscription::all([
-                    'customer' => $stripeCustomerId,
-                    'status' => 'all', // You can use 'active' to filter active subscriptions
-                ]);
-
-
-                foreach ($stripeSubscriptions->data as $subscription) {
-
-                    $business_subscriptions[] = [
-                        'id' => $subscription->id,
-                        'start_date' => Carbon::createFromTimestamp($subscription->current_period_start),
-                        'end_date' => Carbon::createFromTimestamp($subscription->current_period_end),
-                        'status' => $subscription->status,
-                        'amount' => $subscription->items->data[0]->price->unit_amount / 100, // Convert cents to dollars
-                        'service_plan_id' => $subscription?->metadata?->service_plan_id??"",
-                        'service_plan_name' => $subscription?->metadata?->service_plan_name??"",
-                        'url' => "https://dashboard.stripe.com/subscriptions/{$subscription->id}",
-
-                    ];
-                }
-
-                // Fetch the upcoming invoice (for upcoming subscription details)
-                $upcomingInvoice = null;
-                try {
-                    $upcomingInvoice = \Stripe\Invoice::upcoming([
+                if (!empty($stripeCustomerId)) {
+                    // Fetch all subscriptions from Stripe
+                    $stripeSubscriptions = \Stripe\Subscription::all([
                         'customer' => $stripeCustomerId,
+                        'status' => 'all', // You can use 'active' to filter active subscriptions
                     ]);
-                } catch (\Stripe\Exception\InvalidRequestException $e) {
-                    // Handle case where no upcoming invoice exists
-                    $upcomingInvoice = null;
-                }
 
-                if (!empty($upcomingInvoice) && !empty($upcomingInvoice->lines->data)) {
-                    foreach ($upcomingInvoice->lines->data as $subscriptionDetails) {
-                        $upcoming_business_subscriptions[] = [
-                            'service_plan_id' => $subscriptionDetails->price->id,
-                            'start_date' => Carbon::createFromTimestamp($subscriptionDetails->period->start ?? $upcomingInvoice->period_start),
-                            'end_date' => Carbon::createFromTimestamp($subscriptionDetails->period->end ?? $upcomingInvoice->period_end),
-                            'amount' => $subscriptionDetails->amount / 100, // Convert cents to dollars
-                            'service_plan_id' => $subscriptionDetails?->metadata?->service_plan_id ?? "",
-                            'service_plan_name' => $subscriptionDetails?->metadata?->service_plan_name ?? "",
-                            'url' => "https://dashboard.stripe.com/subscriptions/{$subscriptionDetails->subscription}",
+                    foreach ($stripeSubscriptions->data as $subscription) {
+
+                        $business_subscriptions[] = [
+                            'id' => $subscription->id,
+                            'start_date' => Carbon::createFromTimestamp($subscription->current_period_start),
+                            'end_date' => Carbon::createFromTimestamp($subscription->current_period_end),
+                            'status' => $subscription->status,
+                            'amount' => $subscription->items->data[0]->price->unit_amount / 100, // Convert cents to dollars
+                            'service_plan_id' => $subscription?->metadata?->service_plan_id ?? "",
+                            'service_plan_name' => $subscription?->metadata?->service_plan_name ?? "",
+                            'url' => "https://dashboard.stripe.com/subscriptions/{$subscription->id}",
+
+                        ];
+                    }
+
+                    // Fetch the upcoming invoice (for upcoming subscription details)
+                    $upcomingInvoice = null;
+                    try {
+                        $upcomingInvoice = \Stripe\Invoice::upcoming([
+                            'customer' => $stripeCustomerId,
+                        ]);
+                    } catch (\Stripe\Exception\InvalidRequestException $e) {
+                        // Handle case where no upcoming invoice exists
+                        $upcomingInvoice = null;
+                    }
+
+                    if (!empty($upcomingInvoice) && !empty($upcomingInvoice->lines->data)) {
+                        foreach ($upcomingInvoice->lines->data as $subscriptionDetails) {
+                            $upcoming_business_subscriptions[] = [
+                                'service_plan_id' => $subscriptionDetails->price->id,
+                                'start_date' => Carbon::createFromTimestamp($subscriptionDetails->period->start ?? $upcomingInvoice->period_start),
+                                'end_date' => Carbon::createFromTimestamp($subscriptionDetails->period->end ?? $upcomingInvoice->period_end),
+                                'amount' => $subscriptionDetails->amount / 100, // Convert cents to dollars
+                                'service_plan_id' => $subscriptionDetails?->metadata?->service_plan_id ?? "",
+                                'service_plan_name' => $subscriptionDetails?->metadata?->service_plan_name ?? "",
+                                'url' => "https://dashboard.stripe.com/subscriptions/{$subscriptionDetails->subscription}",
+                            ];
+                        }
+                    }
+
+                    // Fetch failed payment attempts
+                    $events = \Stripe\Event::all([
+                        'type' => 'invoice.payment_failed', // Event type for failed payments
+                        'created' => [
+                            'gte' => Carbon::now()->subMonths(6)->timestamp, // Fetch events from the past 6 months
+                        ],
+                    ]);
+
+                    foreach ($events->data as $event) {
+                        $invoice = $event->data->object;
+                        $failed_attempts[] = [
+                            'invoice_id' => $invoice->id,
+                            'amount_due' => $invoice->amount_due / 100, // Convert cents to dollars
+                            'attempt_count' => $invoice->attempt_count,
+                            'failure_reason' => $invoice->failure_reason,
+                            'failed_at' => Carbon::createFromTimestamp($invoice->created),
+                            'url' => "https://dashboard.stripe.com/invoices/{$invoice->id}",
                         ];
                     }
                 }
             }
+
+            $responseData = [
+                "subscriptions" => $business_subscriptions,
+                "upcoming_subscriptions" => $upcoming_business_subscriptions,
+                "failed_attempts" => $failed_attempts
+            ];
+
+            return response()->json($responseData, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500, $request);
         }
-
-        $responseData = [
-            "subscriptions" => $business_subscriptions,
-            "upcoming_subscriptions" => $upcoming_business_subscriptions // Changed to plural for multiple subscriptions
-        ];
-
-        return response()->json($responseData, 200);
-    } catch (Exception $e) {
-        return $this->sendError($e, 500, $request);
     }
-}
 
 
 
