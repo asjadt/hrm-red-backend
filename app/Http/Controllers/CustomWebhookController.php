@@ -65,9 +65,6 @@ class CustomWebhookController extends WebhookController
      */
     protected function handleChargeSucceeded($data)
     {
-
-
-
         // Extract required data from payment charge
         $amount = $data['amount_total'] ?? null;
         $customerID = $data['customer'] ?? null;
@@ -80,9 +77,12 @@ class CustomWebhookController extends WebhookController
 
         $user = User::where("stripe_id", $customerID)->first();
 
+        if(!empty($metadata["service_plan_id"])) {
+            $service_plan = ServicePlan::find($metadata["service_plan_id"]);
+        } else {
+            $service_plan = ServicePlan::find($user->business->service_plan_id);
+        }
 
-
-        $service_plan = ServicePlan::find($metadata["service_plan_id"]);
 
 
         $subscription_count =  BusinessSubscription::create([

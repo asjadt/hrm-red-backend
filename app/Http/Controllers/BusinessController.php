@@ -2711,12 +2711,12 @@ class BusinessController extends Controller
                     foreach ($upcomingInvoice->lines->data as $subscriptionDetails) {
                         $upcoming_business_subscriptions[] = [
                             'service_plan_id' => $subscriptionDetails->price->id,
-                            'start_date' => Carbon::createFromTimestamp($upcomingInvoice->period_start),
-                            'end_date' => Carbon::createFromTimestamp($upcomingInvoice->period_end),
+                            'start_date' => Carbon::createFromTimestamp($subscriptionDetails->period->start ?? $upcomingInvoice->period_start),
+                            'end_date' => Carbon::createFromTimestamp($subscriptionDetails->period->end ?? $upcomingInvoice->period_end),
                             'amount' => $subscriptionDetails->amount / 100, // Convert cents to dollars
-                            'service_plan_id' => $subscriptionDetails?->metadata?->service_plan_id??"",
-                        'service_plan_name' => $subscriptionDetails?->metadata?->service_plan_name??"",
-                        'url' => "https://dashboard.stripe.com/subscriptions/{$subscription->id}",
+                            'service_plan_id' => $subscriptionDetails?->metadata?->service_plan_id ?? "",
+                            'service_plan_name' => $subscriptionDetails?->metadata?->service_plan_name ?? "",
+                            'url' => "https://dashboard.stripe.com/subscriptions/{$subscriptionDetails->subscription}",
                         ];
                     }
                 }
