@@ -122,7 +122,7 @@ class SubscriptionController extends Controller
                         ],
                         'unit_amount' => $service_plan->price * 100, // Amount in cents
                         'recurring' => [
-                            'interval' => 'month', // Recur monthly
+                            'interval' => (env("IS_DEVELOPMENT_MODE") == "true"?"day": 'month'), // Recur monthly
                             'interval_count' => $service_plan->duration_months, // Adjusted duration
                         ],
                     ],
