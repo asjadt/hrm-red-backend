@@ -16,6 +16,7 @@ class UserSubscriptionRenewed extends Mailable
     /**
      * Create a new message instance.
      */
+
     public function __construct($user, $renewalAmount)
     {
         $this->user = $user;

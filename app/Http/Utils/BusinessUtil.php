@@ -2,8 +2,7 @@
 
 namespace App\Http\Utils;
 
-use App\Mail\BusinessWelcomeMail;
-use App\Mail\UserRegistered;
+
 use App\Models\Business;
 use App\Models\BusinessModule;
 use App\Models\BusinessTime;

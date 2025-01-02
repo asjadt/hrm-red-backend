@@ -188,21 +188,21 @@ class SubscriptionController extends Controller
 
     public function stripePaymentSuccess(Request $request)
     {
-        $user_id = base64_decode($request->query('user_id'));
+        // $user_id = base64_decode($request->query('user_id'));
 
-        // Validate the decoded user_id
-        $user = User::find($user_id);
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-        $reseller = $user->business->reseller;
-        try {
-            Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user));
-        } catch (\Exception $e) {
-            // Log the error with stack trace for debugging
-            Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
-            // Optionally, handle specific actions if email fails (e.g., notify admin)
-        }
+        // // Validate the decoded user_id
+        // $user = User::find($user_id);
+        // if (!$user) {
+        //     return response()->json(['message' => 'User not found'], 404);
+        // }
+        // $reseller = $user->business->reseller;
+        // try {
+        //     Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user));
+        // } catch (\Exception $e) {
+        //     // Log the error with stack trace for debugging
+        //     Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+        //     // Optionally, handle specific actions if email fails (e.g., notify admin)
+        // }
 
         return redirect()->to(env("FRONT_END_URL") . "/verify/business?status=success");
     }

@@ -2609,7 +2609,6 @@ class BusinessController extends Controller
      *      summary="This method is to get subscriptions by id",
      *      description="This method is to get subscriptions by id",
      *
-
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -2656,7 +2655,6 @@ class BusinessController extends Controller
             }
 
             $business = $this->businessOwnerCheck($id, false);
-
             $valid_stripe = false;
             $systemSetting = SystemSetting::first();
 

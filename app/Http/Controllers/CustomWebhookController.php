@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Utils\ErrorUtil;
 use App\Http\Utils\UserActivityUtil;
+use App\Mail\UserRegistered;
 use App\Mail\UserSubscriptionRenewed;
 use App\Models\ServicePlan;
 use App\Models\BusinessSubscription;
@@ -83,9 +84,7 @@ class CustomWebhookController extends WebhookController
             $service_plan = ServicePlan::find($user->business->service_plan_id);
         }
 
-
-
-        $subscription_count =  BusinessSubscription::create([
+        $subscription =  BusinessSubscription::create([
             'business_id' => $user->business->id,
             'service_plan_id' => $service_plan->id,
             'start_date' => now(),  // Start date of the subscription
@@ -99,15 +98,24 @@ class CustomWebhookController extends WebhookController
             'business_id' => $user->business->id
         ])
             ->count();
+            $reseller = $user->business->reseller;
         if ($subscription_count > 1) {
             // Send email
 
-            $reseller = $user->business->reseller;
+
             try {
                 Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserSubscriptionRenewed($user, ($amount / 100)));
             } catch (\Exception $e) {
                 // Log the error with stack trace for debugging
                 Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+            }
+        } else {
+            try {
+                Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user,$subscription));
+            } catch (\Exception $e) {
+                // Log the error with stack trace for debugging
+                Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+                // Optionally, handle specific actions if email fails (e.g., notify admin)
             }
         }
 
