@@ -2719,6 +2719,7 @@ class BusinessController extends Controller
                         }
                     }
 
+
                     // Fetch failed payment attempts
                     $events = \Stripe\Event::all([
                         'type' => 'invoice.payment_failed', // Event type for failed payments
@@ -2744,7 +2745,8 @@ class BusinessController extends Controller
             $responseData = [
                 "subscriptions" => $business_subscriptions,
                 "upcoming_subscriptions" => $upcoming_business_subscriptions,
-                "failed_attempts" => $failed_attempts
+                "failed_attempts" => $failed_attempts,
+                "stripeSubscriptions"=> $stripeSubscriptions
             ];
 
             return response()->json($responseData, 200);
