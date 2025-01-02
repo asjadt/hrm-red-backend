@@ -19,6 +19,10 @@
     <p><strong>Package Details:</strong> {{ $subscriptionName }}</p>
     <p><strong>Discount Code (if any):</strong> {{ $discountCode }}</p>
 
+    <h2>Payment Details</h2>
+    <p><strong>Stripe Transaction ID:</strong> {{ $subscription->transaction_id }}</p>
+    <p><strong>Payment Amount:</strong> £{{ $subscription->amount }}</p>
+
     <p>Thank you for your collaboration and ongoing support!</p>
 
     <p>Best regards,</p>
