@@ -63,7 +63,10 @@ class SubscriptionController extends Controller
             // Create the webhook endpoint
             $webhookEndpoint = WebhookEndpoint::create([
                 'url' => route('stripe.webhook'),
-                'enabled_events' => ['checkout.session.completed'], // Specify the events you want to listen to
+                'enabled_events' => [
+                    'checkout.session.completed', // One-time payments
+                    'invoice.payment_succeeded', // Subscription payments
+                ], // Specify the events you want to listen to
             ]);
         }
 

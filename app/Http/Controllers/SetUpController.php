@@ -38,99 +38,105 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Stripe\WebhookEndpoint;
 use Stripe\Stripe;
+
 class SetUpController extends Controller
 {
     use ErrorUtil, UserActivityUtil, SetupUtil;
 
-    public function getFrontEndErrorLogs(Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-        $error_logs = ErrorLog::
-        whereIn("status_code",[422,403,400,404,409])
-        ->when(!empty($request->status), function ($query) use($request){
-            $query->where("status_code",$request->status);
-        })
-        ->orderbyDesc("id")->paginate(10);
-        return view("error-log",compact("error_logs"));
+    public function getFrontEndErrorLogs(Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        $error_logs = ErrorLog::whereIn("status_code", [422, 403, 400, 404, 409])
+            ->when(!empty($request->status), function ($query) use ($request) {
+                $query->where("status_code", $request->status);
+            })
+            ->orderbyDesc("id")->paginate(10);
+        return view("error-log", compact("error_logs"));
     }
 
-  public function getErrorLogs(Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-        $error_logs = ErrorLog::
-        when(!empty($request->status_code), function ($query) use($request){
-            $query->where("status_code",$request->status);
-        })
-        ->when(!empty($request->ip_address), function ($query) use($request){
-            $query->where("ip_address",$request->ip_address);
-        })
-        ->when(!empty($request->request_method), function ($query) use($request){
-            $query->where("request_method",$request->request_method);
-        })
-        ->when(!empty($request->id), function ($query) use($request){
-            $query->where("id",$request->id);
-        })
-        ->orderbyDesc("id")->paginate(10);
-        return view("error-log",compact("error_logs"));
+    public function getErrorLogs(Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        $error_logs = ErrorLog::when(!empty($request->status_code), function ($query) use ($request) {
+                $query->where("status_code", $request->status);
+            })
+            ->when(!empty($request->ip_address), function ($query) use ($request) {
+                $query->where("ip_address", $request->ip_address);
+            })
+            ->when(!empty($request->request_method), function ($query) use ($request) {
+                $query->where("request_method", $request->request_method);
+            })
+            ->when(!empty($request->id), function ($query) use ($request) {
+                $query->where("id", $request->id);
+            })
+            ->orderbyDesc("id")->paginate(10);
+        return view("error-log", compact("error_logs"));
     }
 
-    public function testError($id,Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-        $error_log = ErrorLog::where("id",$request->id)
+    public function testError($id, Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        $error_log = ErrorLog::where("id", $request->id)
 
-        ->first();
-        return view("test-error",compact("error_log"));
+            ->first();
+        return view("test-error", compact("error_log"));
     }
 
-    public function testApi($id,Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-        $error_log = ActivityLog::where("id",$request->id)
+    public function testApi($id, Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        $error_log = ActivityLog::where("id", $request->id)
 
-        ->first();
-        return view("test-api",compact("error_log"));
+            ->first();
+        return view("test-api", compact("error_log"));
     }
 
 
 
-   public function getActivityLogs(Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-        $activity_logs = ActivityLog::
-        when(!empty($request->status_code), function ($query) use($request){
-            $query->where("status_code",$request->status);
-        })
-        ->when(!empty($request->user_id), function ($query) use($request){
-            $query->where("user_id",$request->user_id);
-        })
-        -> when(!empty($request->api_url), function ($query) use($request){
-            $query->where("api_url",$request->api_url);
-        })
-        ->when(!empty($request->ip_address), function ($query) use($request){
-            $query->where("ip_address",$request->ip_address);
-        })
-        ->when(!empty($request->request_method), function ($query) use($request){
-            $query->where("request_method",$request->request_method);
-        })
-        ->when(!empty($request->id), function ($query) use($request){
-            $query->where("id",$request->id);
-        })
+    public function getActivityLogs(Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        $activity_logs = ActivityLog::when(!empty($request->status_code), function ($query) use ($request) {
+                $query->where("status_code", $request->status);
+            })
+            ->when(!empty($request->user_id), function ($query) use ($request) {
+                $query->where("user_id", $request->user_id);
+            })
+            ->when(!empty($request->api_url), function ($query) use ($request) {
+                $query->where("api_url", $request->api_url);
+            })
+            ->when(!empty($request->ip_address), function ($query) use ($request) {
+                $query->where("ip_address", $request->ip_address);
+            })
+            ->when(!empty($request->request_method), function ($query) use ($request) {
+                $query->where("request_method", $request->request_method);
+            })
+            ->when(!empty($request->id), function ($query) use ($request) {
+                $query->where("id", $request->id);
+            })
 
-        ->orderbyDesc("id")
-        ->paginate(100);
-        return view("user-activity-log",compact("activity_logs"));
+            ->orderbyDesc("id")
+            ->paginate(100);
+        return view("user-activity-log", compact("activity_logs"));
     }
 
-    public function migrate(Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
+    public function migrate(Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
         Artisan::call('migrate');
         return "migrated";
-            }
-
-    public function swaggerRefresh(Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-        Artisan::call('optimize:clear');
-Artisan::call('l5-swagger:generate');
-return "swagger generated";
     }
 
-    public function clearCache() {
+    public function swaggerRefresh(Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        Artisan::call('optimize:clear');
+        Artisan::call('l5-swagger:generate');
+        return "swagger generated";
+    }
+
+    public function clearCache()
+    {
         // Clear all caches
         Artisan::call('optimize:clear');  // Clear all caches
         Artisan::call('cache:clear');     // Clear application cache
@@ -156,74 +162,73 @@ return "swagger generated";
         return "Cache cleared successfully!";
     }
 
-    public function configureStripe(Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-       $system_settings = SystemSetting::get();
-foreach($system_settings as $system_setting) {
-    $stripeValid = false;
-    if (!empty($system_setting->STRIPE_SECRET) && !empty($system_setting->STRIPE_KEY)) {
-        // Verify the Stripe credentials before updating
-        try {
-            // Set Stripe client with the provided secret
-            $stripe = new \Stripe\StripeClient($system_setting->STRIPE_SECRET);
-
-            // Make a test API call to check balance instead of account details
-            $balance = $stripe->balance->retrieve();
-
-            // If the request is successful, mark the Stripe credentials as valid
-            $stripeValid = true;
-
-        }  catch (Exception $e) {
+    public function configureStripe(Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        $system_settings = SystemSetting::get();
+        foreach ($system_settings as $system_setting) {
             $stripeValid = false;
+            if (!empty($system_setting->STRIPE_SECRET) && !empty($system_setting->STRIPE_KEY)) {
+                // Verify the Stripe credentials before updating
+                try {
+                    // Set Stripe client with the provided secret
+                    $stripe = new \Stripe\StripeClient($system_setting->STRIPE_SECRET);
+
+                    // Make a test API call to check balance instead of account details
+                    $balance = $stripe->balance->retrieve();
+
+                    // If the request is successful, mark the Stripe credentials as valid
+                    $stripeValid = true;
+                } catch (Exception $e) {
+                    $stripeValid = false;
+                }
+            }
+
+            if ($stripeValid) {
+
+                Stripe::setApiKey($system_setting->STRIPE_SECRET);
+                Stripe::setClientId($system_setting->STRIPE_KEY);
+
+                // Define the required events
+                $requiredEvents = [
+                    'checkout.session.completed', // One-time payments
+                    'invoice.payment_succeeded',  // Subscription payments
+                ];
+                // Retrieve all webhook endpoints from Stripe
+                $webhookEndpoints = WebhookEndpoint::all();
+
+                // Check if a webhook endpoint with the desired URL already exists
+                $existingEndpoint = collect($webhookEndpoints->data)->first(function ($endpoint) {
+                    return $endpoint->url === route('stripe.webhook'); // Replace with your actual endpoint URL
+                });
+
+                if ($existingEndpoint) {
+                    // Check if all required events are already in enabled events
+                    $currentEvents = $existingEndpoint->enabled_events ?? [];
+                    $missingEvents = array_diff($requiredEvents, $currentEvents);
+
+                    if (!empty($missingEvents)) {
+                        // Add missing events to the existing endpoint
+                        WebhookEndpoint::update(
+                            $existingEndpoint->id,
+                            [
+                                'enabled_events' => array_unique(array_merge(
+                                    $currentEvents,
+                                    $missingEvents
+                                )),
+                            ]
+                        );
+                    }
+                }
+            }
         }
-    }
-
-    if($stripeValid) {
-
-        Stripe::setApiKey($system_setting->STRIPE_SECRET);
-        Stripe::setClientId($system_setting->STRIPE_KEY);
-
-        // Define the required events
-    $requiredEvents = [
-        'checkout.session.completed', // One-time payments
-        'invoice.payment_succeeded',  // Subscription payments
-    ];
-        // Retrieve all webhook endpoints from Stripe
-        $webhookEndpoints = WebhookEndpoint::all();
-
-        // Check if a webhook endpoint with the desired URL already exists
-    $existingEndpoint = collect($webhookEndpoints->data)->first(function ($endpoint) {
-        return $endpoint->url === route('stripe.webhook'); // Replace with your actual endpoint URL
-    });
-
-    if ($existingEndpoint) {
-        // Check if all required events are already in enabled events
-        $currentEvents = $existingEndpoint->enabled_events ?? [];
-        $missingEvents = array_diff($requiredEvents, $currentEvents);
-
-        if (!empty($missingEvents)) {
-        // Add missing events to the existing endpoint
-            WebhookEndpoint::update(
-                $existingEndpoint->id,
-                [
-                    'enabled_events' => array_unique(array_merge(
-                        $currentEvents,
-                        $missingEvents
-                    )),
-                ]
-            );
-        }
-    }
-
-    }
-}
 
         return "ok";
-        }
+    }
 
     public function setUp(Request $request)
     {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
         // @@@@@@@@@@@@@@@@@@@
         // clear everything
         // @@@@@@@@@@@@@@@@@@@
@@ -239,59 +244,59 @@ foreach($system_settings as $system_setting) {
         // ##########################################
         // user
         // #########################################
-      $admin =  User::create([
-        'first_Name' => "super",
-        'last_Name'=> "admin",
-        'phone'=> "01771034383",
-        'address_line_1',
-        'address_line_2',
-        'country'=> "Bangladesh",
-        'city'=> "Dhaka",
-        'postcode'=> "1207",
-        'email'=> "asjadtariq@gmail.com",
-        'password'=>Hash::make("12345678@We"),
-        "email_verified_at"=>now(),
-        'is_active' => 1
+        $admin =  User::create([
+            'first_Name' => "super",
+            'last_Name' => "admin",
+            'phone' => "01771034383",
+            'address_line_1',
+            'address_line_2',
+            'country' => "Bangladesh",
+            'city' => "Dhaka",
+            'postcode' => "1207",
+            'email' => "asjadtariq@gmail.com",
+            'password' => Hash::make("12345678@We"),
+            "email_verified_at" => now(),
+            'is_active' => 1
         ]);
         $admin->email_verified_at = now();
         $admin->save();
 
         $reseller =  User::create([
             'first_Name' => "Shahbaz",
-            'last_Name'=> "Khan",
-            'phone'=> "01771034383",
+            'last_Name' => "Khan",
+            'phone' => "01771034383",
             'address_line_1',
             'address_line_2',
-            'country'=> "Bangladesh",
-            'city'=> "Dhaka",
-            'postcode'=> "1207",
-            'email'=> "shahbaz.scm@gmail.com",
-            'password'=>Hash::make("12345678@We"),
-            "email_verified_at"=>now(),
+            'country' => "Bangladesh",
+            'city' => "Dhaka",
+            'postcode' => "1207",
+            'email' => "shahbaz.scm@gmail.com",
+            'password' => Hash::make("12345678@We"),
+            "email_verified_at" => now(),
             'is_active' => 1
-            ]);
-            $reseller->email_verified_at = now();
-            $reseller->save();
+        ]);
+        $reseller->email_verified_at = now();
+        $reseller->save();
 
-            $specialReseller =  User::create([
-                'first_Name' => "Shahbaz",
-                'last_Name'=> "Khan",
-                'phone'=> "01771034383",
-                'address_line_1',
-                'address_line_2',
-                'country'=> "Bangladesh",
-                'city'=> "Dhaka",
-                'postcode'=> "1207",
-                'email'=> "kids20acc@gmail.com",
-                'password' => Hash::make("12345678@We"),
-                "email_verified_at"=>now(),
-                'is_active' => 1
-                ]);
-                $specialReseller->email_verified_at = now();
-                $specialReseller->save();
+        $specialReseller =  User::create([
+            'first_Name' => "Shahbaz",
+            'last_Name' => "Khan",
+            'phone' => "01771034383",
+            'address_line_1',
+            'address_line_2',
+            'country' => "Bangladesh",
+            'city' => "Dhaka",
+            'postcode' => "1207",
+            'email' => "kids20acc@gmail.com",
+            'password' => Hash::make("12345678@We"),
+            "email_verified_at" => now(),
+            'is_active' => 1
+        ]);
+        $specialReseller->email_verified_at = now();
+        $specialReseller->save();
 
-                $permissions = Permission::whereIn('name', ["handle_self_registered_businesses"])->get();
-                $specialReseller->givePermissionTo($permissions);
+        $permissions = Permission::whereIn('name', ["handle_self_registered_businesses"])->get();
+        $specialReseller->givePermissionTo($permissions);
 
 
         // ###############################
@@ -300,37 +305,41 @@ foreach($system_settings as $system_setting) {
         $permissions =  config("setup-config.permissions");
         // setup permissions
         foreach ($permissions as $permission) {
-            if(!Permission::where([
-            'name' => $permission,
-            'guard_name' => 'api'
+            if (!Permission::where([
+                'name' => $permission,
+                'guard_name' => 'api'
             ])
-            ->exists()){
+                ->exists()) {
                 Permission::create(['guard_name' => 'api', 'name' => $permission]);
             }
-
         }
         // setup roles
         $roles = config("setup-config.roles");
         foreach ($roles as $role) {
-            if(!Role::where([
-            'name' => $role,
-            'guard_name' => 'api',
-            "is_system_default" => 1,
-            "business_id" => NULL,
-            "is_default" => 1,
+            if (!Role::where([
+                'name' => $role,
+                'guard_name' => 'api',
+                "is_system_default" => 1,
+                "business_id" => NULL,
+                "is_default" => 1,
             ])
-            ->exists()){
-             Role::create(['guard_name' => 'api', 'name' => $role,"is_system_default"=> 1, "business_id" => NULL,
-             "is_default" => 1,
-             "is_default_for_business" => (in_array($role ,["business_owner",
-             "business_admin",
-             "business_manager",
-             "business_employee"])?1:0)
+                ->exists()) {
+                Role::create([
+                    'guard_name' => 'api',
+                    'name' => $role,
+                    "is_system_default" => 1,
+                    "business_id" => NULL,
+                    "is_default" => 1,
+                    "is_default_for_business" => (in_array($role, [
+                        "business_owner",
+                        "business_admin",
+                        "business_manager",
+                        "business_employee"
+                    ]) ? 1 : 0)
 
 
-            ]);
+                ]);
             }
-
         }
 
         // setup roles and permissions
@@ -702,8 +711,8 @@ foreach($system_settings as $system_setting) {
             ],
         ];
 
-         // Iterate through the array and create records
-         foreach ($default_task_categories as $data) {
+        // Iterate through the array and create records
+        foreach ($default_task_categories as $data) {
             TaskCategory::create([
                 'name' => $data['name'],
                 'description' => $data['description'],
@@ -877,10 +886,10 @@ foreach($system_settings as $system_setting) {
             'start_month' => 1,
             'approval_level' => "multiple",
             'allow_bypass' => 1,
-          "business_id" => NULL,
-          "is_active" => 1,
-          "is_default" => 1,
-          "created_by" => $admin->id,
+            "business_id" => NULL,
+            "is_active" => 1,
+            "is_default" => 1,
+            "created_by" => $admin->id,
         ]);
 
         SettingAttendance::create([
@@ -888,7 +897,7 @@ foreach($system_settings as $system_setting) {
             'work_availability_definition' => 80,
             'punch_in_out_alert' => 0,
             'punch_in_out_interval' => 0.5,
-            'alert_area' => (["web","system"]),
+            'alert_area' => (["web", "system"]),
             'auto_approval' => false,
             "is_geolocation_enabled" => 0,
 
@@ -932,7 +941,7 @@ foreach($system_settings as $system_setting) {
             'break_hours' => 1,
 
             "is_active" => 1,
-            "is_default"=> 1,
+            "is_default" => 1,
             'details' => [
                 [
                     'day' => '0',
@@ -991,8 +1000,8 @@ foreach($system_settings as $system_setting) {
         $employee_work_shift_history_data["work_shift_id"] = $default_work_shift_1->id;
         $employee_work_shift_history_data["from_date"] = now();
         $employee_work_shift_history_data["to_date"] = NULL;
-         $employee_work_shift_history =  WorkShiftHistory::create($employee_work_shift_history_data);
-         $employee_work_shift_history->details()->createMany($default_work_shift_data_1['details']);
+        $employee_work_shift_history =  WorkShiftHistory::create($employee_work_shift_history_data);
+        $employee_work_shift_history->details()->createMany($default_work_shift_data_1['details']);
 
         $default_work_shift_data_2 = [
             'name' => 'main work shift',
@@ -1003,7 +1012,7 @@ foreach($system_settings as $system_setting) {
             'break_hours' => 1,
 
             "is_active" => 1,
-            "is_default"=> 1,
+            "is_default" => 1,
             'details' => [
                 [
                     'day' => '0',
@@ -1051,18 +1060,18 @@ foreach($system_settings as $system_setting) {
         ];
 
 
-                // $default_work_shift_2 = WorkShift::create($default_work_shift_data_2);
-                // $default_work_shift_2->details()->createMany($default_work_shift_data_2['details']);
+        // $default_work_shift_2 = WorkShift::create($default_work_shift_data_2);
+        // $default_work_shift_2->details()->createMany($default_work_shift_data_2['details']);
 
-                ServicePlan::create([
-                    "name" => "Standard Plan",
-                    "description" => "",
-                      'set_up_amount' => 100,
-                      'duration_months' => 1,
-                      'price' => 20,
-                      'business_tier_id' => 1,
-                      "created_by" => 1
-                ]);
+        ServicePlan::create([
+            "name" => "Standard Plan",
+            "description" => "",
+            'set_up_amount' => 100,
+            'duration_months' => 1,
+            'price' => 20,
+            'business_tier_id' => 1,
+            "created_by" => 1
+        ]);
 
         return "You are done with setup";
     }
@@ -1071,7 +1080,7 @@ foreach($system_settings as $system_setting) {
     public function roleRefresh(Request $request)
     {
 
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
 
         $this->roleRefreshFunc();
 
@@ -1081,16 +1090,17 @@ foreach($system_settings as $system_setting) {
 
 
 
-    public function backup(Request $request) {
-        $this->storeActivity($request, "DUMMY activity","DUMMY description");
-        foreach(DB::connection('backup_database')->table('users')->get() as $backup_data){
+    public function backup(Request $request)
+    {
+        $this->storeActivity($request, "DUMMY activity", "DUMMY description");
+        foreach (DB::connection('backup_database')->table('users')->get() as $backup_data) {
 
-        $data_exists = DB::connection('mysql')->table('users')->where([
-            "id" => $backup_data->id
-           ])->first();
-           if(!$data_exists) {
-            DB::connection('mysql')->table('users')->insert(get_object_vars($backup_data));
-           }
+            $data_exists = DB::connection('mysql')->table('users')->where([
+                "id" => $backup_data->id
+            ])->first();
+            if (!$data_exists) {
+                DB::connection('mysql')->table('users')->insert(get_object_vars($backup_data));
+            }
         }
 
 
@@ -1142,60 +1152,59 @@ foreach($system_settings as $system_setting) {
 
 
 
-                            foreach(DB::connection('backup_database')->table('businesses')->get() as $backup_data){
-                                $data_exists = DB::connection('mysql')->table('businesses')->where([
-                                    "id" => $backup_data->id
-                                   ])->first();
-                                   if(!$data_exists) {
-                                    DB::connection('mysql')->table('businesses')->insert(get_object_vars($backup_data));
-                                   }
-                                }
+        foreach (DB::connection('backup_database')->table('businesses')->get() as $backup_data) {
+            $data_exists = DB::connection('mysql')->table('businesses')->where([
+                "id" => $backup_data->id
+            ])->first();
+            if (!$data_exists) {
+                DB::connection('mysql')->table('businesses')->insert(get_object_vars($backup_data));
+            }
+        }
 
-                                foreach(DB::connection('backup_database')->table('business_automobile_makes')->get() as $backup_data){
-                                    $data_exists = DB::connection('mysql')->table('business_automobile_makes')->where([
-                                        "id" => $backup_data->id
-                                       ])->first();
-                                       if(!$data_exists) {
-                                        DB::connection('mysql')->table('business_automobile_makes')->insert(get_object_vars($backup_data));
-                                       }
-                                    }
+        foreach (DB::connection('backup_database')->table('business_automobile_makes')->get() as $backup_data) {
+            $data_exists = DB::connection('mysql')->table('business_automobile_makes')->where([
+                "id" => $backup_data->id
+            ])->first();
+            if (!$data_exists) {
+                DB::connection('mysql')->table('business_automobile_makes')->insert(get_object_vars($backup_data));
+            }
+        }
 
-                                    foreach(DB::connection('backup_database')->table('business_automobile_models')->get() as $backup_data){
-                                        $data_exists = DB::connection('mysql')->table('business_automobile_models')->where([
-                                            "id" => $backup_data->id
-                                           ])->first();
-                                           if(!$data_exists) {
-                                            DB::connection('mysql')->table('business_automobile_models')->insert(get_object_vars($backup_data));
-                                           }
-                                        }
+        foreach (DB::connection('backup_database')->table('business_automobile_models')->get() as $backup_data) {
+            $data_exists = DB::connection('mysql')->table('business_automobile_models')->where([
+                "id" => $backup_data->id
+            ])->first();
+            if (!$data_exists) {
+                DB::connection('mysql')->table('business_automobile_models')->insert(get_object_vars($backup_data));
+            }
+        }
 
-                                        foreach(DB::connection('backup_database')->table('business_services')->get() as $backup_data){
-                                            $data_exists = DB::connection('mysql')->table('business_services')->where([
-                                                "id" => $backup_data->id
-                                               ])->first();
-                                               if(!$data_exists) {
-                                                DB::connection('mysql')->table('business_services')->insert(get_object_vars($backup_data));
-                                               }
-                                            }
+        foreach (DB::connection('backup_database')->table('business_services')->get() as $backup_data) {
+            $data_exists = DB::connection('mysql')->table('business_services')->where([
+                "id" => $backup_data->id
+            ])->first();
+            if (!$data_exists) {
+                DB::connection('mysql')->table('business_services')->insert(get_object_vars($backup_data));
+            }
+        }
 
-                                            foreach(DB::connection('backup_database')->table('business_sub_services')->get() as $backup_data){
-                                                $data_exists = DB::connection('mysql')->table('business_sub_services')->where([
-                                                    "id" => $backup_data->id
-                                                   ])->first();
-                                                   if(!$data_exists) {
-                                                    DB::connection('mysql')->table('business_sub_services')->insert(get_object_vars($backup_data));
-                                                   }
-                                                }
-                                                foreach(DB::connection('backup_database')->table('fuel_stations')->get() as $backup_data){
-                                                    $data_exists = DB::connection('mysql')->table('fuel_stations')->where([
-                                                        "id" => $backup_data->id
-                                                       ])->first();
-                                                       if(!$data_exists) {
-                                                        DB::connection('mysql')->table('fuel_stations')->insert(get_object_vars($backup_data));
-                                                       }
-                                                    }
+        foreach (DB::connection('backup_database')->table('business_sub_services')->get() as $backup_data) {
+            $data_exists = DB::connection('mysql')->table('business_sub_services')->where([
+                "id" => $backup_data->id
+            ])->first();
+            if (!$data_exists) {
+                DB::connection('mysql')->table('business_sub_services')->insert(get_object_vars($backup_data));
+            }
+        }
+        foreach (DB::connection('backup_database')->table('fuel_stations')->get() as $backup_data) {
+            $data_exists = DB::connection('mysql')->table('fuel_stations')->where([
+                "id" => $backup_data->id
+            ])->first();
+            if (!$data_exists) {
+                DB::connection('mysql')->table('fuel_stations')->insert(get_object_vars($backup_data));
+            }
+        }
 
-                                                return response()->json("done",200);
+        return response()->json("done", 200);
     }
-
 }

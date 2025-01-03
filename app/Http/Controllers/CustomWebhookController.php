@@ -44,10 +44,14 @@ class CustomWebhookController extends WebhookController
             // Log the event type
             Log::info('Event Type: ' . $eventType);
 
-            // Handle the event based on its type
-            if ($eventType === 'checkout.session.completed') {
-                $this->handleChargeSucceeded($payload['data']['object']);
-            }
+          // Handle the event based on its type
+        if ($eventType === 'checkout.session.completed') {
+            $this->handleChargeSucceeded($payload['data']['object']);
+        }
+       // This handles the successful payment of a subscription invoice
+   if ($eventType === 'invoice.payment_succeeded') {
+    $this->handleSubscriptionPaymentSucceeded($payload['data']['object']);
+   }
 
             // Return a response to Stripe to acknowledge receipt of the webhook
             return response()->json(['message' => 'Webhook received']);
@@ -66,6 +70,7 @@ class CustomWebhookController extends WebhookController
      */
     protected function handleChargeSucceeded($data)
     {
+
         // Extract required data from payment charge
         $amount = $data['amount_total'] ?? null;
         $customerID = $data['customer'] ?? null;
@@ -78,38 +83,26 @@ class CustomWebhookController extends WebhookController
 
         $user = User::where("stripe_id", $customerID)->first();
 
+
         if(!empty($metadata["service_plan_id"])) {
             $service_plan = ServicePlan::find($metadata["service_plan_id"]);
         } else {
             $service_plan = ServicePlan::find($user->business->service_plan_id);
         }
 
-        $subscription =  BusinessSubscription::create([
+      $subscription = BusinessSubscription::create([
             'business_id' => $user->business->id,
             'service_plan_id' => $service_plan->id,
             'start_date' => now(),  // Start date of the subscription
-            'end_date' => Carbon::now()->addDays($service_plan->duration_months * 30),  // End date based on plan duration
-            'amount' => $amount,
+            'end_date' => Carbon::now()->addDays($service_plan->duration_months * (env("IS_DEVELOPMENT_MODE") == "true" ? 1 : 30)),  // End date based on plan duration
+            'amount' => ($amount / 100),
             'paid_at' => now(),
             'transaction_id' => $data['id'],
+
         ]);
 
-        $subscription_count = BusinessSubscription::where([
-            'business_id' => $user->business->id
-        ])
-            ->count();
             $reseller = $user->business->reseller;
-        if ($subscription_count > 1) {
-            // Send email
 
-
-            try {
-                Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserSubscriptionRenewed($user, ($amount / 100)));
-            } catch (\Exception $e) {
-                // Log the error with stack trace for debugging
-                Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
-            }
-        } else {
             try {
                 Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user,$subscription));
             } catch (\Exception $e) {
@@ -117,46 +110,81 @@ class CustomWebhookController extends WebhookController
                 Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
                 // Optionally, handle specific actions if email fails (e.g., notify admin)
             }
-        }
 
-
-        //     $subscription = BusinessBusinessBusinessSubscription::where('business_id', $user->business->id)
-        //     ->where("service_plan_id",  $user->business->service_plan_id)
-        //     ->where('start_date', '<=', now()) // Start date is in the past or now
-        //     ->where('end_date', '>=', now())   // End date is in the future or now
-        //     ->first();
-
-        // if ($subscription) {
-        //     // If a current subscription exists, update it
-        //     $subscription->amount = $paymentCharge['amount'];
-        //     $subscription->paid_at = now();
-        //     $subscription->save();
-        // } else {
-        //     // If a current subscription does not exist, create a new one
-        //     $service_plan = ServicePlan::find($user->business->service_plan_id);
-
-        //     // Create a new subscription with appropriate date conditions
-        //     BusinessBusinessBusinessSubscription::create([
-        //         'business_id' => $user->business->id,
-        //         'service_plan_id' => $user->business->service_plan_id,
-        //         'start_date' => now(),  // Assuming the subscription starts immediately upon payment
-        //         'end_date' => Carbon::now()->addDays($service_plan->duration),  // Set end date based on plan duration
-        //         'amount' => $paymentCharge['amount'],
-        //         'paid_at' => now(),
-        //         // Add other necessary fields here
-        //     ]);
-        // }
-
-
-        // $userID = $user->id ?? null;
-
-        // // Log the extracted data
-        // Log::info('Amount: ' . $amount);
-        // Log::info('Currency: ' . $currency);
-        // Log::info('Customer ID: ' . $customerID);
-        // Log::info('User ID: ' . $userID);
-
-        // Process the payment charge data as needed
-        // For example, you can update the user's payment information in the database
     }
+
+    protected function handleSubscriptionPaymentSucceeded($invoice)
+    {
+        // Check if this is a subscription payment
+        if (isset($invoice['subscription'])) {
+            // This is a subscription payment
+
+            // Extract required data from the invoice
+            $amount = $invoice['amount_paid'] ?? null; // Amount paid for the subscription
+            $customerID = $invoice['customer'] ?? null; // Customer ID from Stripe
+            $subscriptionID = $invoice['subscription'];  // Subscription ID
+            $metadata = $invoice["subscription_details"]["metadata"] ?? []; // Metadata from the invoice
+
+            // Ensure that the URL in the metadata matches, if provided
+            if (!empty($metadata["our_url"]) && $metadata["our_url"] != route('stripe.webhook')) {
+                return;
+            }
+
+         // Fetch the user based on the Stripe customer ID
+            $user = User::where("stripe_id", $customerID)->first();
+
+            if (!$user) {
+                // If the user does not exist, log the error and stop processing
+                Log::error("User not found for customer ID: $customerID");
+                return;
+            }
+
+            // Fetch the service plan associated with the subscription
+            if(!empty($metadata["service_plan_id"])) {
+                $service_plan = ServicePlan::find($metadata["service_plan_id"]);
+            } else {
+                $service_plan = ServicePlan::find($user->business->service_plan_id);
+            }
+
+
+            if (!$service_plan) {
+                // If the service plan is not found, log the error and stop processing
+                Log::error("Service plan not found for user ID: $user->id");
+                return;
+            }
+
+
+            $subscription_count = BusinessSubscription::where([
+                'business_id' => $user->business->id
+            ])
+                ->count();
+                $reseller = $user->business->reseller;
+
+            if ($subscription_count > 1) {
+                 // Create or update the business subscription
+            $subscription = BusinessSubscription::create([
+                'business_id' => $user->business->id,
+                'service_plan_id' => $service_plan->id,
+                'start_date' => now(), // Start date of the subscription
+               'end_date' => Carbon::now()->addDays($service_plan->duration_months * (env("IS_DEVELOPMENT_MODE") == "true" ? 1 : 30)),  // End date based on plan
+                'amount' => ($amount / 100), // Convert from cents to the full amount
+                'paid_at' => now(), // Payment timestamp
+                'transaction_id' => $invoice['id'], // Transaction ID from Stripe
+                'subscription_id' => $subscriptionID // Store the subscription ID
+            ]);
+                // Send email
+                try {
+                    Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserSubscriptionRenewed($user, $subscription));
+                } catch (\Exception $e) {
+                    // Log the error with stack trace for debugging
+                    Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+                }
+            }
+
+        } else {
+            // Not a subscription payment, handle other events (e.g., one-time payment)
+            Log::warning("Received non-subscription payment event.");
+        }
+    }
+
 }

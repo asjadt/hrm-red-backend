@@ -1,182 +1,120 @@
-"stripeSubscriptions": {
-    "object": "list",
-    "data": [
-        {
-            "id": "sub_1Qc7t8FfJstwvu3U84AaGhKW",
-            "object": "subscription",
-            "application": null,
-            "application_fee_percent": null,
-            "automatic_tax": {
-                "disabled_reason": null,
-                "enabled": false,
-                "liability": null
-            },
-            "billing_cycle_anchor": 1735660906,
-            "billing_cycle_anchor_config": null,
-            "billing_thresholds": null,
-            "cancel_at": null,
-            "cancel_at_period_end": false,
-            "canceled_at": null,
-            "cancellation_details": {
-                "comment": null,
-                "feedback": null,
-                "reason": null
-            },
-            "collection_method": "charge_automatically",
-            "created": 1735660906,
-            "currency": "gbp",
-            "current_period_end": 1735920106,
-            "current_period_start": 1735833706,
-            "customer": "cus_RV86Z2iW8coVqe",
-            "days_until_due": null,
-            "default_payment_method": "pm_1Qc7t7FfJstwvu3UzCvmn1FT",
-            "default_source": null,
-            "default_tax_rates": [],
-            "description": null,
-            "discount": null,
-            "discounts": [],
-            "ended_at": null,
-            "invoice_settings": {
-                "account_tax_ids": null,
-                "issuer": {
-                    "type": "self"
-                }
-            },
-            "items": {
-                "object": "list",
-                "data": [
-                    {
-                        "id": "si_RV89dHgCogGy8n",
-                        "object": "subscription_item",
-                        "billing_thresholds": null,
-                        "created": 1735660907,
-                        "discounts": [],
-                        "metadata": [],
-                        "plan": {
-                            "id": "price_1Qc7qZFfJstwvu3U2sgL7xpX",
-                            "object": "plan",
-                            "active": false,
-                            "aggregate_usage": null,
-                            "amount": 2000,
-                            "amount_decimal": "2000",
-                            "billing_scheme": "per_unit",
-                            "created": 1735660747,
-                            "currency": "gbp",
-                            "interval": "day",
-                            "interval_count": 1,
-                            "livemode": false,
-                            "metadata": [],
-                            "meter": null,
-                            "nickname": null,
-                            "product": "prod_RS7YrdZl9BhezI",
-                            "tiers_mode": null,
-                            "transform_usage": null,
-                            "trial_period_days": null,
-                            "usage_type": "licensed"
-                        },
-                        "price": {
-                            "id": "price_1Qc7qZFfJstwvu3U2sgL7xpX",
-                            "object": "price",
-                            "active": false,
-                            "billing_scheme": "per_unit",
-                            "created": 1735660747,
-                            "currency": "gbp",
-                            "custom_unit_amount": null,
-                            "livemode": false,
-                            "lookup_key": null,
-                            "metadata": [],
-                            "nickname": null,
-                            "product": "prod_RS7YrdZl9BhezI",
-                            "recurring": {
-                                "aggregate_usage": null,
-                                "interval": "day",
-                                "interval_count": 1,
-                                "meter": null,
-                                "trial_period_days": null,
-                                "usage_type": "licensed"
-                            },
-                            "tax_behavior": "unspecified",
-                            "tiers_mode": null,
-                            "transform_quantity": null,
-                            "type": "recurring",
-                            "unit_amount": 2000,
-                            "unit_amount_decimal": "2000"
-                        },
-                        "quantity": 1,
-                        "subscription": "sub_1Qc7t8FfJstwvu3U84AaGhKW",
-                        "tax_rates": []
-                    }
-                ],
-                "has_more": false,
-                "total_count": 1,
-                "url": "\/v1\/subscription_items?subscription=sub_1Qc7t8FfJstwvu3U84AaGhKW"
-            },
-            "latest_invoice": "in_1QcqqpFfJstwvu3Uum3wfMsU",
-            "livemode": false,
-            "metadata": {
-                "our_url": "https:\/\/smartcollegeportal.com\/dev-red-hrm\/api\/webhooks\/stripe",
-                "service_plan_id": "1",
-                "service_plan_name": "Starter"
-            },
-            "next_pending_invoice_item_invoice": null,
-            "on_behalf_of": null,
-            "pause_collection": null,
-            "payment_settings": {
-                "payment_method_options": {
-                    "acss_debit": null,
-                    "bancontact": null,
-                    "card": {
-                        "network": null,
-                        "request_three_d_secure": "automatic"
-                    },
-                    "customer_balance": null,
-                    "konbini": null,
-                    "sepa_debit": null,
-                    "us_bank_account": null
-                },
-                "payment_method_types": null,
-                "save_default_payment_method": "off"
-            },
-            "pending_invoice_item_interval": null,
-            "pending_setup_intent": null,
-            "pending_update": null,
-            "plan": {
-                "id": "price_1Qc7qZFfJstwvu3U2sgL7xpX",
-                "object": "plan",
-                "active": false,
-                "aggregate_usage": null,
-                "amount": 2000,
-                "amount_decimal": "2000",
-                "billing_scheme": "per_unit",
-                "created": 1735660747,
-                "currency": "gbp",
-                "interval": "day",
-                "interval_count": 1,
-                "livemode": false,
-                "metadata": [],
-                "meter": null,
-                "nickname": null,
-                "product": "prod_RS7YrdZl9BhezI",
-                "tiers_mode": null,
-                "transform_usage": null,
-                "trial_period_days": null,
-                "usage_type": "licensed"
-            },
-            "quantity": 1,
-            "schedule": null,
-            "start_date": 1735660906,
-            "status": "active",
-            "test_clock": null,
-            "transfer_data": null,
-            "trial_end": null,
-            "trial_settings": {
-                "end_behavior": {
-                    "missing_payment_method": "create_invoice"
-                }
-            },
-            "trial_start": null
+{
+    "object": {
+      "id": "in_1QcqqpFfJstwvu3Uum3wfMsU",
+      "object": "invoice",
+      "account_country": "US",
+      "account_name": null,
+      "account_tax_ids": null,
+      "amount_due": 2000,
+      "amount_paid": 2000,
+      "amount_remaining": 0,
+      "amount_shipping": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "attempt_count": 1,
+      "attempted": true,
+      "auto_advance": false,
+      "automatic_tax": {
+        "disabled_reason": null,
+        "enabled": false,
+        "liability": null,
+        "status": null
+      },
+      "automatically_finalizes_at": null,
+      "billing_reason": "subscription_cycle",
+      "charge": "ch_3QcrnxFfJstwvu3U0xriTs4t",
+      "collection_method": "charge_automatically",
+      "created": 1735833743,
+      "currency": "gbp",
+      "custom_fields": null,
+      "customer": "cus_RV86Z2iW8coVqe",
+      "customer_address": null,
+      "customer_email": "rifat_owner32@gmail.com",
+      "customer_name": null,
+      "customer_phone": null,
+      "customer_shipping": null,
+      "customer_tax_exempt": "none",
+      "customer_tax_ids": [],
+      "default_payment_method": null,
+      "default_source": null,
+      "default_tax_rates": [],
+      "description": null,
+      "discount": null,
+      "discounts": [],
+      "due_date": null,
+      "effective_at": 1735837408,
+      "ending_balance": 0,
+      "footer": null,
+      "from_invoice": null,
+      "hosted_invoice_url": "https://invoice.stripe.com/i/acct_1QYTqUFfJstwvu3U/test_YWNjdF8xUVlUcVVGZkpzdHd2dTNVLF9SVnNjRW5scVAxQnFFZEJ5QkZ5VVJlVzJFS2dJZ3FRLDEyNjM3ODIxMg0200cpfHlluv?s=ap",
+      "invoice_pdf": "https://pay.stripe.com/invoice/acct_1QYTqUFfJstwvu3U/test_YWNjdF8xUVlUcVVGZkpzdHd2dTNVLF9SVnNjRW5scVAxQnFFZEJ5QkZ5VVJlVzJFS2dJZ3FRLDEyNjM3ODIxMg0200cpfHlluv/pdf?s=ap",
+      "issuer": {
+        "type": "self"
+      },
+      "last_finalization_error": null,
+      "latest_revision": null,
+
+      "livemode": false,
+      "metadata": {},
+      "next_payment_attempt": null,
+      "number": "23A8DA64-0003",
+      "on_behalf_of": null,
+      "paid": true,
+      "paid_out_of_band": false,
+      "payment_intent": "pi_3QcrnxFfJstwvu3U0etggyPl",
+      "payment_settings": {
+        "default_mandate": null,
+        "payment_method_options": {
+          "acss_debit": null,
+          "bancontact": null,
+          "card": {
+            "request_three_d_secure": "automatic"
+          },
+          "customer_balance": null,
+          "konbini": null,
+          "sepa_debit": null,
+          "us_bank_account": null
+        },
+        "payment_method_types": null
+      },
+      "period_end": 1735833706,
+      "period_start": 1735747306,
+      "post_payment_credit_notes_amount": 0,
+      "pre_payment_credit_notes_amount": 0,
+      "quote": null,
+      "receipt_number": null,
+      "rendering": null,
+      "shipping_cost": null,
+      "shipping_details": null,
+      "starting_balance": 0,
+      "statement_descriptor": null,
+      "status": "paid",
+      "status_transitions": {
+        "finalized_at": 1735837408,
+        "marked_uncollectible_at": null,
+        "paid_at": 1735837408,
+        "voided_at": null
+      },
+      "subscription": "sub_1Qc7t8FfJstwvu3U84AaGhKW",
+      "subscription_details": {
+        "metadata": {
+          "our_url": "https://smartcollegeportal.com/dev-red-hrm/api/webhooks/stripe",
+          "service_plan_id": "1",
+          "service_plan_name": "Starter"
         }
-    ],
-    "has_more": false,
-    "url": "\/v1\/subscriptions"
-}
+      },
+      "subtotal": 2000,
+      "subtotal_excluding_tax": 2000,
+      "tax": null,
+      "test_clock": null,
+      "total": 2000,
+      "total_discount_amounts": [],
+      "total_excluding_tax": 2000,
+      "total_pretax_credit_amounts": [],
+      "total_tax_amounts": [],
+      "transfer_data": null,
+      "webhooks_delivered_at": 1735833743
+    },
+    "previous_attributes": null
+  }
+
