@@ -70,7 +70,7 @@ Route::middleware(['developer'])->group(function () {
 
     Route::get('/swagger-refresh', [SetUpController::class, "swaggerRefresh"]);
     Route::get('/migrate', [SetUpController::class, "migrate"]);
-
+    Route::get('/configure-stripe', [SetUpController::class, "configureStripe"]);
 
 });
 

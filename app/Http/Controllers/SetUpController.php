@@ -28,13 +28,16 @@ use App\Models\SettingLeaveType;
 use App\Models\SettingPaymentDate;
 use App\Models\SettingPayrun;
 use App\Models\SocialSite;
+use App\Models\SystemSetting;
 use App\Models\TaskCategory;
 use App\Models\WorkLocation;
 use App\Models\WorkShift;
 use App\Models\WorkShiftHistory;
+use Exception;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
-
+use Stripe\WebhookEndpoint;
+use Stripe\Stripe;
 class SetUpController extends Controller
 {
     use ErrorUtil, UserActivityUtil, SetupUtil;
@@ -153,6 +156,70 @@ return "swagger generated";
         return "Cache cleared successfully!";
     }
 
+    public function configureStripe(Request $request) {
+        $this->storeActivity($request, "DUMMY activity","DUMMY description");
+       $system_settings = SystemSetting::get();
+foreach($system_settings as $system_setting) {
+    $stripeValid = false;
+    if (!empty($system_setting->STRIPE_SECRET) && !empty($system_setting->STRIPE_KEY)) {
+        // Verify the Stripe credentials before updating
+        try {
+            // Set Stripe client with the provided secret
+            $stripe = new \Stripe\StripeClient($system_setting->STRIPE_SECRET);
+
+            // Make a test API call to check balance instead of account details
+            $balance = $stripe->balance->retrieve();
+
+            // If the request is successful, mark the Stripe credentials as valid
+            $stripeValid = true;
+
+        }  catch (Exception $e) {
+            $stripeValid = false;
+        }
+    }
+
+    if($stripeValid) {
+
+        Stripe::setApiKey($system_setting->STRIPE_SECRET);
+        Stripe::setClientId($system_setting->STRIPE_KEY);
+
+        // Define the required events
+    $requiredEvents = [
+        'checkout.session.completed', // One-time payments
+        'invoice.payment_succeeded',  // Subscription payments
+    ];
+        // Retrieve all webhook endpoints from Stripe
+        $webhookEndpoints = WebhookEndpoint::all();
+
+        // Check if a webhook endpoint with the desired URL already exists
+    $existingEndpoint = collect($webhookEndpoints->data)->first(function ($endpoint) {
+        return $endpoint->url === route('stripe.webhook'); // Replace with your actual endpoint URL
+    });
+
+    if ($existingEndpoint) {
+        // Check if all required events are already in enabled events
+        $currentEvents = $existingEndpoint->enabled_events ?? [];
+        $missingEvents = array_diff($requiredEvents, $currentEvents);
+
+        if (!empty($missingEvents)) {
+        // Add missing events to the existing endpoint
+            WebhookEndpoint::update(
+                $existingEndpoint->id,
+                [
+                    'enabled_events' => array_unique(array_merge(
+                        $currentEvents,
+                        $missingEvents
+                    )),
+                ]
+            );
+        }
+    }
+
+    }
+}
+
+        return "ok";
+        }
 
     public function setUp(Request $request)
     {

@@ -87,7 +87,6 @@ class SystemSettingController extends Controller
 
              if (!empty($request_data['self_registration_enabled'])) {
                  // Verify the Stripe credentials before updating
-                 $stripeValid = false;
 
 
                  try {
@@ -98,10 +97,9 @@ class SystemSettingController extends Controller
                      $balance = $stripe->balance->retrieve();
 
                      // If the request is successful, mark the Stripe credentials as valid
-                     $stripeValid = true;
 
                  } catch (\Stripe\Exception\AuthenticationException $e) {
-                 
+
                      return response()->json([
                          "message" => "Something went wrong with the payment setup. It looks like the Stripe key you provided is invalid. Please double-check the key and try again. If you continue to experience issues, contact support."
                      ], 401);

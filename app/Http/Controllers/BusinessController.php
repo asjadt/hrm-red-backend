@@ -2673,26 +2673,28 @@ class BusinessController extends Controller
                 $stripeCustomerId = $business?->owner?->stripe_id ?? null;
 
                 if (!empty($stripeCustomerId)) {
-                    // Fetch all subscriptions from Stripe
-                    $stripeSubscriptions = \Stripe\Subscription::all([
-                        'customer' => $stripeCustomerId,
-                        'status' => 'all', // You can use 'active' to filter active subscriptions
-                    ]);
+                   // Fetch all paid invoices from Stripe
+$stripeInvoices = \Stripe\Invoice::all([
+    'customer' => $stripeCustomerId,
+    'status' => 'paid', // Only fetch paid invoices
+    'limit' => 100, // Adjust limit as needed
+]);
 
-                    foreach ($stripeSubscriptions->data as $subscription) {
+foreach ($stripeInvoices->data as $invoice) {
+    $subscriptionId = $invoice->subscription;
+    $subscriptionDetails = \Stripe\Subscription::retrieve($subscriptionId);
 
-                        $business_subscriptions[] = [
-                            'id' => $subscription->id,
-                            'start_date' => Carbon::createFromTimestamp($subscription->current_period_start),
-                            'end_date' => Carbon::createFromTimestamp($subscription->current_period_end),
-                            'status' => $subscription->status,
-                            'amount' => $subscription->items->data[0]->price->unit_amount / 100, // Convert cents to dollars
-                            'service_plan_id' => $subscription?->metadata?->service_plan_id ?? "",
-                            'service_plan_name' => $subscription?->metadata?->service_plan_name ?? "",
-                            'url' => "https://dashboard.stripe.com/subscriptions/{$subscription->id}",
-
-                        ];
-                    }
+    $business_subscriptions[] = [
+        'id' => $subscriptionId,
+        'start_date' => Carbon::createFromTimestamp($subscriptionDetails->current_period_start)->toDateTimeString(),
+        'end_date' => Carbon::createFromTimestamp($subscriptionDetails->current_period_end)->toDateTimeString(),
+        'status' => $subscriptionDetails->status,
+        'amount' => $invoice->amount_paid / 100, // Convert cents to dollars
+        'service_plan_id' => $subscriptionDetails?->metadata?->service_plan_id ?? "",
+        'service_plan_name' => $subscriptionDetails?->metadata?->service_plan_name ?? "",
+        'url' => "https://dashboard.stripe.com/subscriptions/{$subscriptionId}",
+    ];
+}
 
                     // Fetch the upcoming invoice (for upcoming subscription details)
                     $upcomingInvoice = null;
@@ -2745,8 +2747,7 @@ class BusinessController extends Controller
             $responseData = [
                 "subscriptions" => $business_subscriptions,
                 "upcoming_subscriptions" => $upcoming_business_subscriptions,
-                "failed_attempts" => $failed_attempts,
-                "stripeSubscriptions"=> $stripeSubscriptions
+                "failed_attempts" => $failed_attempts
             ];
 
             return response()->json($responseData, 200);
