@@ -69,7 +69,7 @@ class Business extends Model
     // {
     //     return $this->hasOne(BusinessEmailSetting::class);
     // }
-    
+
     public function reseller()
     {
         return $this->hasOne(User::class,"id","reseller_id");
@@ -82,14 +82,15 @@ class Business extends Model
         // Return false if start_date or end_date is empty
         if (empty($subscription->start_date) || empty($subscription->end_date)) return false;
 
-        $startDate = Carbon::parse($subscription->start_date);
-        $endDate = Carbon::parse($subscription->end_date);
+        $startDate = Carbon::parse($subscription->start_date)->startOfDay();
+        $endDate = Carbon::parse($subscription->end_date)->endOfDay();
+        $today = Carbon::today(); // Get today's date (start of day)
 
-        // Return false if the subscription hasn't started
-        if ($startDate->isFuture()) return false;
+     // Return false if the subscription hasn't started
+    if ($startDate->isFuture()) return false;
 
-        // Return false if the subscription has expired
-        if ($endDate->isPast() && !$endDate->isToday()) return false;
+    // Return false if the subscription has expired (end_date is before today)
+    if ($endDate->isPast() && !$endDate->isSameDay($today)) return false;
 
         return true;
     }
