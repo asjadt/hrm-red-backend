@@ -185,7 +185,7 @@ class CustomWebhookController extends WebhookController
                 'service_plan_id' => $service_plan->id,
                 'start_date' => $periodStart, // Start date of the subscription
                 'end_date' => $periodEnd,    // End date of the subscription
-                'amount' => ($amount / 100), // Convert from cents to the full amount
+                'amount' => ($amount), // Convert from cents to the full amount
                 'paid_at' => now(), // Payment timestamp
                 'transaction_id' => $invoice['id'], // Transaction ID from Stripe
                 'subscription_id' => $subscriptionID // Store the subscription ID
