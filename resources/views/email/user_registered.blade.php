@@ -12,7 +12,7 @@
     <h2>User Information</h2>
     <p><strong>Name:</strong> {{ $userName }}</p>
     <p><strong>Email:</strong> {{ $userEmail }}</p>
-    <p><strong>Registration Date:</strong> {{ $registrationDate }}</p>
+    <p><strong>Registration Date:</strong> {{ \Carbon\Carbon::parse($registrationDate)->format('d/m/Y') }}</p>
 
     <h2>Business Details</h2>
     <p><strong>Business Name:</strong> {{ $businessName }}</p>
