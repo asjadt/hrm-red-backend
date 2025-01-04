@@ -11,16 +11,16 @@ class UserSubscriptionRenewed extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
-    public $renewalAmount;
+    public $subscription;
 
     /**
      * Create a new message instance.
      */
 
-    public function __construct($user, $renewalAmount)
+    public function __construct($user, $subscription)
     {
         $this->user = $user;
-        $this->renewalAmount = $renewalAmount;
+        $this->subscription = $subscription;
     }
 
     /**
@@ -44,7 +44,7 @@ class UserSubscriptionRenewed extends Mailable
                 'businessName' => $business->name ?? 'N/A',
                 'subscriptionName' => $business->service_plan->name ?? 'N/A',
                 'discountCode' => $business->discount_code ?? 'N/A',
-                'renewalAmount' => $this->renewalAmount,
+                'renewalAmount' => $this->subscription->amount,
             ]);
     }
 }

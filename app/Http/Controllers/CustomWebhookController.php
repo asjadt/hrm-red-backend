@@ -122,12 +122,19 @@ class CustomWebhookController extends WebhookController
             // This is a subscription payment
 
             // Extract required data from the invoice
-            $amount = $invoice['amount_paid'] ?? null; // Amount paid for the subscription
+            $amount = isset($invoice['lines']['data'][0]['amount'])
+            ? $invoice['lines']['data'][0]['amount'] / 100 // Amount in dollars
+            : null;
             $customerID = $invoice['customer'] ?? null; // Customer ID from Stripe
             $subscriptionID = $invoice['subscription'];  // Subscription ID
             $metadata = $invoice["subscription_details"]["metadata"] ?? []; // Metadata from the invoice
-            $periodStart = $invoice["period_start"] ?? null; // Subscription period start
-            $periodEnd = $invoice['period_end'] ?? null;
+            $periodStart = isset($invoice['lines']['data'][0]['period']['start'])
+            ? Carbon::createFromTimestamp($invoice['lines']['data'][0]['period']['start'])
+            : null;
+
+        $periodEnd = isset($invoice['lines']['data'][0]['period']['end'])
+            ? Carbon::createFromTimestamp($invoice['lines']['data'][0]['period']['end'])
+            : null;
 
             // Ensure that the URL in the metadata matches, if provided
             if (!empty($metadata["our_url"]) && $metadata["our_url"] != route('stripe.webhook')) {
@@ -169,15 +176,15 @@ class CustomWebhookController extends WebhookController
                 $reseller = $user->business->reseller;
 
             if ($subscription_count >= 1) {
+
                  // Create or update the business subscription
-                 $startDate = Carbon::createFromTimestamp($periodStart, 'UTC');
-                 $endDate = Carbon::createFromTimestamp($periodEnd, 'UTC');
+
 
             $subscription = BusinessSubscription::create([
                 'business_id' => $user->business->id,
                 'service_plan_id' => $service_plan->id,
-                'start_date' => $startDate, // Start date of the subscription
-                'end_date' => $endDate,    // End date of the subscription
+                'start_date' => $periodStart, // Start date of the subscription
+                'end_date' => $periodEnd,    // End date of the subscription
                 'amount' => ($amount / 100), // Convert from cents to the full amount
                 'paid_at' => now(), // Payment timestamp
                 'transaction_id' => $invoice['id'], // Transaction ID from Stripe
