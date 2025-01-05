@@ -38,7 +38,7 @@ class UserRegistered extends Mailable
 
 
         return $this
-            ->subject(('New User Registration Notification - ' . base64_encode($business->id) ))
+        ->subject(("New Business Alert: " . $business->name ." registered"))
             ->view('email.user_registered', [
                 'resellerName' => $reseller_name,
                 'userName' => $user_name,

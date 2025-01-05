@@ -35,7 +35,7 @@ class UserSubscriptionRenewed extends Mailable
         $user_name  = trim($this->user->first_Name . " " . $this->user->middle_Name . " " . $this->user->last_Name);
 
         return $this
-            ->subject('Subscription Renewal Notification')
+            ->subject(("Subscription Renewal Alert: " . $business->name ." renewed"))
             ->view('email.user_subscription_renewed', [
                 'resellerName' => $reseller_name,
                 'userName' => $user_name,
