@@ -93,7 +93,7 @@ class Business extends Model
 
     // Return false if the subscription has expired (end_date is before today)
     if ($endDate->isPast() && !$endDate->isSameDay($today)){
-         return true;
+        return false;
     };
 
      return true;
