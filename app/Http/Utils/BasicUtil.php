@@ -129,7 +129,8 @@ trait BasicUtil
         if(!$user->pension_eligible) {
             $current_data = $model::where('user_id', $current_user_id)
             ->where("pension_eligible",0)
-            ->latest()->first();
+            ->orderByDesc("id")
+            ->first();
         } else {
             $current_data = $model::where('user_id', $current_user_id)
             ->where("pension_eligible", 1)

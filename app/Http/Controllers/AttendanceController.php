@@ -700,7 +700,9 @@ class AttendanceController extends Controller
                 }
             }
 
-            $this->send_notification($employee->attendances()->latest()->take(count($attendances_data))->get(), $employee, "Attendance Taken", "create", "attendance");
+            $this->send_notification($employee->attendances()
+            ->orderByDesc("attendances.id")
+            ->take(count($attendances_data))->get(), $employee, "Attendance Taken", "create", "attendance");
 
 
             DB::commit();
@@ -2335,7 +2337,7 @@ class AttendanceController extends Controller
                 ->where("created_by", auth()->user()->id)
 
 
-                ->latest()
+                ->orderByDesc("attendances.id")
                 ->first();
 
             if (empty($attendance)) {
@@ -2845,7 +2847,8 @@ class AttendanceController extends Controller
             $latest_attendances = Attendance::whereIn(
                 "user_id",
                 $users->pluck("id")
-            )->latest()
+            )
+            ->orderByDesc("attendances.id")
                 ->take($attendances_data->count())
                 ->get();
 
@@ -3255,7 +3258,9 @@ class AttendanceController extends Controller
 
                 if ($created_attendances) {
                     // Retrieve latest attendances for the user
-                    $latest_attendances = $user->attendances()->latest()->take(count($attendances_data->toArray()))->get();
+                    $latest_attendances = $user->attendances()
+                    ->orderByDesc("attendances.id")
+                    ->take(count($attendances_data->toArray()))->get();
 
                     Log::info(json_encode($latest_attendances));
                     Log::info("........................................................ attendances");

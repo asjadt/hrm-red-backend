@@ -130,7 +130,7 @@ class Business extends Model
             $validTrailDate = $this->isTrailDateValid($this->trail_end_date);
             $latest_subscription = BusinessSubscription::where('business_id', $this->id)
                 ->where('service_plan_id', $this->service_plan_id)
-                ->latest()
+                ->orderByDesc("business_subscriptions.id")
                 ->first();
 
             // If no valid subscription and no valid trail date, return 0
@@ -169,14 +169,16 @@ class Business extends Model
     public function subscription()
     {
         return $this->hasOne(BusinessSubscription::class, 'business_id', 'id')
-            ->latest();
+        ->orderByDesc("business_subscriptions.id")
+            ;
     }
 
     public function current_subscription()
     {
         return $this->hasOne(BusinessSubscription::class, 'business_id', 'id')
          ->where('business_subscriptions.service_plan_id', $this->service_plan_id)
-            ->latest();
+         ->orderByDesc("business_subscriptions.id")
+            ;
     }
 
     public function getStripeSubscriptionEnabledAttribute()

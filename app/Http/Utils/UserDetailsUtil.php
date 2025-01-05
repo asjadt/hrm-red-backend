@@ -259,7 +259,7 @@ trait UserDetailsUtil
             "user_id" =>   $user->id,
             "to_date" => NULL
         ])
-            ->latest('created_at')
+        ->orderByDesc("employee_address_histories.id")
             ->first();
 
         if ($employee_address_history) {

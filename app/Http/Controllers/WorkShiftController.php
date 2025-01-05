@@ -504,7 +504,8 @@ class WorkShiftController extends Controller
                             ]);
 
                         $last_inactive_date = WorkShiftHistory::where("work_shift_id", $work_shift->id)
-                            ->latest()->first();
+                        ->orderByDesc("work_shift_histories.id")
+                            ->first();
 
                         $employee_work_shift_history_data = $work_shift->toArray();
                         $employee_work_shift_history_data["work_shift_id"] = $work_shift->id;
@@ -910,7 +911,8 @@ class WorkShiftController extends Controller
                             ]);
 
                         $last_inactive_date = WorkShiftHistory::where("work_shift_id", $work_shift->id)
-                            ->latest()->first();
+                        ->orderByDesc("work_shift_histories.id")
+                            ->first();
 
                         $employee_work_shift_history_data = $work_shift->toArray();
                         $employee_work_shift_history_data["work_shift_id"] = $work_shift->id;
@@ -1185,7 +1187,8 @@ class WorkShiftController extends Controller
                 if ($is_active) {
 
                     $last_inactive_date = WorkShiftHistory::where("work_shift_id", $work_shift->id)
-                        ->latest()->first();
+                        ->orderByDesc("work_shift_histories.id")
+                        ->first();
 
 
                     $employee_work_shift_history_data = $work_shift->toArray();

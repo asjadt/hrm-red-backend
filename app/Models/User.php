@@ -406,7 +406,8 @@ return count($all_departments) > 0;
             if(!$user->pension_eligible) {
                 $current_data = EmployeePensionHistory::where('user_id', $current_user_id)
                 ->where("pension_eligible",0)
-                ->latest()->first();
+                ->orderByDesc("employee_pension_histories.id")
+                ->first();
             } else {
 
 
@@ -447,7 +448,8 @@ return count($all_departments) > 0;
         if(!$user->pension_eligible) {
             $current_data = EmployeePensionHistory::where('user_id', $current_user_id)
             ->where("pension_eligible",0)
-            ->latest()->first();
+            ->orderByDesc("employee_pension_histories.id")
+            ->first();
         } else {
             $current_data = EmployeePensionHistory::where('user_id', $current_user_id)
             ->where("pension_eligible", 1)
