@@ -87,12 +87,16 @@ class Business extends Model
         $today = Carbon::today(); // Get today's date (start of day)
 
      // Return false if the subscription hasn't started
-    if ($startDate->isFuture()) return false;
+    if ($startDate->isFuture()){
+        return false;
+    };
 
     // Return false if the subscription has expired (end_date is before today)
-    if ($endDate->isPast() && !$endDate->isSameDay($today)) return false;
+    if ($endDate->isPast() && !$endDate->isSameDay($today)){
+         return true;
+    };
 
-        return true;
+     return true;
     }
 
     private function isTrailDateValid($trail_end_date)
