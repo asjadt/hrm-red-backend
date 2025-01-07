@@ -697,7 +697,14 @@ public function update_work_shift_history($work_shift_id, $user)
 
             // return response()->json(["message" => ("Please activate the work shift named '" . $work_shift->name . "'")], 400);
         }
-        $work_shift->users()->attach($user->id);
+
+        UserWorkShift::where([
+            "user_id" => $user->id
+        ])
+        ->update([
+            "work_shift_id" => $work_shift->id
+        ]);
+
 
 
 

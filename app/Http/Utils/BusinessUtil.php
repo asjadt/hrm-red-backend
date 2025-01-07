@@ -4,14 +4,9 @@ namespace App\Http\Utils;
 
 
 use App\Models\Business;
-use App\Models\BusinessModule;
 use App\Models\BusinessTime;
 use App\Models\Department;
-use App\Models\DepartmentUser;
-use App\Models\Designation;
 use App\Models\EmailTemplate;
-use App\Models\EmploymentStatus;
-use App\Models\JobPlatform;
 use App\Models\Project;
 use App\Models\RecruitmentProcess;
 use App\Models\Role;
@@ -66,15 +61,6 @@ trait BusinessUtil
 
         return $business;
     }
-
-
-
-
-
-
-
-
-
 
 
     public function loadDefaultEmailTemplates($business_id)

@@ -37,17 +37,9 @@ class WorkShift extends Model
 
 
 
-
-
-
     public function details(){
         return $this->hasMany(WorkShiftDetail::class,'work_shift_id', 'id');
     }
-
-
-
-
-
 
 
     public function departments() {
@@ -59,21 +51,9 @@ class WorkShift extends Model
     }
 
 
-
-
-
-
-
-
-
-
-
-
     public function users() {
         return $this->belongsToMany(User::class, 'user_work_shifts', 'work_shift_id', 'user_id');
     }
-
-
 
 
 
