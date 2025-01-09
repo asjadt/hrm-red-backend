@@ -222,13 +222,15 @@ class SubscriptionController extends Controller
         }
         $reseller = $user->business->reseller;
 
-
-        try {
-            Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserPaymentFailed($user));
-        } catch (\Exception $e) {
-            // Log the error with stack trace for debugging
-            Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+        if (env("SEND_EMAIL") == true) {
+            try {
+                Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserPaymentFailed($user));
+            } catch (\Exception $e) {
+                // Log the error with stack trace for debugging
+                Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+            }
         }
+
 
         return redirect()->to(env("FRONT_END_URL") . "/verify/business?status=failed");
     }

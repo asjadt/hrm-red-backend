@@ -108,13 +108,16 @@ class CustomWebhookController extends WebhookController
 
         $reseller = $user->business->reseller;
 
-        try {
-            Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user, $subscription));
-        } catch (\Exception $e) {
-            // Log the error with stack trace for debugging
-            Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
-            // Optionally, handle specific actions if email fails (e.g., notify admin)
+        if (env("SEND_EMAIL") == true) {
+            try {
+                Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user, $subscription));
+            } catch (\Exception $e) {
+                // Log the error with stack trace for debugging
+                Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+                // Optionally, handle specific actions if email fails (e.g., notify admin)
+            }
         }
+
     }
 
     protected function handleSubscriptionPaymentSucceeded($invoice)
@@ -188,12 +191,18 @@ class CustomWebhookController extends WebhookController
 
             if ($subscription_count > 2) {
                 $reseller = $user->business->reseller;
-                try {
-                    Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserSubscriptionRenewed($user, $subscription));
-                } catch (\Exception $e) {
-                    // Log the error with stack trace for debugging
-                    Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+
+                if (env("SEND_EMAIL") == true) {
+                    try {
+                        Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserSubscriptionRenewed($user, $subscription));
+                    } catch (\Exception $e) {
+                        // Log the error with stack trace for debugging
+                        Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
+                    }
                 }
+
+
+
             }
         } else {
             // Not a subscription payment, handle other events (e.g., one-time payment)
