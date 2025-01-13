@@ -711,20 +711,28 @@ public function update_work_shift_history($work_shift_id, $user)
         $work_shift_history_data = $work_shift->toArray();
         $work_shift_history_data["work_shift_id"] = $work_shift_history_data["id"];
         // $employee_work_shift_history_data["from_date"] = $request_data["start_date"]?$request_data["start_date"]:now();
-        $work_shift_history_data["from_date"] = today()->addDay(1);
-        $work_shift_history_data["to_date"] = NULL;
+
+
         $work_shift_history_data["user_id"] =  $user->id;
 
 
-        WorkShiftHistory::where([
+       $last_work_shift = WorkShiftHistory::where([
             "user_id" => $user->id
         ])
         ->whereDate("from_date","<",today())
         ->whereNull("to_date")
-        ->update([
-            "to_date" =>today()
-        ]);
+        ->first();
 
+        if(!empty($last_work_shift)) {
+            $last_work_shift->update([
+                "to_date" => today()
+            ]);
+            $work_shift_history_data["from_date"] = today()->addDay(1);
+        } else {
+            $work_shift_history_data["from_date"] = auth()->user()->business->start_date;
+        }
+
+        $work_shift_history_data["to_date"] = NULL;
 
         $work_shift_history =  WorkShiftHistory::create($work_shift_history_data);
 

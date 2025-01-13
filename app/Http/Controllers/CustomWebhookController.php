@@ -111,12 +111,12 @@ class CustomWebhookController extends WebhookController
         if (env("SEND_EMAIL") == true) {
             try {
                 Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserRegistered($user, $subscription));
-            } catch (\Exception $e) {
-                // Log the error with stack trace for debugging
+            } catch (Exception $e) {
                 Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
-                // Optionally, handle specific actions if email fails (e.g., notify admin)
             }
         }
+
+
 
     }
 
@@ -195,8 +195,7 @@ class CustomWebhookController extends WebhookController
                 if (env("SEND_EMAIL") == true) {
                     try {
                         Mail::to(['kids20acc@gmail.com', 'ralashwad@gmail.com', $reseller->email])->send(new UserSubscriptionRenewed($user, $subscription));
-                    } catch (\Exception $e) {
-                        // Log the error with stack trace for debugging
+                    } catch (Exception $e) {
                         Log::error("Failed to send email: " . $e->getMessage(), ['exception' => $e]);
                     }
                 }

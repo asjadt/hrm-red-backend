@@ -231,7 +231,8 @@ class SubscriptionController extends Controller
             }
         }
 
-
         return redirect()->to(env("FRONT_END_URL") . "/verify/business?status=failed");
     }
+
+    
 }
