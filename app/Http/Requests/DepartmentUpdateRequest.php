@@ -51,7 +51,7 @@ class DepartmentUpdateRequest extends BaseFormRequest
 
             ],
             'work_location_id' => [
-                "required",
+                "nullable",
                 'numeric',
                 new ValidWorkLocationId()
             ],
