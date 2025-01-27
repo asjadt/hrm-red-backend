@@ -14,68 +14,8 @@ use Illuminate\Support\Facades\File;
 class BusinessBackgroundImageController extends Controller
 {
     use ErrorUtil,UserActivityUtil;
-       /**
-        *
-     * @OA\Post(
-     *      path="/v1.0/business-background-image",
-     *      operationId="updateBusinessBackgroundImage",
-     *      tags={"business_background_image"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store business bakground image ",
-     *      description="This method is to business bakground user image",
-     *
-   *  @OA\RequestBody(
-        *   * @OA\MediaType(
-*     mediaType="multipart/form-data",
-*     @OA\Schema(
-*         required={"image"},
-*         @OA\Property(
-*             description="image to upload",
-*             property="image",
-*             type="file",
-*             collectionFormat="multi",
-*         )
-*     )
-* )
 
 
-
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function updateBusinessBackgroundImage(ImageUploadRequest $request)
      {
@@ -120,69 +60,7 @@ File::put(config_path('setup-config.php'), '<?php return ' . var_export(config('
      }
 
 
-          /**
-        *
-     * @OA\Post(
-     *      path="/v1.0/business-background-image/by-user",
-     *      operationId="updateBusinessBackgroundImageByUser",
-     *      tags={"business_background_image"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *      summary="This method is to store business bakground image by owner ",
-     *      description="This method is to business bakground user image by owner",
-     *
-   *  @OA\RequestBody(
-        *   * @OA\MediaType(
-*     mediaType="multipart/form-data",
-*     @OA\Schema(
-*         required={"image"},
-*         @OA\Property(
-*             description="image to upload",
-*             property="image",
-*             type="file",
-*             collectionFormat="multi",
-*         )
-*     )
-* )
-
-
-
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function updateBusinessBackgroundImageByUser(ImageUploadRequest $request)
      {
@@ -227,54 +105,7 @@ File::put(config_path('setup-config.php'), '<?php return ' . var_export(config('
 
 
 
-      /**
-        *
-     * @OA\Get(
-     *      path="/v1.0/business-background-image",
-     *      operationId="getBusinessBackgroundImage",
-     *      tags={"business_background_image"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *      summary="This method is to get business background image",
-     *      description="This method is to get business background image",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+    
     public function getBusinessBackgroundImage(Request $request) {
 
         try{

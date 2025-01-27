@@ -1380,61 +1380,6 @@ $responseData = [
 
 
 
-
-  /**
-        *
-     * @OA\Post(
-     *      path="/auth/check/email",
-     *      operationId="checkEmail",
-     *      tags={"auth"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to check user",
-     *      description="This method is to check user",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"email"},
-     *
-     *             @OA\Property(property="email", type="string", format="string",example="test@g.c"),
-     *     *  *             @OA\Property(property="user_id", type="string", format="string",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *@OA\JsonContent()
-     *      )
-     *     )
-     */
-
-
     public function checkEmail(Request $request) {
         try{
             $this->storeActivity($request, "DUMMY activity","DUMMY description");
@@ -1458,59 +1403,6 @@ $responseData = [
 
  }
 
-
-  /**
-        *
-     * @OA\Post(
-     *      path="/auth/check/business/email",
-     *      operationId="checkBusinessEmail",
-     *      tags={"auth"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to check user",
-     *      description="This method is to check user",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"email"},
-     *
-     *             @OA\Property(property="email", type="string", format="string",example="test@g.c"),
-     *     *  *             @OA\Property(property="business_id", type="string", format="string",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *@OA\JsonContent()
-     *      )
-     *     )
-     */
 
 
      public function checkBusinessEmail(Request $request) {
@@ -1536,61 +1428,6 @@ $responseData = [
 
  }
 
-
-
-
-  /**
-        *
-     * @OA\Patch(
-     *      path="/auth/changepassword",
-     *      operationId="changePassword",
-     *      tags={"auth"},
- *
-     *      summary="This method is to change password",
-     *      description="This method is to change password",
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"password","cpassword"},
-     *
-     *     @OA\Property(property="password", type="string", format="string",* example="aaaaaaaa"),
-    *  * *  @OA\Property(property="password_confirmation", type="string", format="string",example="aaaaaaaa"),
-     *     @OA\Property(property="current_password", type="string", format="string",* example="aaaaaaaa"),
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *@OA\JsonContent()
-     *      )
-     *     )
-     */
 
 
 
@@ -1637,74 +1474,6 @@ try{
 
 
 
-
- /**
-        *
-     * @OA\Put(
-     *      path="/v1.0/update-user-info",
-     *      operationId="updateUserInfo",
-     *      tags={"auth"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update user by user",
-     *      description="This method is to update user by user",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"first_Name","last_Name","email","password","password_confirmation","phone","address_line_1","address_line_2","country","city","postcode"},
-     *             @OA\Property(property="first_Name", type="string", format="string",example="tsa"),
-     *            @OA\Property(property="last_Name", type="string", format="string",example="ts"),
-     *            @OA\Property(property="email", type="string", format="string",example="admin@gmail.com"),
-
-     * *  @OA\Property(property="password", type="boolean", format="boolean",example="12345678"),
-     *  * *  @OA\Property(property="password_confirmation", type="string", format="string",example="12345678"),
-     *  * *  @OA\Property(property="phone", type="string", format="string",example="1"),
-     *  * *  @OA\Property(property="address_line_1", type="string", format="string",example="1"),
-     *  * *  @OA\Property(property="address_line_2", type="string", format="string",example="1"),
-     *  * *  @OA\Property(property="country", type="string", format="string",example="1"),
-     *  * *  @OA\Property(property="city", type="string", format="string",example="1"),
-     *  * *  @OA\Property(property="postcode", type="string", format="string",example="1"),
-     *  *  * *  @OA\Property(property="lat", type="string", format="string",example="1"),
-     *  *  * *  @OA\Property(property="long", type="string", format="string",example="1"),
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateUserInfo(UserInfoUpdateRequest $request)
     {

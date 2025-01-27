@@ -1858,71 +1858,7 @@ class BusinessController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/business-pension-information",
-     *      operationId="updateBusinessPensionInformation",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update business pension information",
-     *      description="This method is to update pension information",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"user","business"},
-     *
-     *  @OA\Property(property="business", type="string", format="array",example={
-     *   *  * "id":1,
-     *   "pension_scheme_registered" : 1,
-     *   "pension_scheme_name" : "hh",
-     *   "pension_scheme_letters" : {{"file" :"vv.jpg"}}
-     *
-     * }),
-     *
 
-     *
-     *
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
     public function updateBusinessPensionInformation(BusinessUpdatePensionRequest $request)
     {
 
@@ -2016,59 +1952,6 @@ class BusinessController extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/businesses/toggle-active",
-     *      operationId="toggleActiveBusiness",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to toggle business",
-     *      description="This method is to toggle business",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"id","first_Name","last_Name","email","password","password_confirmation","phone","address_line_1","address_line_2","country","city","postcode","role"},
-     *           @OA\Property(property="id", type="string", format="number",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function toggleActiveBusiness(GetIdRequest $request)
     {
@@ -2105,91 +1988,7 @@ class BusinessController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/businesses/separate",
-     *      operationId="updateBusinessSeparate",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update business",
-     *      description="This method is to update business",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"business"},
 
-     *
-     *  @OA\Property(property="business", type="string", format="array",example={
-     *   *  * "id":1,
-     * "name":"ABCD businesses",
-     * "about":"Best businesses in Dhaka",
-     * "web_page":"https://www.facebook.com/",
-     * "identifier_prefix":"identifier_prefix",
-     * "pin_code":"pin_code",
-     *
-     *  "phone":"01771034383",
-     *  "email":"rifatalashwad@gmail.com",
-     *  "phone":"01771034383",
-     *  "additional_information":"No Additional Information",
-     *  "address_line_1":"Dhaka",
-     *  "address_line_2":"Dinajpur",
-     *    * *  "lat":"23.704263332849386",
-     *    * *  "long":"90.44707059805279",
-     *
-     *  "country":"Bangladesh",
-     *  "city":"Dhaka",
-     *  "postcode":"Dinajpur",
-     *
-     *  "logo":"https://images.unsplash.com/photo-1671410714831-969877d103b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-     *      *  *  "image":"https://images.unsplash.com/photo-1671410714831-969877d103b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-     *  "images":{"/a","/b","/c"},
-     * *  "currency":"BDT"
-     *
-     * }),
-     *
-
-     *
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
     public function updateBusinessSeparate(BusinessUpdateSeparateRequest $request)
     {
 
@@ -2259,137 +2058,6 @@ class BusinessController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/businesses",
-     *      operationId="getBusinesses",
-     *      tags={"business_management"},
-     * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="country_code",
-     * in="query",
-     * description="country_code",
-     * required=true,
-     * example="country_code"
-     * ),
-     * *  @OA\Parameter(
-     * name="address",
-     * in="query",
-     * description="address",
-     * required=true,
-     * example="address"
-     * ),
-     * *  @OA\Parameter(
-     * name="city",
-     * in="query",
-     * description="city",
-     * required=true,
-     * example="city"
-     * ),
-     * *  @OA\Parameter(
-     * name="start_lat",
-     * in="query",
-     * description="start_lat",
-     * required=true,
-     * example="3"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_lat",
-     * in="query",
-     * description="end_lat",
-     * required=true,
-     * example="2"
-     * ),
-     * *  @OA\Parameter(
-     * name="start_long",
-     * in="query",
-     * description="start_long",
-     * required=true,
-     * example="1"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_long",
-     * in="query",
-     * description="end_long",
-     * required=true,
-     * example="4"
-     * ),
-     * *  @OA\Parameter(
-     * name="per_page",
-     * in="query",
-     * description="per_page",
-     * required=true,
-     * example="10"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *
-     *      summary="This method is to get businesses",
-     *      description="This method is to get businesses",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinesses(Request $request)
     {
@@ -2503,59 +2171,7 @@ class BusinessController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/businesses/{id}",
-     *      operationId="getBusinessById",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      summary="This method is to get business by id",
-     *      description="This method is to get business by id",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessById($id, Request $request)
     {
@@ -2583,65 +2199,7 @@ class BusinessController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-subscriptions/{id}",
-     *      operationId="getSubscriptionsByBusinessId",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      *              @OA\Parameter(
-     *         name="per_page",
-     *         in="path",
-     *         description="per_page",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      summary="This method is to get subscriptions by id",
-     *      description="This method is to get subscriptions by id",
-     *
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+
 
     public function getSubscriptionsByBusinessId($id, Request $request)
     {
@@ -2758,59 +2316,6 @@ foreach ($stripeInvoices->data as $invoice) {
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/businesses/{id}",
-     *      operationId="getBusinessByIdV2",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      summary="This method is to get business by id",
-     *      description="This method is to get business by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessByIdV2($id, Request $request)
     {
@@ -2868,59 +2373,7 @@ foreach ($stripeInvoices->data as $invoice) {
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/businesses-id-by-email/{email}",
-     *      operationId="getBusinessIdByEmail",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="email",
-     *         in="path",
-     *         description="email",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      summary="This method is to get business id by email",
-     *      description="This method is to get business id by email",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessIdByEmail($email, Request $request)
     {
@@ -2965,67 +2418,6 @@ foreach ($stripeInvoices->data as $invoice) {
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/businesses-pension-information/{id}",
-     *      operationId="getBusinessPensionInformationById",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      *              @OA\Parameter(
-     *         name="per_page",
-     *         in="path",
-     *         description="per_page",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      summary="This method is to get business pension information by id",
-     *      description="This method is to get business pension information by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getBusinessPensionInformationById($id, Request $request)
     {
 
@@ -3061,59 +2453,7 @@ foreach ($stripeInvoices->data as $invoice) {
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/businesses-pension-information-history/{id}",
-     *      operationId="getBusinessPensionInformationHistoryByBusinessId",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      summary="This method is to get business pension information history by business id",
-     *      description="This method is to get business pension information history by business id",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessPensionInformationHistoryByBusinessId($id, Request $request)
     {
@@ -3146,59 +2486,6 @@ foreach ($stripeInvoices->data as $invoice) {
     }
 
 
-    /**
-     *
-     * @OA\Delete(
-     *      path="/v1.0/businesses-pension-information-history/{ids}",
-     *      operationId="deleteBusinessPensionInformationHistoryByIds",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="6,7,8"
-     *      ),
-     *      summary="This method is to delete business pension history by id",
-     *      description="This method is to delete business pension history by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteBusinessPensionInformationHistoryByIds(Request $request, $ids)
     {
@@ -3247,59 +2534,7 @@ foreach ($stripeInvoices->data as $invoice) {
         }
     }
 
-    /**
-     *
-     * @OA\Delete(
-     *      path="/v1.0/businesses/{ids}",
-     *      operationId="deleteBusinessesByIds",
-     *      tags={"business_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="6,7,8"
-     *      ),
-     *      summary="This method is to delete business by id",
-     *      description="This method is to delete business by id",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteBusinessesByIds(Request $request, $ids)
     {
@@ -3357,55 +2592,7 @@ foreach ($stripeInvoices->data as $invoice) {
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/businesses/by-business-owner/all",
-     *      operationId="getAllBusinessesByBusinessOwner",
-     *      tags={"business_management"},
-
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *      summary="This method is to get businesses",
-     *      description="This method is to get businesses",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+    
     public function getAllBusinessesByBusinessOwner(Request $request)
     {
 
