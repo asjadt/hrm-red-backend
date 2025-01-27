@@ -18,70 +18,7 @@ use Illuminate\Support\Facades\DB;
 class BusinessTimesController extends Controller
 {
     use ErrorUtil,BusinessUtil,UserActivityUtil;
-    /**
-     *
-     * @OA\Patch(
-     *      path="/v1.0/business-times",
-     *      operationId="updateBusinessTimes",
-     *      tags={"business_times_management"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update business times",
-     *      description="This method is to update business times",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"business_id","times"},
-     *    @OA\Property(property="times", type="string", format="array",example={
-    *{"day":0,"start_at":"10:10:00","end_at":"10:15:00","is_weekend":true},
-    *{"day":1,"start_at":"10:10:00","end_at":"10:15:00","is_weekend":true},
-    *{"day":2,"start_at":"10:10:00","end_at":"10:15:00","is_weekend":true},
-     *{"day":3,"start_at":"10:10:00","end_at":"10:15:00","is_weekend":true},
-    *{"day":4,"start_at":"10:10:00","end_at":"10:15:00","is_weekend":true},
-    *{"day":5,"start_at":"10:10:00","end_at":"10:15:00","is_weekend":true},
-    *{"day":6,"start_at":"10:10:00","end_at":"10:15:00","is_weekend":true}
-     *
-     * }),
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+   
     public function updateBusinessTimes(BusinessTimesUpdateRequest $request)
     {
         try {
@@ -196,55 +133,6 @@ class BusinessTimesController extends Controller
         }
     }
 
-
-     /**
-        *
-     * @OA\Get(
-     *      path="/v1.0/business-times",
-     *      operationId="getBusinessTimes",
-     *      tags={"business_times_management"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="This method is to get business times ",
-     *      description="This method is to get business times",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessTimes(Request $request) {
         try{
