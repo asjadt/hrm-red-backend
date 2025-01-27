@@ -22,64 +22,8 @@ use Maatwebsite\Excel\Facades\Excel;
 class DepartmentController extends Controller
 {
     use ErrorUtil, UserActivityUtil, BusinessUtil, BasicUtil;
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/departments",
-     *      operationId="createDepartment",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store department",
-     *      description="This method is to store department",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
 
-     *    @OA\Property(property="name", type="string", format="string",example="name"),
-     *    @OA\Property(property="work_location_id", type="string", format="string",example="1"),
-     *    @OA\Property(property="description", type="string", format="string",example="description"),
-     *   *    @OA\Property(property="manager_id", type="number", format="number",example="1"),
-     * *   *    @OA\Property(property="parent_id", type="number", format="number",example="1")
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+    
     public function createDepartment(DepartmentCreateRequest $request)
     {
         DB::beginTransaction();
@@ -124,64 +68,7 @@ class DepartmentController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/departments",
-     *      operationId="updateDepartment",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update department ",
-     *      description="This method is to update department",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *    @OA\Property(property="id", type="number", format="number",example="1"),
-     *    @OA\Property(property="name", type="string", format="string",example="name"),
-     *    @OA\Property(property="work_location_id", type="string", format="string",example="1"),
-     *    @OA\Property(property="description", type="string", format="string",example="description"),
-     *    @OA\Property(property="manager_id", type="number", format="number",example="1"),
-     *    @OA\Property(property="parent_id", type="number", format="number",example="1")
 
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateDepartment(DepartmentUpdateRequest $request)
     {
@@ -310,60 +197,6 @@ class DepartmentController extends Controller
         }
     }
 
-  /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/departments/toggle-active",
-     *      operationId="toggleActiveDepartment",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to toggle department activity",
-     *      description="This method is to toggle department activity",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"id","first_Name","last_Name","email","password","password_confirmation","phone","address_line_1","address_line_2","country","city","postcode","role"},
-     *           @OA\Property(property="id", type="string", format="number",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
 
      public function toggleActiveDepartment(GetIdRequest $request)
      {
@@ -415,122 +248,6 @@ class DepartmentController extends Controller
          }
      }
 
-
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/departments",
-     *      operationId="getDepartments",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     *  * *  @OA\Parameter(
-     * name="is_active",
-     * in="query",
-     * description="is_active",
-     * required=true,
-     * example="1"
-     * ),
-     *   *  * *  @OA\Parameter(
-     * name="doesnt_have_payrun",
-     * in="query",
-     * description="doesnt_have_payrun",
-     * required=true,
-     * example="1"
-     * ),
-     *    *   *  * *  @OA\Parameter(
-     * name="hide_parent",
-     * in="query",
-     * description="hide_parent",
-     * required=true,
-     * example="1"
-     * ),
-     *
-     *    *    *   *  * *  @OA\Parameter(
-     * name="not_in_rota",
-     * in="query",
-     * description="not_in_rota",
-     * required=true,
-     * example="1"
-     * ),
-     *
-     *
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get departments  ",
-     *      description="This method is to get departments ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getDepartments(Request $request)
     {
@@ -641,54 +358,7 @@ class DepartmentController extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
-  /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/departments",
-     *      operationId="getDepartmentsV2",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-
-     *      summary="This method is to get departments  ",
-     *      description="This method is to get departments ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function getDepartmentsV2(Request $request)
      {
@@ -743,69 +413,7 @@ class DepartmentController extends Controller
              return $this->sendError($e, 500, $request);
          }
      }
-      /**
-     *
-     * @OA\Get(
-     *      path="/v3.0/departments",
-     *      operationId="getDepartmentsV3",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-   *   *              @OA\Parameter(
-     *         name="response_type",
-     *         in="query",
-     *         description="response_type: in pdf,csv,json",
-     *         required=true,
-     *  example="json"
-     *      ),
-     *      *   *              @OA\Parameter(
-     *         name="file_name",
-     *         in="query",
-     *         description="file_name",
-     *         required=true,
-     *  example="employee"
-     *      ),
-     *
-     *
-     *      summary="This method is to get departments  ",
-     *      description="This method is to get departments ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function getDepartmentsV3(Request $request)
      {
@@ -857,59 +465,7 @@ class DepartmentController extends Controller
              return $this->sendError($e, 500, $request);
          }
      }
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/departments/{id}",
-     *      operationId="getDepartmentById",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get department by id",
-     *      description="This method is to get department by id",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
 
     public function getDepartmentById($id, Request $request)
@@ -960,59 +516,6 @@ class DepartmentController extends Controller
 
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/departments/{ids}",
-     *      operationId="deleteDepartmentsByIds",
-     *      tags={"administrator.department"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete department by id",
-     *      description="This method is to delete department by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteDepartmentsByIds(Request $request, $ids)
     {

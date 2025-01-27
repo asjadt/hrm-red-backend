@@ -22,73 +22,7 @@ class CandidateController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/candidates",
-     *      operationId="createCandidate",
-     *      tags={"candidates"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store candidate",
-     *      description="This method is to store candidate",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*     @OA\Property(property="name", type="string", format="string", example="John Doe"),
- *     @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
- *     @OA\Property(property="phone", type="string", format="string", example="123-456-7890"),
- *     @OA\Property(property="experience_years", type="integer", format="int", example=3),
- *     @OA\Property(property="education_level", type="string", format="string", example="Bachelor's Degree"),
- *     @OA\Property(property="job_platforms", type="string", format="array", example={1,2,3}),
- *     @OA\Property(property="cover_letter", type="string", format="string", example="Cover letter content..."),
- *     @OA\Property(property="application_date", type="string", format="date", example="2023-11-01"),
- *     @OA\Property(property="interview_date", type="string", format="date", example="2023-11-10"),
- *     @OA\Property(property="feedback", type="string", format="string", example="Positive feedback..."),
- *     @OA\Property(property="status", type="string", format="string", example="review"),
- *     @OA\Property(property="job_listing_id", type="integer", format="int", example=1),
- *   @OA\Property(property="attachments", type="string", format="array", example={"/abcd.jpg","/efgh.jpg"})
- *
- *
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+
 
     public function createCandidate(CandidateCreateRequest $request)
     {
@@ -140,7 +74,6 @@ class CandidateController extends Controller
 
 
 
-                // $this->moveUploadedFiles($request_data["attachments"],"candidate_files");
 
 
                 DB::commit();
@@ -167,73 +100,6 @@ class CandidateController extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/client/candidates",
-     *      operationId="createCandidateClient",
-     *      tags={"candidates"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store candidate",
-     *      description="This method is to store candidate",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*     @OA\Property(property="name", type="string", format="string", example="John Doe"),
- *     @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
- *     @OA\Property(property="phone", type="string", format="string", example="123-456-7890"),
- *     @OA\Property(property="experience_years", type="integer", format="int", example=3),
- *     @OA\Property(property="education_level", type="string", format="string", example="Bachelor's Degree"),
- *     @OA\Property(property="job_platforms", type="string", format="array", example={1,2,3}),
- *     @OA\Property(property="cover_letter", type="string", format="string", example="Cover letter content..."),
- *     @OA\Property(property="application_date", type="string", format="date", example="2023-11-01"),
- *     @OA\Property(property="interview_date", type="string", format="date", example="2023-11-10"),
- *     @OA\Property(property="feedback", type="string", format="string", example="Positive feedback..."),
- *     @OA\Property(property="status", type="string", format="string", example="review"),
- *     @OA\Property(property="job_listing_id", type="integer", format="int", example=1),
- *   @OA\Property(property="attachments", type="string", format="array", example={"/abcd.jpg","/efgh.jpg"})
- *
- *
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function createCandidateClient(CandidateCreateRequest $request)
      {
@@ -304,73 +170,7 @@ class CandidateController extends Controller
          }
      }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/candidates",
-     *      operationId="updateCandidate",
-     *      tags={"candidates"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update candidate ",
-     *      description="This method is to update candidate",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-*     @OA\Property(property="name", type="string", format="string", example="John Doe"),
- *     @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
- *     @OA\Property(property="phone", type="string", format="string", example="123-456-7890"),
- *     @OA\Property(property="experience_years", type="integer", format="int", example=3),
- *     @OA\Property(property="education_level", type="string", format="string", example="Bachelor's Degree"),
- *  *     @OA\Property(property="job_platform", type="string", format="string", example="facebook"),
- *
- *     @OA\Property(property="cover_letter", type="string", format="string", example="Cover letter content..."),
- *     @OA\Property(property="application_date", type="string", format="date", example="2023-11-01"),
- *     @OA\Property(property="interview_date", type="string", format="date", example="2023-11-10"),
- *     @OA\Property(property="feedback", type="string", format="string", example="Positive feedback..."),
- *     @OA\Property(property="status", type="string", format="string", example="review"),
- *     @OA\Property(property="job_listing_id", type="integer", format="int", example=1),
- *   @OA\Property(property="attachments", type="string", format="array", example={"/abcd.jpg","/efgh.jpg"})
 
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateCandidate(CandidateUpdateRequest $request)
     {
@@ -484,137 +284,6 @@ class CandidateController extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/candidates",
-     *      operationId="getCandidates",
-     *      tags={"candidates"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *    *      * *  @OA\Parameter(
-     * name="job_listing_id",
-     * in="query",
-     * description="job_listing_id",
-     * required=true,
-     * example="1"
-     * ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     *
-     *     * *  @OA\Parameter(
-     * name="name",
-     * in="query",
-     * description="name",
-     * required=true,
-     * example="name"
-     * ),
-     *
-
-     *
-     *  @OA\Parameter(
-     * name="job_platform_id",
-     * in="query",
-     * description="job_platform",
-     * required=true,
-     * example="job_platform_id"
-     * ),
-     *
-     *  *  @OA\Parameter(
-     * name="interview_date",
-     * in="query",
-     * description="interview_date",
-     * required=true,
-     * example="interview_date"
-     * ),
-     *     *  *  @OA\Parameter(
-     * name="status",
-     * in="query",
-     * description="status",
-     * required=true,
-     * example="status"
-     * ),
-     *
-     *
-     *
-     *
-     *
-     *
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get candidates  ",
-     *      description="This method is to get candidates ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getCandidates(Request $request)
     {
         try {
@@ -698,59 +367,6 @@ class CandidateController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/candidates/{id}",
-     *      operationId="getCandidateById",
-     *      tags={"candidates"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get candidate by id",
-     *      description="This method is to get candidate by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
 
     public function getCandidateById($id, Request $request)
@@ -785,59 +401,6 @@ class CandidateController extends Controller
 
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/candidates/{ids}",
-     *      operationId="deleteCandidatesByIds",
-     *      tags={"candidates"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete candidate by id",
-     *      description="This method is to delete candidate by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteCandidatesByIds(Request $request, $ids)
     {

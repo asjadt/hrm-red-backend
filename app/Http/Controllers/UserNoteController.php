@@ -26,64 +26,6 @@ class UserNoteController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/user-notes",
-     *      operationId="createUserNote",
-     *      tags={"user_notes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store user note",
-     *      description="This method is to store user note",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
- * @OA\Property(property="user_id", type="integer", format="int", example=1),
- * @OA\Property(property="title", type="string", format="string", example="Your title"),
- * @OA\Property(property="description", type="string", format="string", example="Your Major")
- *
- *
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function createUserNote(UserNoteCreateRequest $request)
     {
         try {
@@ -132,64 +74,6 @@ $user_note->mentions()->createMany($mentions_data);
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/user-notes",
-     *      operationId="updateUserNote",
-     *      tags={"user_notes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update  user note ",
-     *      description="This method is to update user note",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
- * @OA\Property(property="user_id", type="integer", format="int", example=1),
-  * @OA\Property(property="title", type="string", format="string", example="Your title"),
- * @OA\Property(property="description", type="string", format="string", example="Your Major")
-*
- *
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateUserNote(UserNoteUpdateRequest $request)
     {
@@ -285,66 +169,7 @@ $user_note->mentions()->createMany($mentions_data);
         }
     }
 
-      /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/user-notes/by-business-owner",
-     *      operationId="updateUserNoteByBusinessOwner",
-     *      tags={"user_notes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update  user note ",
-     *      description="This method is to update user note",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
- * @OA\Property(property="user_id", type="integer", format="int", example=1),
-  * @OA\Property(property="title", type="string", format="string", example="Your title"),
- * @OA\Property(property="description", type="string", format="string", example="Your Major"),
- *  * @OA\Property(property="created_at", type="string", format="string", example="your date"),
- *  * @OA\Property(property="updated_at", type="string", format="string", example="your date")
-*
- *
 
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function updateUserNoteByBusinessOwner(UserNoteUpdateByBusinessOwnerRequest $request)
      {
@@ -433,96 +258,6 @@ $user_note->mentions()->createMany($mentions_data);
      }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-notes",
-     *      operationId="getUserNotes",
-     *      tags={"user_notes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="user_id",
-     *         in="query",
-     *         description="user_id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get user notes  ",
-     *      description="This method is to get user notes ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getUserNotes(Request $request)
     {
@@ -600,59 +335,7 @@ $user_note->mentions()->createMany($mentions_data);
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-notes/{id}",
-     *      operationId="getUserNoteById",
-     *      tags={"user_notes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get user note by id",
-     *      description="This method is to get user note by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+    
 
 
     public function getUserNoteById($id, Request $request)
@@ -706,59 +389,6 @@ $user_note->mentions()->createMany($mentions_data);
 
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/user-notes/{ids}",
-     *      operationId="deleteUserNotesByIds",
-     *      tags={"user_notes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete user note by id",
-     *      description="This method is to delete user note by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteUserNotesByIds(Request $request, $ids)
     {

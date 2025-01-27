@@ -19,63 +19,8 @@ use Illuminate\Support\Facades\DB;
 class RecruitmentProcessController extends Controller
 {
     use ErrorUtil, UserActivityUtil, BusinessUtil;
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/recruitment-processes",
-     *      operationId="createRecruitmentProcess",
-     *      tags={"recruitment_processes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store recruitment process ",
-     *      description="This method is to store recruitment process ",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     * @OA\Property(property="name", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="description", type="string", format="string", example="erg ear ga&nbsp;"),
-     * @OA\Property(property="use_in_employee", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="use_in_on_boarding", type="string", format="string", example="tttttt"),
-     *
-     *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+
+
 
     public function createRecruitmentProcess(RecruitmentProcessCreateRequest $request)
     {
@@ -118,64 +63,6 @@ class RecruitmentProcessController extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
-
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/recruitment-processes",
-     *      operationId="updateRecruitmentProcess",
-     *      tags={"recruitment_processes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update recruitment process  ",
-     *      description="This method is to update recruitment process ",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-     * @OA\Property(property="name", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="description", type="string", format="string", example="erg ear ga&nbsp;"),
-     * @OA\Property(property="use_in_employee", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="use_in_on_boarding", type="string", format="string", example="tttttt"),
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateRecruitmentProcess(RecruitmentProcessUpdateRequest $request)
     {
@@ -229,59 +116,7 @@ class RecruitmentProcessController extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/recruitment-processes/toggle-active",
-     *      operationId="toggleActiveRecruitmentProcess",
-     *      tags={"recruitment_processes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to toggle recruitment process ",
-     *      description="This method is to toggle recruitment process ",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
 
-     *           @OA\Property(property="id", type="string", format="number",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function toggleActiveRecruitmentProcess(GetIdRequest $request)
     {
@@ -404,111 +239,7 @@ class RecruitmentProcessController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/recruitment-processes",
-     *      operationId="getRecruitmentProcesses",
-     *      tags={"recruitment_processes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-*      * *  @OA\Parameter(
-     * name="is_active",
-     * in="query",
-     * description="is_active",
-     * required=true,
-     * example="1"
-     * ),
-     *   @OA\Parameter(
-     * name="use_in_employee",
-     * in="query",
-     * description="use_in_employee",
-     * required=true,
-     * example="1"
-     * ),
-     *   @OA\Parameter(
-     * name="use_in_on_boarding",
-     * in="query",
-     * description="use_in_on_boarding",
-     * required=true,
-     * example="1"
-     * ),
-     *
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get recruitment process s  ",
-     *      description="This method is to get recruitment process s ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getRecruitmentProcesses(Request $request)
     {
@@ -663,60 +394,7 @@ class RecruitmentProcessController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/recruitment-processes/{id}",
-     *      operationId="getRecruitmentProcessById",
-     *      tags={"recruitment_processes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get recruitment process  by id",
-     *      description="This method is to get recruitment process  by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+    
 
     public function getRecruitmentProcessById($id, Request $request)
     {
@@ -793,60 +471,6 @@ class RecruitmentProcessController extends Controller
         }
     }
 
-
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/recruitment-processes/{ids}",
-     *      operationId="deleteRecruitmentProcessesByIds",
-     *      tags={"recruitment_processes"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete recruitment process  by id",
-     *      description="This method is to delete recruitment process  by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteRecruitmentProcessesByIds(Request $request, $ids)
     {

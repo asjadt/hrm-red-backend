@@ -17,74 +17,8 @@ use Illuminate\Support\Facades\DB;
 class CommentController extends Controller
 {
     use ErrorUtil, UserActivityUtil, BusinessUtil, ModuleUtil;
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/comments",
-     *      operationId="createComment",
-     *      tags={"comment"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store comment listing",
-     *      description="This method is to store comment listing",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
 
 
- *     @OA\Property(property="description", type="string", format="string", example="A brief overview of Comment X's objectives and scope."),
- *     @OA\Property(property="attachments", type="array", @OA\Items(type="string")),
- *     @OA\Property(property="status", type="string", format="string", example="open", enum={"open", "closed"}),
- *     @OA\Property(property="priority", type="string", format="string", example="low", enum={"low", "medium", "high"}),
- *     @OA\Property(property="visibility", type="string", format="string", example="public", enum={"public", "private"}),
- *     @OA\Property(property="tags", type="string", format="string", example="tag1,tag2,tag3"),
- *     @OA\Property(property="resolution", type="string", format="string", example="Resolution details"),
- *     @OA\Property(property="feedback", type="array", @OA\Items(type="string")),
- *     @OA\Property(property="hidden_note", type="string", format="string", example="Hidden note details"),
- *     @OA\Property(property="related_task_id", type="integer", format="int64", example=123),
- *     @OA\Property(property="task_id", type="integer", format="int64", example=456)
- *
-
-     *
-     *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function createComment(CommentCreateRequest $request)
     {
@@ -143,72 +77,7 @@ class CommentController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/comments",
-     *      operationId="updateComment",
-     *      tags={"comment"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update comment listing ",
-     *      description="This method is to update comment listing",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *    @OA\Property(property="id", type="number", format="number",example="1"),
-*     @OA\Property(property="description", type="string", format="string", example="A brief overview of Comment X's objectives and scope."),
- *     @OA\Property(property="attachments", type="array", @OA\Items(type="string")),
- *     @OA\Property(property="status", type="string", format="string", example="open", enum={"open", "closed"}),
- *     @OA\Property(property="priority", type="string", format="string", example="low", enum={"low", "medium", "high"}),
- *     @OA\Property(property="visibility", type="string", format="string", example="public", enum={"public", "private"}),
- *     @OA\Property(property="tags", type="string", format="string", example="tag1,tag2,tag3"),
- *     @OA\Property(property="resolution", type="string", format="string", example="Resolution details"),
- *     @OA\Property(property="feedback", type="array", @OA\Items(type="string")),
- *     @OA\Property(property="hidden_note", type="string", format="string", example="Hidden note details"),
- *     @OA\Property(property="related_task_id", type="integer", format="int64", example=123),
- *     @OA\Property(property="task_id", type="integer", format="int64", example=456)
-     *
-     *
 
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateComment(CommentUpdateRequest $request)
     {
@@ -281,105 +150,6 @@ DB::commit();
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/comments",
-     *      operationId="getComments",
-     *      tags={"comment"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *    @OA\Parameter(
-     *         name="task_id",
-     *         in="query",
-     *         description="task_id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      *    @OA\Parameter(
-     *         name="status",
-     *         in="query",
-     *         description="status",
-     *         required=true,
-     *  example="pending"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get comment listings  ",
-     *      description="This method is to get comment listings ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getComments(Request $request)
     {
         try {
@@ -449,60 +219,6 @@ DB::commit();
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/comments/{id}",
-     *      operationId="getCommentById",
-     *      tags={"comment"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get comment listing by id",
-     *      description="This method is to get comment listing by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
 
     public function getCommentById($id, Request $request)
     {
@@ -541,60 +257,6 @@ DB::commit();
     }
 
 
-
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/comments/{ids}",
-     *      operationId="deleteCommentsByIds",
-     *      tags={"comment"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete comment listing by id",
-     *      description="This method is to delete comment listing by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteCommentsByIds(Request $request, $ids)
     {

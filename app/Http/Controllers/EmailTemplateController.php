@@ -18,66 +18,6 @@ class EmailTemplateController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/email-templates",
-     *      operationId="createEmailTemplate",
-     *      tags={"z.unused"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store email template",
-     *      description="This method is to store email template",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         description="use {{dynamic-username}} {{dynamic-verify-link}} in the template.",
-     *         @OA\JsonContent(
-     *            required={"type","template","is_active"},
-     * *    @OA\Property(property="name", type="string", format="string",example="emal v1"),
-     *    @OA\Property(property="type", type="string", format="string",example="email_verification_mail"),
-     *    @OA\Property(property="template", type="string", format="string",example="html template goes here"),
-     * *    @OA\Property(property="wrapper_id", type="number", format="number",example="1"),
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     * @OA\Hidden,
-     * @OA\Hidden
-
-     */
-
     public function createEmailTemplate(EmailTemplateCreateRequest $request)
     {
         try {
@@ -114,66 +54,8 @@ class EmailTemplateController extends Controller
             return $this->sendError($e, 500,$request);
         }
     }
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/email-templates",
-     *      operationId="updateEmailTemplate",
-     *      tags={"template_management.email"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update email template",
-     *      description="This method is to update email template",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *  description="use [FirstName],[LastName],[FullName],[AccountVerificationLink],[ForgotPasswordLink]
-     * [customer_FirstName],[customer_LastName],[customer_FullName],[business_owner_FirstName],[business_owner_LastName],[business_owner_FullName],[automobile_make],[automobile_model],[car_registration_no],[car_registration_year],[status],[payment_status],[additional_information],[discount_type],[discount_amount],[price],[job_start_date],[job_start_time],[job_end_time],[coupon_code],[fuel],[transmission]
-     *  in the template",
-     *         @OA\JsonContent(
-     *            required={"id","template","is_active"},
-     *    @OA\Property(property="id", type="number", format="number", example="1"),
-     *   * *    @OA\Property(property="name", type="string", format="string",example="emal v1"),
-     * *   * *    @OA\Property(property="is_active", type="number", format="number",example="1"),
-     *    @OA\Property(property="template", type="string", format="string",example="html template goes here"),
-     *  * *    @OA\Property(property="wrapper_id", type="number", format="number",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+
+
 
     public function updateEmailTemplate(EmailTemplateUpdateRequest $request)
     {
@@ -222,81 +104,7 @@ class EmailTemplateController extends Controller
             return $this->sendError($e, 500,$request);
         }
     }
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/email-templates/{perPage}",
-     *      operationId="getEmailTemplates",
-     *      tags={"template_management.email"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *              @OA\Parameter(
-     *         name="perPage",
-     *         in="path",
-     *         description="perPage",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      * *  @OA\Parameter(
-* name="start_date",
-* in="query",
-* description="start_date",
-* required=true,
-* example="2019-06-29"
-* ),
-     * *  @OA\Parameter(
-* name="end_date",
-* in="query",
-* description="end_date",
-* required=true,
-* example="2019-06-29"
-* ),
-     * *  @OA\Parameter(
-* name="search_key",
-* in="query",
-* description="search_key",
-* required=true,
-* example="search_key"
-* ),
-     *      summary="This method is to get email templates ",
-     *      description="This method is to get email templates",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getEmailTemplates($perPage, Request $request)
     {
@@ -335,60 +143,6 @@ class EmailTemplateController extends Controller
     }
 
 
-     /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/email-templates/single/{id}",
-     *      operationId="getEmailTemplateById",
-     *      tags={"template_management.email"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get email template by id",
-     *      description="This method is to get email template by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getEmailTemplateById($id, Request $request)
     {
@@ -406,7 +160,7 @@ class EmailTemplateController extends Controller
             ])
             ->first();
             if(!$template){
-           
+
                 return response()->json([
                      "message" => "no email template found"
                 ], 404);
@@ -418,53 +172,6 @@ class EmailTemplateController extends Controller
         }
     }
 
-     /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/email-template-types",
-     *      operationId="getEmailTemplateTypes",
-     *      tags={"template_management.email"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *
-     *      summary="This method is to get email template types ",
-     *      description="This method is to get email template types",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getEmailTemplateTypes( Request $request)
     {
@@ -509,60 +216,6 @@ $types = [
             return $this->sendError($e, 500,$request);
         }
     }
-
-     /**
-        *
-     *     @OA\Delete(
-     *      path="/v1.0/email-templates/{id}",
-     *      operationId="deleteEmailTemplateById",
-     *      tags={"z.unused"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      summary="This method is to delete email template by id",
-     *      description="This method is to delete email template by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteEmailTemplateById($id,Request $request) {
 

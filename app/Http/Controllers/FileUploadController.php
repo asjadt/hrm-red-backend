@@ -11,69 +11,7 @@ use Illuminate\Http\Request;
 class FileUploadController extends Controller
 {
     use UserActivityUtil,ErrorUtil;
-  /**
-     *
-     * @OA\Post(
-     *      path="/v3.0/files/single-file-upload",
-     *      operationId="createFileSingleV3",
-     *      tags={"files"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store files",
-     *      description="This method is to store files",
-     *
-     *  @OA\RequestBody(
-     *   * @OA\MediaType(
-     *     mediaType="multipart/form-data",
-     *     @OA\Schema(
-     *         required={"file"},
-     *         @OA\Property(
-     *             description="file to upload",
-     *             property="file",
-     *             type="file",
-     *             collectionFormat="multi",
-     *         )
-     *     )
-     * )
-
-
-
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+ 
      public function createFileSingleV3(SingleFileUploadRequest $request)
      {
          try {

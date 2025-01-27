@@ -20,76 +20,6 @@ class UserRecruitmentProcessController extends Controller
     use ErrorUtil, UserActivityUtil, BusinessUtil, ModuleUtil, UserDetailsUtil;
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/user-recruitment-processes",
-     *      operationId="createUserRecruitmentProcess",
-     *      tags={"employee.recruitment_process"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update user recruitment process",
-     *      description="This method is to update user recruitment process",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-
-     *           @OA\Property(property="user_id", type="string", format="number",example="1"),
-
-     *     * @OA\Property(property="recruitment_processes", type="string", format="array", example={
-     * {
-     * "recruitment_process_id":1,
-     * "description":"description",
-     * "attachments":{"/abcd.jpg","/efgh.jpg"}
-     * },
-     *      * {
-     * "recruitment_process_id":1,
-     * "description":"description",
-     * "attachments":{"/abcd.jpg","/efgh.jpg"}
-     * }
-     *
-     *
-     * }),
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function createUserRecruitmentProcess(UserCreateRecruitmentProcessRequest $request)
     {
 
@@ -159,79 +89,6 @@ class UserRecruitmentProcessController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/user-recruitment-processes",
-     *      operationId="updateUserRecruitmentProcess",
-     *      tags={"employee.recruitment_process"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update user address",
-     *      description="This method is to update user address",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-
-     *           @OA\Property(property="id", type="string", format="number",example="1"),
-
-     *     * @OA\Property(property="recruitment_processes", type="string", format="array", example={
-     * {
-     * "id":1,
-     * "recruitment_process_id":1,
-     * "description":"description",
-     * "attachments":{"/abcd.jpg","/efgh.jpg"}
-     * },
-     *      * {
-     *  "id":1,
-     * "recruitment_process_id":1,
-     * "description":"description",
-     * "attachments":{"/abcd.jpg","/efgh.jpg"}
-     * }
-     *
-     *
-     *
-     * }),
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function updateUserRecruitmentProcess(UserUpdateRecruitmentProcessRequest $request)
     {
 
@@ -287,75 +144,7 @@ class UserRecruitmentProcessController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-recruitment-processes/{id}",
-     *      operationId="getUserRecruitmentProcessesById",
-     *      tags={"employee.recruitment_process"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *     @OA\Parameter(
-     *         name="start_date",
-     *         in="query",
-     *         description="start_date",
-     *         required=true,
-     *         example="start_date"
-     *      ),
-     *
-     *     @OA\Parameter(
-     *         name="end_date",
-     *         in="query",
-     *         description="end_date",
-     *         required=true,
-     *         example="end_date"
-     *      ),
-
-     *      summary="This method is to get user by id",
-     *      description="This method is to get user by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+    
 
     public function getUserRecruitmentProcessesById($id, Request $request)
     {
@@ -404,52 +193,6 @@ class UserRecruitmentProcessController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Delete(
-     *      path="/v1.0/user-recruitment-processes/{ids}",
-     *      operationId="deleteUserRecruitmentProcess",
-     *      tags={"employee.recruitment_process"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update user address",
-     *      description="This method is to update user address",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteUserRecruitmentProcess($ids, Request $request)
     {

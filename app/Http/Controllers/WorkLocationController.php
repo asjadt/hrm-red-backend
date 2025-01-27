@@ -29,72 +29,6 @@ class WorkLocationController extends Controller
 
     }
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/work-locations",
-     *      operationId="createWorkLocation",
-     *      tags={"work_locations"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store work location",
-     *      description="This method is to store work location",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     * @OA\Property(property="name", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="description", type="string", format="string", example="erg ear ga&nbsp;"),
-     * @OA\Property(property="address", type="string", format="string", example="erg ear ga&nbsp;"),
-     * @OA\Property(property="is_location_enabled", type="string", format="string", example="test"),
-     * @OA\Property(property="is_geo_location_enabled", type="string", format="string", example="test"),
-     * @OA\Property(property="is_ip_enabled", type="string", format="string", example="test"),
-     * @OA\Property(property="max_radius", type="string", format="string", example="test"),
-     * @OA\Property(property="ip_address", type="string", format="string", example="test"),
-     *
-     *
-     *
-     * @OA\Property(property="latitude", type="string", format="string", example="test"),
-     * @OA\Property(property="longitude", type="string", format="string", example="test"),
-     *
-     *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function createWorkLocation(WorkLocationCreateRequest $request)
     {
@@ -138,70 +72,7 @@ class WorkLocationController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/work-locations",
-     *      operationId="updateWorkLocation",
-     *      tags={"work_locations"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update work location ",
-     *      description="This method is to update work location",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-     * @OA\Property(property="name", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="description", type="string", format="string", example="erg ear ga&nbsp;"),
-     * @OA\Property(property="address", type="string", format="string", example="erg ear ga&nbsp;"),
-     * @OA\Property(property="is_location_enabled", type="string", format="string", example="test"),
-     *    * @OA\Property(property="latitude", type="string", format="string", example="test"),
-     * @OA\Property(property="longitude", type="string", format="string", example="test"),
-     *    @OA\Property(property="is_geo_location_enabled", type="string", format="string", example="test"),
-     * @OA\Property(property="is_ip_enabled", type="string", format="string", example="test"),
-     * @OA\Property(property="max_radius", type="string", format="string", example="test"),
-     * @OA\Property(property="ip_address", type="string", format="string", example="test"),
-     *
 
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateWorkLocation(WorkLocationUpdateRequest $request)
     {
@@ -261,59 +132,7 @@ class WorkLocationController extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/work-locations/toggle-active",
-     *      operationId="toggleActiveWorkLocation",
-     *      tags={"work_locations"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to toggle work location",
-     *      description="This method is to toggle work location",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
 
-     *           @OA\Property(property="id", type="string", format="number",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function toggleActiveWorkLocation(GetIdRequest $request)
     {
@@ -436,96 +255,7 @@ class WorkLocationController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/work-locations",
-     *      operationId="getWorkLocations",
-     *      tags={"work_locations"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-*      * *  @OA\Parameter(
-     * name="is_active",
-     * in="query",
-     * description="is_active",
-     * required=true,
-     * example="1"
-     * ),
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get work locations  ",
-     *      description="This method is to get work locations ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getWorkLocations(Request $request)
     {
@@ -547,59 +277,7 @@ class WorkLocationController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/work-locations/{id}",
-     *      operationId="getWorkLocationById",
-     *      tags={"work_locations"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get work location by id",
-     *      description="This method is to get work location by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+    
 
 
     public function getWorkLocationById($id, Request $request)
@@ -678,59 +356,6 @@ class WorkLocationController extends Controller
     }
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/work-locations/{ids}",
-     *      operationId="deleteWorkLocationsByIds",
-     *      tags={"work_locations"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete work location by id",
-     *      description="This method is to delete work location by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteWorkLocationsByIds(Request $request, $ids)
     {

@@ -3436,54 +3436,6 @@ class DashboardManagementControllerV2 extends Controller
         return $data;
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/business-manager-dashboard",
-     *      operationId="getBusinessManagerDashboardData",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardData(Request $request)
     {
@@ -3981,60 +3933,7 @@ class DashboardManagementControllerV2 extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/total-employee/{duration}",
-     *      operationId="getBusinessManagerDashboardDataTotalEmployee",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="total,today, this_month, this_week... ",
-     *         required=true,
-     *  example="duration"
-     *      ),
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataTotalEmployee($duration, Request $request)
     {
@@ -4118,60 +4017,7 @@ class DashboardManagementControllerV2 extends Controller
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/open-roles/{duration}",
-     *      operationId="getBusinessManagerDashboardDataOpenRoles",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week... ",
-     *         required=true,
-     *  example="duration"
-     *      ),
 
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataOpenRoles($duration, Request $request)
     {
@@ -4252,54 +4098,6 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/open-roles-and-total-employee",
-     *      operationId="getBusinessManagerDashboardDataOpenRolesAndTotalEmployee",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataOpenRolesAndTotalEmployee(Request $request)
     {
@@ -4384,54 +4182,7 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/absent",
-     *      operationId="getBusinessManagerDashboardDataAbsent",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataAbsent(Request $request)
     {
@@ -4506,55 +4257,6 @@ class DashboardManagementControllerV2 extends Controller
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/present",
-     *      operationId="getBusinessManagerDashboardDataPresent",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getBusinessManagerDashboardDataPresent(Request $request)
     {
 
@@ -4615,67 +4317,6 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/leaves/{status}/{duration}",
-     *      operationId="getBusinessManagerDashboardDataLeavesByStatus",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="status",
-     *         in="path",
-     *         description="rejected, pending_approval... ",
-     *         required=true,
-     *  example="status"
-     *      ),
-     *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week",
-     *         required=true,
-     *  example="duration"
-     *      ),
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataLeavesByStatus($status, $duration, Request $request)
     {
@@ -4756,60 +4397,6 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/holidays/{status}/{duration}",
-     *      operationId="getBusinessManagerDashboardDataHolidaysByStatus",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="status",
-     *         in="path",
-     *         description="rejected, pending_approval... ",
-     *         required=true,
-     *  example="status"
-     *      ),
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataHolidaysByStatus($status, $duration, Request $request)
     {
@@ -4886,67 +4473,8 @@ class DashboardManagementControllerV2 extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/pensions/{status}/{duration}",
-     *      operationId="getBusinessManagerDashboardDataPensionsByStatus",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="status",
-     *         in="path",
-     *         description="opt_in, opt_out",
-     *         required=true,
-     *  example="status"
-     *      ),
-     *    *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week",
-     *         required=true,
-     *  example="duration"
-     *      ),
 
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataPensionsByStatus($status, $duration, Request $request)
     {
@@ -5024,53 +4552,7 @@ class DashboardManagementControllerV2 extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/pensions",
-     *      operationId="getBusinessManagerDashboardDataPensions",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataPensions(Request $request)
     {
@@ -5147,56 +4629,6 @@ class DashboardManagementControllerV2 extends Controller
 
 
 
-
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/holidays",
-     *      operationId="getBusinessManagerDashboardDataHolidays",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getBusinessManagerDashboardDataHolidays(Request $request)
     {
 
@@ -5260,56 +4692,6 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-
-
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/leaves",
-     *      operationId="getBusinessManagerDashboardDataLeaves",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataLeaves(Request $request)
     {
@@ -5375,62 +4757,6 @@ class DashboardManagementControllerV2 extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/business-employee-dashboard/leaves",
-     *      operationId="getBusinessEmployeeDashboardDataLeaves",
-     *      tags={"dashboard_management.business_user"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      *              @OA\Parameter(
-     *         name="year",
-     *         in="query",
-     *         description="total,today, this_month, this_week... ",
-     *         required=true,
-     *  example="year"
-     *      ),
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getBusinessEmployeeDashboardDataLeaves(Request $request)
     {
 
@@ -5495,54 +4821,6 @@ class DashboardManagementControllerV2 extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/leaves-holidays",
-     *      operationId="getBusinessManagerDashboardDataLeavesAndHolidays",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataLeavesAndHolidays(Request $request)
     {
@@ -5628,62 +4906,6 @@ class DashboardManagementControllerV2 extends Controller
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/pension-expiries/{duration}",
-     *      operationId="getBusinessManagerDashboardDataPensionExpiries",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week, previous_month, next_month, previous_week, next_week... ",
-     *         required=true,
-     *  example="duration"
-     *      ),
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getBusinessManagerDashboardDataPensionExpiries($duration, Request $request)
     {
 
@@ -5761,54 +4983,6 @@ class DashboardManagementControllerV2 extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/combined-expiries",
-     *      operationId="getBusinessManagerDashboardDataCombinedExpiries",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataCombinedExpiries(Request $request)
     {
@@ -5954,62 +5128,6 @@ class DashboardManagementControllerV2 extends Controller
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/passport-expiries/{duration}",
-     *      operationId="getBusinessManagerDashboardDataPassportExpiries",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *
-     *  *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week, previous_month, next_month, previous_week, next_week... ",
-     *         required=true,
-     *  example="duration"
-     *      ),
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataPassportExpiries($duration, Request $request)
     {
@@ -6088,60 +5206,6 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/visa-expiries/{duration}",
-     *      operationId="getBusinessManagerDashboardDataVisaExpiries",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week, previous_month, next_month, previous_week, next_week... ",
-     *         required=true,
-     *  example="duration"
-     *      ),
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataVisaExpiries($duration, Request $request)
     {
@@ -6215,61 +5279,7 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/right-to-work-expiries/{duration}",
-     *      operationId="getBusinessManagerDashboardDataRightToWorkExpiries",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week, previous_month, next_month, previous_week, next_week... ",
-     *         required=true,
-     *  example="duration"
-     *      ),
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataRightToWorkExpiries($duration, Request $request)
     {
@@ -6348,61 +5358,6 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/sponsorship-expiries/{duration}",
-     *      operationId="getBusinessManagerDashboardDataSponsorshipExpiries",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="duration",
-     *         in="path",
-     *         description="today, this_month, this_week, previous_month, next_month, previous_week, next_week... ",
-     *         required=true,
-     *  example="duration"
-     *      ),
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataSponsorshipExpiries($duration, Request $request)
     {
@@ -6479,61 +5434,6 @@ class DashboardManagementControllerV2 extends Controller
 
 
 
-
-
-
-
-
-
-    /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/business-manager-dashboard/present-absent",
-     *      operationId="getBusinessManagerDashboardDataPresentAbsent",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getBusinessManagerDashboardDataPresentAbsent(Request $request)
     {
 
@@ -6604,55 +5504,6 @@ class DashboardManagementControllerV2 extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/business-manager-dashboard/present-absent-hours",
-     *      operationId="getBusinessManagerDashboardDataPresentAbsentHours",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getBusinessManagerDashboardDataPresentAbsentHours(Request $request)
     {
 
@@ -6721,54 +5572,6 @@ class DashboardManagementControllerV2 extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-manager-dashboard/other-widgets",
-     *      operationId="getBusinessManagerDashboardDataOtherWidgets",
-     *      tags={"dashboard_management.business_manager"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessManagerDashboardDataOtherWidgets(Request $request)
     {

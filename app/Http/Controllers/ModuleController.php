@@ -16,58 +16,7 @@ use Illuminate\Http\Request;
 class ModuleController extends Controller
 {
     use ErrorUtil, UserActivityUtil;
-   /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/modules/toggle-active",
-     *      operationId="toggleActiveModule",
-     *      tags={"modules"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to toggle module active",
-     *      description="This method is to toggle module active",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *           @OA\Property(property="id", type="string", format="number",example="1"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+
 
      public function toggleActiveModule(GetIdRequest $request)
      {
@@ -106,64 +55,6 @@ class ModuleController extends Controller
          }
      }
 
-      /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/business-modules/enable",
-     *      operationId="enableBusinessModule",
-     *      tags={"modules"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to toggle module active",
-     *      description="This method is to toggle module active",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *
-     *
-     *
-     *           @OA\Property(property="business_id", type="string", format="number",example="1"),
-     *           @OA\Property(property="active_module_ids", type="string", format="array",example="{1,2,3}"),
-     *
-     *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function enableBusinessModule(EnableBusinessModuleRequest $request)
      {
@@ -207,97 +98,6 @@ class ModuleController extends Controller
 
 
 
-
- /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/modules",
-     *      operationId="getModules",
-     *      tags={"modules"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     *    * *  @OA\Parameter(
-     * name="business_tier_id",
-     * in="query",
-     * description="business_tier_id",
-     * required=true,
-     * example="1"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get modules",
-     *      description="This method is to get modules",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function getModules(Request $request)
      {
@@ -354,63 +154,7 @@ class ModuleController extends Controller
      }
 
 
-
- /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-modules/{business_id}",
-     *      operationId="getBusinessModules",
-     *      tags={"modules"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="business_id",
-     *         in="path",
-     *         description="business_id",
-     *         required=true,
-     *  example="6"
-     *      ),
-
-
-     *      summary="This method is to get modules",
-     *      description="This method is to get modules",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+ 
 
      public function getBusinessModules($business_id,Request $request)
      {

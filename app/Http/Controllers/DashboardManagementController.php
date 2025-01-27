@@ -2308,54 +2308,6 @@ $data["yesterday_data_count"] = $data["yesterday_data_count"]->whereBetween('pas
 
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-user-dashboard",
-     *      operationId="getBusinessUserDashboardData",
-     *      tags={"dashboard_management.business_user"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getBusinessUserDashboardData(Request $request)
     {
@@ -2995,55 +2947,6 @@ $data["yesterday_data_count"] = $data["yesterday_data_count"]->whereBetween('pas
 
 
 
-     /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/business-employee-dashboard",
-     *      operationId="getBusinessEmployeeDashboardData",
-     *      tags={"dashboard_management.business_user"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
      public function getBusinessEmployeeDashboardData(Request $request)
      {
 
@@ -3626,54 +3529,6 @@ $data["yesterday_data_count"] = $data["yesterday_data_count"]->whereBetween('pas
 
 
 
-  /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/business-employee-dashboard",
-     *      operationId="getBusinessEmployeeDashboardDataV2",
-     *      tags={"dashboard_management.business_user"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function getBusinessEmployeeDashboardDataV2(Request $request)
      {
@@ -3871,67 +3726,7 @@ foreach ($last12MonthsDates as $month) {
 
 
     }
-       /**
-     *
-     * @OA\Get(
-     *      path="/v2.0/business-employee-dashboard/present-hours",
-     *      operationId="getBusinessEmployeeDashboardDataPresentHours",
-     *      tags={"dashboard_management.business_user"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-   *              @OA\Parameter(
-     *         name="duration",
-     *         in="query",
-     *         description="total,today, this_month, this_week... ",
-     *         required=true,
-     *  example="query"
-     *      ),
-     *      *              @OA\Parameter(
-     *         name="year",
-     *         in="query",
-     *         description="total,today, this_month, this_week... ",
-     *         required=true,
-     *  example="year"
-     *      ),
 
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function getBusinessEmployeeDashboardDataPresentHours(Request $request)
      {
@@ -3960,55 +3755,6 @@ foreach ($last12MonthsDates as $month) {
          }
      }
 
-
- /**
-     *
-     * @OA\Get(
-     *      path="/v3.0/business-employee-dashboard",
-     *      operationId="getBusinessEmployeeDashboardDataV3",
-     *      tags={"dashboard_management.business_user"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function getBusinessEmployeeDashboardDataV3(Request $request)
      {
@@ -4061,72 +3807,6 @@ foreach ($last12MonthsDates as $month) {
      }
 
 
- /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/dashboard-widgets",
-     *      operationId="createDashboardWidget",
-     *      tags={"dashboard_management.dashboard_widgets"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store dashboard widgets",
-     *      description="This method is to store dashboard widgets",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *
-     *
- *     @OA\Property(property="widgets", type="string", format="array", example={
- *    {"id":1,
- *    "widget_name":"passport",
- *    "widget_order":1}
- * }),
- *
- *
- *
- *
- *
- *
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
      public function createDashboardWidget(WidgetCreateRequest $request)
      {
          try {
@@ -4156,60 +3836,6 @@ foreach ($last12MonthsDates as $month) {
              return $this->sendError($e, 500, $request);
          }
      }
-
- /**
-     *
-     *     @OA\Delete(
-    *      path="/v1.0/dashboard-widgets/{ids}",
-     *      operationId="deleteDashboardWidgetsByIds",
-     *      tags={"dashboard_management.dashboard_widgets"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete widget by id",
-     *      description="This method is to delete widget by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function deleteDashboardWidgetsByIds(Request $request, $ids)
      {
@@ -4772,53 +4398,7 @@ public function getEmploymentStatuses () {
         $data["previous_month_data_count"] = $data["previous_month_data"]->count();
         return $data;
     }
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/superadmin-dashboard",
-     *      operationId="getSuperAdminDashboardData",
-     *      tags={"dashboard_management.superadmin"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getSuperAdminDashboardData(Request $request)
     {
@@ -4857,53 +4437,7 @@ public function getEmploymentStatuses () {
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/data-collector-dashboard",
-     *      operationId="getDataCollectorDashboardData",
-     *      tags={"dashboard_management.data_collector"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *      summary="get all dashboard data combined",
-     *      description="get all dashboard data combined",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+   
 
     public function getDataCollectorDashboardData(Request $request)
     {

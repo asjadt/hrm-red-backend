@@ -23,70 +23,6 @@ class UserVisaHistoryController extends Controller
 
 
 
-
-
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/user-visa-histories",
-     *      operationId="createUserVisaHistory",
-     *      tags={"user_visa_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store user visa history",
-     *      description="This method is to store user visa history",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-* @OA\Property(property="BRP_number", type="string", format="string", example="Your BRP Number"),
-* @OA\Property(property="visa_issue_date", type="string", format="date", example="Your Visa Issue Date"),
-* @OA\Property(property="visa_expiry_date", type="string", format="date", example="Your Visa Expiry Date"),
-* @OA\Property(property="place_of_issue", type="string", format="string", example="Place of Visa Issue"),
-* @OA\Property(property="visa_docs", type="string", format="string", example="Your Visa Documents"),
-* @OA\Property(property="user_id", type="string", format="string", example="Your Employee ID"),
-* @OA\Property(property="from_date", type="string", format="date", example="Your From Date"),
-* @OA\Property(property="to_date", type="string", format="date", example="Your To Date"),
- *
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function createUserVisaHistory(UserVisaHistoryCreateRequest $request)
     {
         DB::beginTransaction();
@@ -140,71 +76,6 @@ class UserVisaHistoryController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/user-visa-histories",
-     *      operationId="updateUserVisaHistory",
-     *      tags={"user_visa_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update  user visa history ",
-     *      description="This method is to update user visa history",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-* @OA\Property(property="BRP_number", type="string", format="string", example="Your BRP Number"),
-* @OA\Property(property="visa_issue_date", type="string", format="date", example="Your Visa Issue Date"),
-* @OA\Property(property="visa_expiry_date", type="string", format="date", example="Your Visa Expiry Date"),
-* @OA\Property(property="place_of_issue", type="string", format="string", example="Place of Visa Issue"),
-* @OA\Property(property="visa_docs", type="string", format="string", example="Your Visa Documents"),
-* @OA\Property(property="user_id", type="string", format="string", example="Your Employee ID"),
-* @OA\Property(property="from_date", type="string", format="date", example="Your From Date"),
-* @OA\Property(property="to_date", type="string", format="date", example="Your To Date"),
-
- *
-*
- *
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateUserVisaHistory(UserVisaHistoryUpdateRequest $request)
     {
@@ -221,7 +92,7 @@ class UserVisaHistoryController extends Controller
 
 
                 $request_data = $request->validated();
-                
+
                 $request_data["visa_docs"] =   $this->storeUploadedFiles($request_data["visa_docs"],"file_name","visa_docs");
                 $this->makeFilePermanent($request_data["visa_docs"],"file_name");
 
@@ -302,96 +173,7 @@ class UserVisaHistoryController extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-visa-histories",
-     *      operationId="getUserVisaHistories",
-     *      tags={"user_visa_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="user_id",
-     *         in="query",
-     *         description="user_id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
 
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get user visa histories  ",
-     *      description="This method is to get user visa histories ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getUserVisaHistories(Request $request)
     {
@@ -467,60 +249,7 @@ class UserVisaHistoryController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-visa-histories/{id}",
-     *      operationId="getUserVisaHistoryById",
-     *      tags={"user_visa_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get user visa history by id",
-     *      description="This method is to get user visa history by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+    
 
     public function getUserVisaHistoryById($id, Request $request)
     {
@@ -558,59 +287,6 @@ class UserVisaHistoryController extends Controller
 
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/user-visa-histories/{ids}",
-     *      operationId="deleteUserVisaHistoriesByIds",
-     *      tags={"user_visa_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete user visa history by id",
-     *      description="This method is to delete user visa history by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteUserVisaHistoriesByIds(Request $request, $ids)
     {

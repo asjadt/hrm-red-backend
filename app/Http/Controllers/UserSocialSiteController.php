@@ -22,67 +22,6 @@ class UserSocialSiteController extends Controller
 
 
 
-
-      /**
-       *
-       * @OA\Post(
-       *      path="/v1.0/user-social-sites",
-       *      operationId="createUserSocialSite",
-       *      tags={"user_social_sites"},
-       *       security={
-       *           {"bearerAuth": {}}
-       *       },
-       *      summary="This method is to store user social site",
-       *      description="This method is to store user social site",
-       *
-       *  @OA\RequestBody(
-       *         required=true,
-       *         @OA\JsonContent(
-  * @OA\Property(property="social_site_id", type="number", format="number", example=1),
-     * @OA\Property(property="user_id", type="number", format="number", example=1),
-     * @OA\Property(property="profile_link", type="string", format="string", example="https://example.com/profile")
-   *
-   *
-   *
-   *
-   *
-       *
-       *         ),
-       *      ),
-       *      @OA\Response(
-       *          response=200,
-       *          description="Successful operation",
-       *       @OA\JsonContent(),
-       *       ),
-       *      @OA\Response(
-       *          response=401,
-       *          description="Unauthenticated",
-       * @OA\JsonContent(),
-       *      ),
-       *        @OA\Response(
-       *          response=422,
-       *          description="Unprocesseble Content",
-       *    @OA\JsonContent(),
-       *      ),
-       *      @OA\Response(
-       *          response=403,
-       *          description="Forbidden",
-       *   @OA\JsonContent()
-       * ),
-       *  * @OA\Response(
-       *      response=400,
-       *      description="Bad Request",
-       *   *@OA\JsonContent()
-       *   ),
-       * @OA\Response(
-       *      response=404,
-       *      description="not found",
-       *   *@OA\JsonContent()
-       *   )
-       *      )
-       *     )
-       */
-
       public function createUserSocialSite(UserSocialSiteCreateRequest $request)
       {
           try {
@@ -121,63 +60,7 @@ UserSocialSite::where([
           }
       }
 
-      /**
-       *
-       * @OA\Put(
-       *      path="/v1.0/user-social-sites",
-       *      operationId="updateUserSocialSite",
-       *      tags={"user_social_sites"},
-       *       security={
-       *           {"bearerAuth": {}}
-       *       },
-       *      summary="This method is to update  user social site ",
-       *      description="This method is to update user social site",
-       *
-       *  @OA\RequestBody(
-       *         required=true,
-       *         @OA\JsonContent(
-  *      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-   * @OA\Property(property="social_site_id", type="number", format="number", example=1),
-     * @OA\Property(property="user_id", type="number", format="number", example=1),
-     * @OA\Property(property="profile_link", type="string", format="string", example="https://example.com/profile")
-   *
 
-       *
-       *         ),
-       *      ),
-       *      @OA\Response(
-       *          response=200,
-       *          description="Successful operation",
-       *       @OA\JsonContent(),
-       *       ),
-       *      @OA\Response(
-       *          response=401,
-       *          description="Unauthenticated",
-       * @OA\JsonContent(),
-       *      ),
-       *        @OA\Response(
-       *          response=422,
-       *          description="Unprocesseble Content",
-       *    @OA\JsonContent(),
-       *      ),
-       *      @OA\Response(
-       *          response=403,
-       *          description="Forbidden",
-       *   @OA\JsonContent()
-       * ),
-       *  * @OA\Response(
-       *      response=400,
-       *      description="Bad Request",
-       *   *@OA\JsonContent()
-       *   ),
-       * @OA\Response(
-       *      response=404,
-       *      description="not found",
-       *   *@OA\JsonContent()
-       *   )
-       *      )
-       *     )
-       */
 
       public function updateUserSocialSite(UserSocialSiteUpdateRequest $request)
       {
@@ -240,96 +123,6 @@ UserSocialSite::where([
       }
 
 
-      /**
-       *
-       * @OA\Get(
-       *      path="/v1.0/user-social-sites",
-       *      operationId="getUserSocialSites",
-       *      tags={"user_social_sites"},
-       *       security={
-       *           {"bearerAuth": {}}
-       *       },
-       *              @OA\Parameter(
-       *         name="user_id",
-       *         in="query",
-       *         description="user_id",
-       *         required=true,
-       *  example="1"
-       *      ),
-       *              @OA\Parameter(
-       *         name="per_page",
-       *         in="query",
-       *         description="per_page",
-       *         required=true,
-       *  example="6"
-       *      ),
-
-       *      * *  @OA\Parameter(
-       * name="start_date",
-       * in="query",
-       * description="start_date",
-       * required=true,
-       * example="2019-06-29"
-       * ),
-       * *  @OA\Parameter(
-       * name="end_date",
-       * in="query",
-       * description="end_date",
-       * required=true,
-       * example="2019-06-29"
-       * ),
-       * *  @OA\Parameter(
-       * name="search_key",
-       * in="query",
-       * description="search_key",
-       * required=true,
-       * example="search_key"
-       * ),
-       * *  @OA\Parameter(
-       * name="order_by",
-       * in="query",
-       * description="order_by",
-       * required=true,
-       * example="ASC"
-       * ),
-
-       *      summary="This method is to get user social sites  ",
-       *      description="This method is to get user social sites ",
-       *
-
-       *      @OA\Response(
-       *          response=200,
-       *          description="Successful operation",
-       *       @OA\JsonContent(),
-       *       ),
-       *      @OA\Response(
-       *          response=401,
-       *          description="Unauthenticated",
-       * @OA\JsonContent(),
-       *      ),
-       *        @OA\Response(
-       *          response=422,
-       *          description="Unprocesseble Content",
-       *    @OA\JsonContent(),
-       *      ),
-       *      @OA\Response(
-       *          response=403,
-       *          description="Forbidden",
-       *   @OA\JsonContent()
-       * ),
-       *  * @OA\Response(
-       *      response=400,
-       *      description="Bad Request",
-       *   *@OA\JsonContent()
-       *   ),
-       * @OA\Response(
-       *      response=404,
-       *      description="not found",
-       *   *@OA\JsonContent()
-       *   )
-       *      )
-       *     )
-       */
 
       public function getUserSocialSites(Request $request)
       {
@@ -396,60 +189,7 @@ UserSocialSite::where([
           }
       }
 
-      /**
-       *
-       * @OA\Get(
-       *      path="/v1.0/user-social-sites/{id}",
-       *      operationId="getUserSocialSiteById",
-       *      tags={"user_social_sites"},
-       *       security={
-       *           {"bearerAuth": {}}
-       *       },
-       *              @OA\Parameter(
-       *         name="id",
-       *         in="path",
-       *         description="id",
-       *         required=true,
-       *  example="6"
-       *      ),
-       *      summary="This method is to get user social site by id",
-       *      description="This method is to get user social site by id",
-       *
-
-       *      @OA\Response(
-       *          response=200,
-       *          description="Successful operation",
-       *       @OA\JsonContent(),
-       *       ),
-       *      @OA\Response(
-       *          response=401,
-       *          description="Unauthenticated",
-       * @OA\JsonContent(),
-       *      ),
-       *        @OA\Response(
-       *          response=422,
-       *          description="Unprocesseble Content",
-       *    @OA\JsonContent(),
-       *      ),
-       *      @OA\Response(
-       *          response=403,
-       *          description="Forbidden",
-       *   @OA\JsonContent()
-       * ),
-       *  * @OA\Response(
-       *      response=400,
-       *      description="Bad Request",
-       *   *@OA\JsonContent()
-       *   ),
-       * @OA\Response(
-       *      response=404,
-       *      description="not found",
-       *   *@OA\JsonContent()
-       *   )
-       *      )
-       *     )
-       */
-
+      
 
       public function getUserSocialSiteById($id, Request $request)
       {
@@ -489,59 +229,6 @@ UserSocialSite::where([
 
 
 
-      /**
-       *
-       *     @OA\Delete(
-       *      path="/v1.0/user-social-sites/{ids}",
-       *      operationId="deleteUserSocialSitesByIds",
-       *      tags={"user_social_sites"},
-       *       security={
-       *           {"bearerAuth": {}}
-       *       },
-       *              @OA\Parameter(
-       *         name="ids",
-       *         in="path",
-       *         description="ids",
-       *         required=true,
-       *  example="1,2,3"
-       *      ),
-       *      summary="This method is to delete user social site by id",
-       *      description="This method is to delete user social site by id",
-       *
-
-       *      @OA\Response(
-       *          response=200,
-       *          description="Successful operation",
-       *       @OA\JsonContent(),
-       *       ),
-       *      @OA\Response(
-       *          response=401,
-       *          description="Unauthenticated",
-       * @OA\JsonContent(),
-       *      ),
-       *        @OA\Response(
-       *          response=422,
-       *          description="Unprocesseble Content",
-       *    @OA\JsonContent(),
-       *      ),
-       *      @OA\Response(
-       *          response=403,
-       *          description="Forbidden",
-       *   @OA\JsonContent()
-       * ),
-       *  * @OA\Response(
-       *      response=400,
-       *      description="Bad Request",
-       *   *@OA\JsonContent()
-       *   ),
-       * @OA\Response(
-       *      response=404,
-       *      description="not found",
-       *   *@OA\JsonContent()
-       *   )
-       *      )
-       *     )
-       */
 
       public function deleteUserSocialSitesByIds(Request $request, $ids)
       {

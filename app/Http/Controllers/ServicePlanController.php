@@ -18,73 +18,7 @@ use App\Models\Business;
 class ServicePlanController extends Controller
 {
     use ErrorUtil, UserActivityUtil, BusinessUtil, DiscountUtil;
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/service-plans",
-     *      operationId="createServicePlan",
-     *      tags={"service_plans"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store service plan",
-     *      description="This method is to store service plan",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     * * @OA\Property(property="name", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="description", type="string", format="string", example="erg ear ga&nbsp;"),
- * @OA\Property(property="set_up_amount", type="number", format="number", example="10"),
- * @OA\Property(property="duration_months", type="number", format="number", example="12"),
- *  * @OA\Property(property="price", type="number", format="number", example="50"),
- * @OA\Property(property="business_tier_id", type="number", format="number", example="1"),
- *
- * * @OA\Property(property="discount_codes", type="string", format="string", example={
- *{"code" : "ddedddd",
- * "discount_amount" : 50,
- *},
-  *{"code" : "ddedddd",
- * "discount_amount" : 50,
- *}
- * }),
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+
 
     public function createServicePlan(ServicePlanCreateRequest $request)
     {
@@ -116,78 +50,6 @@ class ServicePlanController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/service-plans",
-     *      operationId="updateServicePlan",
-     *      tags={"service_plans"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update business tier ",
-     *      description="This method is to update business tier",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-* @OA\Property(property="name", type="string", format="string", example="tttttt"),
-     * @OA\Property(property="description", type="string", format="string", example="erg ear ga&nbsp;"),
-* @OA\Property(property="set_up_amount", type="number", format="number", example="10"),
- * @OA\Property(property="duration_months", type="number", format="number", example="30"),
- *  *  * @OA\Property(property="price", type="number", format="number", example="50"),
- * @OA\Property(property="business_tier_id", type="number", format="number", example="1"),
- *  * * @OA\Property(property="discount_codes", type="string", format="string", example={
- *{
- *   "id" :1,
-   * "code" : "ddedddd",
- * "discount_amount" : 50,
- *},
-  *{
-     *   "id" :1,
-  *  "code" : "ddedddd",
- * "discount_amount" : 50,
- *}
- * }),
-
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateServicePlan(ServicePlanUpdateRequest $request)
     {
@@ -246,90 +108,6 @@ class ServicePlanController extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/service-plans",
-     *      operationId="getServicePlans",
-     *      tags={"service_plans"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get business tiers  ",
-     *      description="This method is to get business tiers ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getServicePlans(Request $request)
     {
@@ -387,90 +165,7 @@ class ServicePlanController extends Controller
             return $this->sendError($e, 500, $request);
         }
     }
-      /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/client/service-plans",
-     *      operationId="getServicePlanClient",
-     *      tags={"service_plans"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get business tiers  ",
-     *      description="This method is to get business tiers ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function getServicePlanClient(Request $request)
      {
@@ -524,61 +219,7 @@ class ServicePlanController extends Controller
              return $this->sendError($e, 500, $request);
          }
      }
-
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/service-plans/{id}",
-     *      operationId="getServicePlanById",
-     *      tags={"service_plans"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get business tier by id",
-     *      description="This method is to get business tier by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+ 
 
     public function getServicePlanById($id, Request $request)
     {
@@ -616,59 +257,6 @@ class ServicePlanController extends Controller
     }
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/service-plans/{ids}",
-     *      operationId="deleteServicePlansByIds",
-     *      tags={"service_plans"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete business tier by id",
-     *      description="This method is to delete business tier by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
       public function deleteServicePlansByIds(Request $request, $ids)
     {
@@ -736,59 +324,6 @@ class ServicePlanController extends Controller
     }
 
 
-       /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/client/check-discount",
-     *      operationId="checkDiscountClient",
-     *      tags={"service_plans"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to check discount",
-     *      description="This method is to check discount",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     * * @OA\Property(property="service_plan_discount_code", type="string", format="string", example="tttttt"),
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function checkDiscountClient(CheckDiscountRequest $request)
      {

@@ -22,72 +22,6 @@ class UserPensionHistoryController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/user-pension-histories",
-     *      operationId="createUserPensionHistory",
-     *      tags={"user_pension_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store user pension history",
-     *      description="This method is to store user pension history",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *  * @OA\Property(property="user_id", type="string", format="string", example="Your Employee ID"),
-     *      @OA\Property(property="pension_eligible", type="boolean", format="boolean", example="1"),
-     *      @OA\Property(property="pension_letters", type="string", format="array", example={{"file_name":"sss"}}),
-     *      @OA\Property(property="pension_scheme_status", type="string", format="string", example="pension_scheme_status"),
-     *      @OA\Property(property="pension_enrollment_issue_date", type="string", format="string", example="pension_enrollment_issue_date"),
-     *      @OA\Property(property="pension_scheme_opt_out_date", type="string", format="string", example="pension_scheme_opt_out_date"),
-     *      @OA\Property(property="pension_re_enrollment_due_date", type="string", format="date", example="pension_re_enrollment_due_date"),
-     *
-     *      @OA\Property(property="from_date", type="string", format="date", example="Your From Date"),
-     *      @OA\Property(property="to_date", type="string", format="date", example="Your To Date")
-
-
-     *
-     *
-     *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function createUserPensionHistory(UserPensionHistoryCreateRequest $request)
     {
@@ -149,72 +83,6 @@ DB::commit();
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/user-pension-histories",
-     *      operationId="updateUserPensionHistory",
-     *      tags={"user_pension_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update  user pension history ",
-     *      description="This method is to update user pension history",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-     *  * @OA\Property(property="user_id", type="string", format="string", example="Your Employee ID"),
-     *      @OA\Property(property="pension_eligible", type="boolean", format="boolean", example="1"),
-     *      @OA\Property(property="pension_letters", type="string", format="array", example={{"file_name":"sss"}}),
-     *      @OA\Property(property="pension_scheme_status", type="string", format="string", example="pension_scheme_status"),
-     *      @OA\Property(property="pension_enrollment_issue_date", type="string", format="string", example="pension_enrollment_issue_date"),
-     *      @OA\Property(property="pension_scheme_opt_out_date", type="string", format="string", example="pension_scheme_opt_out_date"),
-     *      @OA\Property(property="pension_re_enrollment_due_date", type="string", format="date", example="pension_re_enrollment_due_date"),
-     *
-     *      @OA\Property(property="from_date", type="string", format="date", example="Your From Date"),
-     *      @OA\Property(property="to_date", type="string", format="date", example="Your To Date")
-     *
-     *
-     *
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateUserPensionHistory(UserPensionHistoryUpdateRequest $request)
     {
@@ -312,97 +180,7 @@ DB::commit();
         }
     }
 
-
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-pension-histories",
-     *      operationId="getUserPensionHistories",
-     *      tags={"user_pension_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="user_id",
-     *         in="query",
-     *         description="user_id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get user pension histories  ",
-     *      description="This method is to get user pension histories ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+ 
 
     public function getUserPensionHistories(Request $request)
     {
@@ -493,60 +271,7 @@ DB::commit();
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-pension-histories/{id}",
-     *      operationId="getUserPensionHistoryById",
-     *      tags={"user_pension_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get user pension history by id",
-     *      description="This method is to get user pension history by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+    
 
     public function getUserPensionHistoryById($id, Request $request)
     {
@@ -592,60 +317,6 @@ DB::commit();
     }
 
 
-
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/user-pension-histories/{ids}",
-     *      operationId="deleteUserPensionHistoriesByIds",
-     *      tags={"user_pension_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete user pension history by id",
-     *      description="This method is to delete user pension history by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteUserPensionHistoriesByIds(Request $request, $ids)
     {

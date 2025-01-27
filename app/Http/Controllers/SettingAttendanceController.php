@@ -17,72 +17,8 @@ use Illuminate\Support\Facades\DB;
 class SettingAttendanceController extends Controller
 {
     use ErrorUtil, UserActivityUtil, BusinessUtil;
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/setting-attendance",
-     *      operationId="createSettingAttendance",
-     *      tags={"settings.setting_attendance"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store setting attendance",
-     *      description="This method is to store setting attendance",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
- *     @OA\Property(property="punch_in_time_tolerance", type="number", format="number", example="15"),
- *     @OA\Property(property="work_availability_definition", type="number", format="number", example="80"),
- *     @OA\Property(property="punch_in_out_alert", type="boolean", format="boolean", example="1"),
- *     @OA\Property(property="punch_in_out_interval", type="number", format="number", example="30"),
- *     @OA\Property(property="alert_area", type="string", format="array", example={"web","system"}),
- *
- *  *     @OA\Property(property="service_name", type="string", format="string", example="map"),
- *  *     @OA\Property(property="api_key", type="string", format="string", example="sdthsd@hrhfgf"),
- *
- *     @OA\Property(property="auto_approval", type="boolean", format="boolean", example="1"),
- *  *     @OA\Property(property="is_geolocation_enabled", type="boolean", format="boolean", example="1"),
- *
-*     @OA\Property(property="special_users", type="string", format="array", example={1,2,3}),
- *     @OA\Property(property="special_roles", type="string", format="array", example={1,2,3})
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+
+
 
     public function createSettingAttendance(SettingAttendanceCreateRequest $request)
     {
@@ -176,91 +112,7 @@ class SettingAttendanceController extends Controller
     }
 
 
-
-      /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/setting-attendance",
-     *      operationId="getSettingAttendance",
-     *      tags={"settings.setting_attendance"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get setting attendance  ",
-     *      description="This method is to get setting attendance ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+ 
 
      public function getSettingAttendance(Request $request)
      {

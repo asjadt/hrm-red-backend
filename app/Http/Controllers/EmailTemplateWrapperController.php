@@ -17,64 +17,6 @@ class EmailTemplateWrapperController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/email-template-wrappers",
-     *      operationId="updateEmailTemplateWrapper",
-     *      tags={"template_management.wrapper.email"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update email template wrapper",
-     *      description="This method is to update email template wrapper",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *  description="use [content] in the template",
-     *         @OA\JsonContent(
-     *            required={"id","template","is_active"},
-     *    @OA\Property(property="id", type="number", format="number", example="1"),
-     *   * *    @OA\Property(property="name", type="string", format="string",example="emal v1"),
-     *   * *   * *    @OA\Property(property="is_active", type="number", format="number",example="1"),
-     *    @OA\Property(property="template", type="string", format="string",example="html template goes here"),
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateEmailTemplateWrapper(EmailTemplateWrapperUpdateRequest $request)
     {
@@ -122,81 +64,8 @@ class EmailTemplateWrapperController extends Controller
             return $this->sendError($e, 500,$request);
         }
     }
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/email-template-wrappers/{perPage}",
-     *      operationId="getEmailTemplateWrappers",
-     *      tags={"template_management.wrapper.email"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *              @OA\Parameter(
-     *         name="perPage",
-     *         in="path",
-     *         description="perPage",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      * *  @OA\Parameter(
-* name="start_date",
-* in="query",
-* description="start_date",
-* required=true,
-* example="2019-06-29"
-* ),
-     * *  @OA\Parameter(
-* name="end_date",
-* in="query",
-* description="end_date",
-* required=true,
-* example="2019-06-29"
-* ),
-     * *  @OA\Parameter(
-* name="search_key",
-* in="query",
-* description="search_key",
-* required=true,
-* example="search_key"
-* ),
-     *      summary="This method is to get email template  wrappers ",
-     *      description="This method is to get email template wrappers",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getEmailTemplateWrappers($perPage, Request $request)
     {
@@ -235,61 +104,6 @@ class EmailTemplateWrapperController extends Controller
     }
 
 
-     /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/email-template-wrappers/single/{id}",
-     *      operationId="getEmailTemplateWrapperById",
-     *      tags={"template_management.wrapper.email"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get email template wrapper by id",
-     *      description="This method is to get email template wrapper by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getEmailTemplateWrapperById($id, Request $request)
     {
         try {
@@ -306,7 +120,7 @@ class EmailTemplateWrapperController extends Controller
             ])
             ->first();
             if(!$template){
-              
+
                 return response()->json([
                      "message" => "no data found"
                 ], 404);

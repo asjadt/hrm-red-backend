@@ -26,70 +26,6 @@ class UserSponsorshipHistoryController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/user-sponsorship-histories",
-     *      operationId="createUserSponsorshipHistory",
-     *      tags={"user_sponsorship_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store user sponsorship history",
-     *      description="This method is to store user sponsorship history",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *  * @OA\Property(property="user_id", type="string", format="string", example="Your Employee ID"),
- *      @OA\Property(property="date_assigned", type="string", format="date", example="Your Date Assigned"),
- *      @OA\Property(property="expiry_date", type="string", format="date", example="Your Expiry Date"),
- *      @OA\Property(property="note", type="string", format="string", example="Your Note"),
- *      @OA\Property(property="certificate_number", type="string", format="string", example="Your Certificate Number"),
- *      @OA\Property(property="current_certificate_status", type="string", format="string", example="Your Current Certificate Status"),
- *      @OA\Property(property="is_sponsorship_withdrawn", type="string", format="string", example="Your Is Sponsorship Withdrawn"),
- *      @OA\Property(property="from_date", type="string", format="date", example="Your From Date"),
- *      @OA\Property(property="to_date", type="string", format="date", example="Your To Date")
-
- *
- *
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function createUserSponsorshipHistory(UserSponsorshipHistoryCreateRequest $request)
     {
@@ -127,71 +63,6 @@ class UserSponsorshipHistoryController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/user-sponsorship-histories",
-     *      operationId="updateUserSponsorshipHistory",
-     *      tags={"user_sponsorship_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update  user sponsorship history ",
-     *      description="This method is to update user sponsorship history",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-*      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-     *  * @OA\Property(property="user_id", type="string", format="string", example="Your Employee ID"),
- *      @OA\Property(property="date_assigned", type="string", format="date", example="Your Date Assigned"),
- *      @OA\Property(property="expiry_date", type="string", format="date", example="Your Expiry Date"),
- *      @OA\Property(property="note", type="string", format="string", example="Your Note"),
- *      @OA\Property(property="certificate_number", type="string", format="string", example="Your Certificate Number"),
- *      @OA\Property(property="current_certificate_status", type="string", format="string", example="Your Current Certificate Status"),
- *      @OA\Property(property="is_sponsorship_withdrawn", type="string", format="string", example="Your Is Sponsorship Withdrawn"),
- *      @OA\Property(property="from_date", type="string", format="date", example="Your From Date"),
- *      @OA\Property(property="to_date", type="string", format="date", example="Your To Date")
- *
- *
- *
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateUserSponsorshipHistory(UserSponsorshipHistoryUpdateRequest $request)
     {
@@ -273,96 +144,7 @@ class UserSponsorshipHistoryController extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-sponsorship-histories",
-     *      operationId="getUserSponsorshipHistories",
-     *      tags={"user_sponsorship_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="user_id",
-     *         in="query",
-     *         description="user_id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
 
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get user sponsorship histories  ",
-     *      description="This method is to get user sponsorship histories ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getUserSponsorshipHistories(Request $request)
     {
@@ -441,59 +223,7 @@ class UserSponsorshipHistoryController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/user-sponsorship-histories/{id}",
-     *      operationId="getUserSponsorshipHistoryById",
-     *      tags={"user_sponsorship_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get user sponsorship history by id",
-     *      description="This method is to get user sponsorship history by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+    
 
 
     public function getUserSponsorshipHistoryById($id, Request $request)
@@ -532,59 +262,6 @@ class UserSponsorshipHistoryController extends Controller
 
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/user-sponsorship-histories/{ids}",
-     *      operationId="deleteUserSponsorshipHistoriesByIds",
-     *      tags={"user_sponsorship_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete user sponsorship history by id",
-     *      description="This method is to delete user sponsorship history by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteUserSponsorshipHistoriesByIds(Request $request, $ids)
     {

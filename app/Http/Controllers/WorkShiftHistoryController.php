@@ -44,118 +44,6 @@ class WorkShiftHistoryController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/work-shift-histories",
-     *      operationId="updateWorkShiftHistory",
-     *      tags={"work_shift_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update work shift",
-     *      description="This method is to update work_shift",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *      @OA\Property(property="id", type="number", format="number", example="Updated Christmas"),
-     *     @OA\Property(property="name", type="string", format="string", example="Updated Christmas"),
-     *     @OA\Property(property="type", type="string", format="string", example="regular"),
-     *     @OA\Property(property="description", type="string", format="string", example="description"),
-     *    *      *  *     @OA\Property(property="is_personal", type="boolean", format="boolean", example="0"),
-     *   *     @OA\Property(property="break_type", type="string", format="string", example="paid"),
-     *  *     @OA\Property(property="break_hours", type="boolean", format="boolean", example="0"),
-     *
-     *     @OA\Property(property="departments", type="string",  format="array", example={1,2,3,4}),
-     *      *  *     @OA\Property(property="work_locations", type="string",  format="array", example={1,2,3}),
-
-     *     @OA\Property(property="users", type="string", format="array", example={1,2,3}),
-     * *     @OA\Property(property="details", type="string", format="array", example={
-     *         {
-     *             "day": "0",
-     *             "start_at": "",
-     *             "end_at": "",
-     *             "is_weekend": 0
-     *         },
-     *         {
-     *             "day": "1",
-     *             "start_at": "",
-     *             "end_at": "",
-     *             "is_weekend": 0
-     *         },
-     *         {
-     *             "day": "2",
-     *             "start_at": "",
-     *             "end_at": "",
-     *             "is_weekend": 0
-     *         },
-     *         {
-     *             "day": "3",
-     *             "start_at": "",
-     *             "end_at": "",
-     *             "is_weekend": 0
-     *         },
-     *         {
-     *             "day": "4",
-     *             "start_at": "",
-     *             "end_at": "",
-     *             "is_weekend": 0
-     *         },
-     *         {
-     *             "day": "5",
-     *             "start_at": "",
-     *             "end_at": "",
-     *             "is_weekend": 0
-     *         },
-     *         {
-     *             "day": "6",
-     *             "start_at": "",
-     *             "end_at": "",
-     *             "is_weekend": 0
-     *         }
-     *     }),
-
-     *     @OA\Property(property="start_date", type="string", format="date", example="2023-11-16"),
-     *     @OA\Property(property="end_date", type="string", format="date", example=""),
-     *
-
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateWorkShiftHistory(WorkShiftHistoryUpdateRequest $request)
     {
@@ -285,60 +173,6 @@ class WorkShiftHistoryController extends Controller
 
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/work-shift-histories/{ids}",
-     *      operationId="deleteWorkShiftHistoriesByIds",
-     *      tags={"work_shift_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete work shift by id",
-     *      description="This method is to delete work shift by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function deleteWorkShiftHistoriesByIds(Request $request, $ids)
     {
 
@@ -396,59 +230,7 @@ class WorkShiftHistoryController extends Controller
         }
     }
 
-       /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/work-shift-histories/{id}",
-     *      operationId="getWorkShiftHistoryById",
-     *      tags={"work_shift_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get work shift by id",
-     *      description="This method is to get work shift by id",
-     *
 
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
 
      public function getWorkShiftHistoryById($id, Request $request)
@@ -493,61 +275,6 @@ class WorkShiftHistoryController extends Controller
      }
 
 
-          /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/current-work-shift-history/{employee_id}",
-     *      operationId="getCurrentWorkShiftHistory",
-     *      tags={"work_shift_histories"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="employee_id",
-     *         in="path",
-     *         description="employee_id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get work shift by id",
-     *      description="This method is to get work shift by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
-
      public function getCurrentWorkShiftHistory($employee_id, Request $request)
      {
          try {
@@ -584,8 +311,6 @@ class WorkShiftHistoryController extends Controller
                      ->orderByDesc("work_shift_histories.id")
 
                      ->first();
-
-
 
 
                      if (empty($work_shift_history)) {

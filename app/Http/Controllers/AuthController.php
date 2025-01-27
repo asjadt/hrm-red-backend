@@ -35,72 +35,6 @@ use Spatie\Permission\Models\Role;
 class AuthController extends Controller
 {
     use ErrorUtil, BusinessUtil, UserActivityUtil, EmailLogUtil;
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/register",
-     *      operationId="z.unused",
-     *      tags={"auth"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store user",
-     *      description="This method is to store user",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"first_Name","last_Name","email","password","password_confirmation","phone","address_line_1","address_line_2","country","city","postcode"},
-     *             @OA\Property(property="first_Name", type="string", format="string",example="Rifat"),
-     *            @OA\Property(property="last_Name", type="string", format="string",example="Al"),
-     *            @OA\Property(property="email", type="string", format="string",example="rifat@g.c"),
-
-     * *  @OA\Property(property="password", type="string", format="string",example="12345678"),
-     *  * *  @OA\Property(property="password_confirmation", type="string", format="string",example="12345678"),
-     *  * *  @OA\Property(property="phone", type="string", format="string",example="01771034383"),
-     *  * *  @OA\Property(property="address_line_1", type="string", format="string",example="dhaka"),
-     *  * *  @OA\Property(property="address_line_2", type="string", format="string",example="dinajpur"),
-     *  * *  @OA\Property(property="country", type="string", format="string",example="bangladesh"),
-     *  * *  @OA\Property(property="city", type="string", format="string",example="dhaka"),
-     *  * *  @OA\Property(property="postcode", type="string", format="string",example="1207"),
-     *      *  * *  @OA\Property(property="lat", type="string", format="string",example="1207"),
-     *      *  * *  @OA\Property(property="long", type="string", format="string",example="1207"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function register(AuthRegisterRequest $request)
     {
@@ -153,61 +87,7 @@ class AuthController extends Controller
 
 
 
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/login",
-     *      operationId="login",
-     *      tags={"auth"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to login user",
-     *      description="This method is to login user",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"email","password"},
-     *            @OA\Property(property="email", type="string", format="string",example="asjadtariq@gmail.com"),
 
-     * *  @OA\Property(property="password", type="string", format="string",example="12345678@We"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
     public function login(Request $request)
     {
 
@@ -347,61 +227,7 @@ $datediff = $now - $user_created_date;
         }
     }
 
-     /**
-     *
-     * @OA\Post(
-     *      path="/v2.0/login",
-     *      operationId="loginV2",
-     *      tags={"auth"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to login user",
-     *      description="This method is to login user",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"email","password"},
-     *            @OA\Property(property="email", type="string", format="string",example="asjadtariq@gmail.com"),
 
-     * *  @OA\Property(property="password", type="string", format="string",example="12345678@We"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
     public function loginV2(Request $request)
     {
 
@@ -588,58 +414,6 @@ $responseData = [
 
 
 
- /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/logout",
-     *      operationId="logout",
-     *      tags={"auth"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to logout user",
-     *      description="This method is to logout user",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
     public function logout(Request $request)
     {
 
@@ -656,61 +430,6 @@ $responseData = [
         }
     }
 
-  /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/token-regenerate",
-     *      operationId="regenerateToken",
-     *      tags={"auth"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to regenerate Token",
-     *      description="This method is to regenerate Token",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"user_id","site_redirect_token"},
-     *            @OA\Property(property="user_id", type="number", format="number",example="1"),
-
-     * *  @OA\Property(property="site_redirect_token", type="string", format="string",example="12345678"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
     public function regenerateToken(AuthRegenerateTokenRequest $request)
     {
 
@@ -760,57 +479,6 @@ $responseData = [
             return $this->sendError($e, 500,$request);
         }
     }
-
-   /**
-        *
-     * @OA\Post(
-     *      path="/forgetpassword",
-     *      operationId="storeToken",
-     *      tags={"auth"},
-
-     *      summary="This method is to store token",
-     *      description="This method is to store token",
-
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"email"},
-     *
-     *             @OA\Property(property="email", type="string", format="string",* example="test@g.c"),
-     *    *             @OA\Property(property="client_site", type="string", format="string",* example="client"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *@OA\JsonContent()
-     *      )
-     *     )
-     */
 
     public function storeToken(ForgetPasswordRequest $request) {
 
@@ -870,56 +538,6 @@ $responseData = [
         }
 
     }
-/**
-        *
-     * @OA\Post(
-     *      path="/v2.0/forgetpassword",
-     *      operationId="storeTokenV2",
-     *      tags={"auth"},
-
-     *      summary="This method is to store token",
-     *      description="This method is to store token",
-
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"email"},
-     *
-     *             @OA\Property(property="email", type="string", format="string",* example="test@g.c"),
-     *    *             @OA\Property(property="client_site", type="string", format="string",* example="client"),
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *@OA\JsonContent()
-     *      )
-     *     )
-     */
 
      public function storeTokenV2(ForgetPasswordV2Request $request) {
 
@@ -983,54 +601,6 @@ $responseData = [
 
 
 
-      /**
-        *
-     * @OA\Post(
-     *      path="/resend-email-verify-mail",
-     *      operationId="resendEmailVerifyToken",
-     *      tags={"auth"},
-
-     *      summary="This method is to resend email verify mail",
-     *      description="This method is to resend email verify mail",
-
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"email"},
-     *
-     *             @OA\Property(property="email", type="string", format="string",* example="test@g.c"),
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *@OA\JsonContent()
-     *      )
-     *     )
-     */
 
     public function resendEmailVerifyToken(EmailVerifyTokenRequest $request) {
 
@@ -1082,63 +652,6 @@ $responseData = [
         }
 
     }
-
-
-/**
-        *
-     * @OA\Patch(
-     *      path="/forgetpassword/reset/{token}",
-     *      operationId="changePasswordByToken",
-     *      tags={"auth"},
-     *  @OA\Parameter(
-* name="token",
-* in="path",
-* description="token",
-* required=true,
-* example="1"
-* ),
-     *      summary="This method is to change password",
-     *      description="This method is to change password",
-
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"password"},
-     *
-     *     @OA\Property(property="password", type="string", format="string",* example="aaaaaaaa"),
-
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request"
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *@OA\JsonContent()
-     *      )
-     *     )
-     */
 
 
 
@@ -1194,55 +707,6 @@ $responseData = [
 
 
 
- /**
-        *
-     * @OA\Get(
-     *      path="/v1.0/user",
-     *      operationId="getUser",
-     *      tags={"auth"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="This method is to get  user ",
-     *      description="This method is to get user",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
 
 public function getUser (Request $request) {
     try{
@@ -1265,56 +729,7 @@ public function getUser (Request $request) {
 
 }
 
-
- /**
-        *
-     * @OA\Get(
-     *      path="/v2.0/user",
-     *      operationId="getUserV2",
-     *      tags={"auth"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-
-     *      summary="This method is to get  user ",
-     *      description="This method is to get user",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
+ 
 
      public function getUserV2 (Request $request) {
         try{

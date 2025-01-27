@@ -17,68 +17,8 @@ use Illuminate\Support\Facades\Storage;
 class FileManagementController extends Controller
 {
     use UserActivityUtil,ErrorUtil;
-  /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/files/single-file-upload",
-     *      operationId="createFileSingle",
-     *      tags={"files"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store files",
-     *      description="This method is to store files",
-     *
-     *  @OA\RequestBody(
-     *   * @OA\MediaType(
-     *     mediaType="multipart/form-data",
-     *     @OA\Schema(
-     *         required={"file"},
-     *         @OA\Property(
-     *             description="file to upload",
-     *             property="file",
-     *             type="file",
-     *             collectionFormat="multi",
-     *         )
-     *     )
-     * )
 
 
-
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function createFileSingle(SingleFileUploadRequest $request)
      {
@@ -116,72 +56,7 @@ class FileManagementController extends Controller
 
 
 
-       /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/files/multiple-file-upload",
-     *      operationId="createFileMultiple",
-     *      tags={"files"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
 
-     *      summary="This method is to store multiple leave files",
-     *      description="This method is to store multiple leave files",
-     *
-     *  @OA\RequestBody(
-     *   * @OA\MediaType(
-     *     mediaType="multipart/form-data",
-     *     @OA\Schema(
-     *         required={"files[]"},
-     *         @OA\Property(
-     *             description="array of files to upload",
-     *             property="files[]",
-     *             type="array",
-     *             @OA\Items(
-     *                 type="file"
-     *             ),
-     *             collectionFormat="multi",
-     *         )
-     *     )
-     * )
-
-
-
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function createFileMultiple(MultipleFileUploadRequest $request)
     {
@@ -213,68 +88,7 @@ class FileManagementController extends Controller
 
     }
 
-  /**
-     *
-     * @OA\Post(
-     *      path="/v2.0/files/single-file-upload",
-     *      operationId="createFileSingleV2",
-     *      tags={"files"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store files",
-     *      description="This method is to store files",
-     *
-     *  @OA\RequestBody(
-     *   * @OA\MediaType(
-     *     mediaType="multipart/form-data",
-     *     @OA\Schema(
-     *         required={"file"},
-     *         @OA\Property(
-     *             description="file to upload",
-     *             property="file",
-     *             type="file",
-     *             collectionFormat="multi",
-     *         )
-     *     )
-     * )
 
-
-
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function createFileSingleV2(SingleFileUploadRequestV2 $request)
      {
@@ -337,73 +151,6 @@ if (!in_array($folder, $locations)) {
      }
 
 
-
-       /**
-     *
-     * @OA\Post(
-     *      path="/v2.0/files/multiple-file-upload",
-     *      operationId="createFileMultipleV2",
-     *      tags={"files"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *      summary="This method is to store multiple leave files",
-     *      description="This method is to store multiple leave files",
-     *
-     *  @OA\RequestBody(
-     *   * @OA\MediaType(
-     *     mediaType="multipart/form-data",
-     *     @OA\Schema(
-     *         required={"files[]"},
-     *         @OA\Property(
-     *             description="array of files to upload",
-     *             property="files[]",
-     *             type="array",
-     *             @OA\Items(
-     *                 type="file"
-     *             ),
-     *             collectionFormat="multi",
-     *         )
-     *     )
-     * )
-
-
-
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
      public function createFileMultipleV2(MultipleFileUploadRequestV2 $request)
      {
@@ -474,61 +221,6 @@ if (!in_array($folder, $locations)) {
 
 
 
-
- /**
-        *
-     * @OA\Get(
-     *      path="/v1.0/file/{filename}",
-     *      operationId="getFile",
-     *      tags={"files"},
-    *       security={
-     *           {"bearerAuth": {}}
-     *       },
- *              @OA\Parameter(
-     *         name="filename",
-     *         in="path",
-     *         description="filename",
-     *         required=true,
-     *  example="filename"
-     *      ),
-
-     *      summary="This method is to get  user ",
-     *      description="This method is to get user",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
 
      public function getFile ($filename, Request $request) {

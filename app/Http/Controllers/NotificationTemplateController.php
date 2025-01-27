@@ -15,66 +15,6 @@ class NotificationTemplateController extends Controller
 {
     use ErrorUtil,UserActivityUtil;
 
-     /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/notification-templates",
-     *      operationId="updateNotificationTemplate",
-     *      tags={"template_management.notification"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update notification template",
-     *      description="This method is to update notification template",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *  description="use [customer_name],[business_owner_name],[business_name],
-     *  in the template and use [customer_id], [pre_booking_id],[booking_id],[job_id],[business_id],[bid_id] in link",
-     *         @OA\JsonContent(
-     *            required={"id","template","is_active"},
-     *    @OA\Property(property="id", type="number", format="number", example="1"),
-     *   * *    @OA\Property(property="name", type="string", format="string",example="emal v1"),
-     * *   * *    @OA\Property(property="is_active", type="number", format="number",example="1"),
-     *    @OA\Property(property="template", type="string", format="string",example="html template goes here"),
-     *  *    @OA\Property(property="link", type="string", format="string",example="html template goes here"),
-*
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateNotificationTemplate(NotificationTemplateUpdateRequest $request)
     {
@@ -128,81 +68,6 @@ class NotificationTemplateController extends Controller
     }
 
 
-   /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/notification-templates/{perPage}",
-     *      operationId="getNotificationTemplates",
-     *      tags={"template_management.notification"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="perPage",
-     *         in="path",
-     *         description="perPage",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      * *  @OA\Parameter(
-* name="start_date",
-* in="query",
-* description="start_date",
-* required=true,
-* example="2019-06-29"
-* ),
-     * *  @OA\Parameter(
-* name="end_date",
-* in="query",
-* description="end_date",
-* required=true,
-* example="2019-06-29"
-* ),
-     * *  @OA\Parameter(
-* name="search_key",
-* in="query",
-* description="search_key",
-* required=true,
-* example="search_key"
-* ),
-     *      summary="This method is to get notification templates ",
-     *      description="This method is to get notification templates",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getNotificationTemplates($perPage, Request $request)
     {
@@ -241,61 +106,6 @@ class NotificationTemplateController extends Controller
     }
 
 
- /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/notification-templates/single/{id}",
-     *      operationId="getNotificationTemplateById",
-     *      tags={"template_management.notification"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get notification template by id",
-     *      description="This method is to get notification template by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
-
     public function getNotificationTemplateById($id, Request $request)
     {
         try {
@@ -312,7 +122,7 @@ class NotificationTemplateController extends Controller
             ])
             ->first();
             if(!$template){
-          
+
                 return response()->json([
                      "message" => "no data found"
                 ], 404);
@@ -324,54 +134,7 @@ class NotificationTemplateController extends Controller
         }
     }
 
-
-  /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/notification-template-types",
-     *      operationId="getNotificationTemplateTypes",
-     *      tags={"template_management.notification"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *
-     *      summary="This method is to get notification template types ",
-     *      description="This method is to get notification template types",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+ 
 
     public function getNotificationTemplateTypes(Request $request)
     {

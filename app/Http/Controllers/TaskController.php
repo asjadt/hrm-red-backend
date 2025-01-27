@@ -18,74 +18,7 @@ use Illuminate\Support\Facades\DB;
 class TaskController extends Controller
 {
     use ErrorUtil, UserActivityUtil, BusinessUtil, ModuleUtil,BasicUtil;
-    /**
-     *
-     * @OA\Post(
-     *      path="/v1.0/tasks",
-     *      operationId="createTask",
-     *      tags={"task"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to store task listing",
-     *      description="This method is to store task listing",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
 
- *     @OA\Property(property="name", type="string", format="string", example="Task X"),
- *     @OA\Property(property="description", type="string", format="string", example="A brief overview of Task X's objectives and scope."),
- *     @OA\Property(property="start_date", type="string", format="date", example="2023-01-01"),
- *     @OA\Property(property="due_date", type="string", format="date", example="2023-06-30"),
- *     @OA\Property(property="end_date", type="string", format="date", example="2023-12-31"),
- *     @OA\Property(property="status", type="string", format="string", example="in_progress"),
- *     @OA\Property(property="project_id", type="integer", format="integer", example="1"),
- *     @OA\Property(property="parent_task_id", type="integer", format="integer", example="2"),
- *  *     @OA\Property(property="task_category_id", type="integer", format="integer", example="2"),
- *  *     @OA\Property(property="assignees", type="string", format="array", example={1,2,3}),
- *
- *      @OA\Property(property="cover", type="string", format="string", example="in_progress"),
- *      @OA\Property(property="labels", type="string", format="array", example={1,2,3}),
- *      @OA\Property(property="assets", type="string", format="array", example={1,2,3}),
- *
- *
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function createTask(TaskCreateRequest $request)
     {
@@ -133,74 +66,7 @@ class TaskController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Put(
-     *      path="/v1.0/tasks",
-     *      operationId="updateTask",
-     *      tags={"task"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *      summary="This method is to update task listing ",
-     *      description="This method is to update task listing",
-     *
-     *  @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *    @OA\Property(property="id", type="number", format="number",example="1"),
- *     @OA\Property(property="name", type="string", format="string", example="Task X"),
- *     @OA\Property(property="description", type="string", format="string", example="A brief overview of Task X's objectives and scope."),
- *     @OA\Property(property="start_date", type="string", format="date", example="2023-01-01"),
- *     @OA\Property(property="due_date", type="string", format="date", example="2023-06-30"),
- *     @OA\Property(property="end_date", type="string", format="date", example="2023-12-31"),
- *     @OA\Property(property="status", type="string", format="string", example="in_progress"),
- *     @OA\Property(property="project_id", type="integer", format="integer", example="1"),
- *     @OA\Property(property="parent_task_id", type="integer", format="integer", example="2"),
- * *  *     @OA\Property(property="task_category_id", type="integer", format="integer", example="2"),
- *
- * *      @OA\Property(property="cover", type="string", format="string", example="in_progress"),
- *      @OA\Property(property="labels", type="string", format="array", example={1,2,3}),
- *      @OA\Property(property="assets", type="string", format="array", example={1,2,3}),
- *
- *
 
-     *
-     *         ),
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function updateTask(TaskUpdateRequest $request)
     {
@@ -285,105 +151,6 @@ class TaskController extends Controller
     }
 
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/tasks",
-     *      operationId="getTasks",
-     *      tags={"task"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-
-     *              @OA\Parameter(
-     *         name="per_page",
-     *         in="query",
-     *         description="per_page",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *
-     *    @OA\Parameter(
-     *         name="project_id",
-     *         in="query",
-     *         description="project_id",
-     *         required=true,
-     *  example="1"
-     *      ),
-     *      *    @OA\Parameter(
-     *         name="status",
-     *         in="query",
-     *         description="status",
-     *         required=true,
-     *  example="pending"
-     *      ),
-
-     *      * *  @OA\Parameter(
-     * name="start_date",
-     * in="query",
-     * description="start_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="end_date",
-     * in="query",
-     * description="end_date",
-     * required=true,
-     * example="2019-06-29"
-     * ),
-     * *  @OA\Parameter(
-     * name="search_key",
-     * in="query",
-     * description="search_key",
-     * required=true,
-     * example="search_key"
-     * ),
-     * *  @OA\Parameter(
-     * name="order_by",
-     * in="query",
-     * description="order_by",
-     * required=true,
-     * example="ASC"
-     * ),
-
-     *      summary="This method is to get task listings  ",
-     *      description="This method is to get task listings ",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function getTasks(Request $request)
     {
@@ -453,59 +220,7 @@ class TaskController extends Controller
         }
     }
 
-    /**
-     *
-     * @OA\Get(
-     *      path="/v1.0/tasks/{id}",
-     *      operationId="getTaskById",
-     *      tags={"task"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="id",
-     *         required=true,
-     *  example="6"
-     *      ),
-     *      summary="This method is to get task listing by id",
-     *      description="This method is to get task listing by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
+     
 
 
     public function getTaskById($id, Request $request)
@@ -546,59 +261,6 @@ class TaskController extends Controller
 
 
 
-    /**
-     *
-     *     @OA\Delete(
-     *      path="/v1.0/tasks/{ids}",
-     *      operationId="deleteTasksByIds",
-     *      tags={"task"},
-     *       security={
-     *           {"bearerAuth": {}}
-     *       },
-     *              @OA\Parameter(
-     *         name="ids",
-     *         in="path",
-     *         description="ids",
-     *         required=true,
-     *  example="1,2,3"
-     *      ),
-     *      summary="This method is to delete task listing by id",
-     *      description="This method is to delete task listing by id",
-     *
-
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *       @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     * @OA\JsonContent(),
-     *      ),
-     *        @OA\Response(
-     *          response=422,
-     *          description="Unprocesseble Content",
-     *    @OA\JsonContent(),
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden",
-     *   @OA\JsonContent()
-     * ),
-     *  * @OA\Response(
-     *      response=400,
-     *      description="Bad Request",
-     *   *@OA\JsonContent()
-     *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found",
-     *   *@OA\JsonContent()
-     *   )
-     *      )
-     *     )
-     */
 
     public function deleteTasksByIds(Request $request, $ids)
     {
