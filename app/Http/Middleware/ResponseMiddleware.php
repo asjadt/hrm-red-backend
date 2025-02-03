@@ -49,10 +49,8 @@ class ResponseMiddleware
                     "message" =>  $response->getContent(),
                 ];
 
-                  $error =   ErrorLog::create($errorLog);
-                    // $errorMessage = "Error ID: ".$error->id." - Status: ".$error->status_code." - Operation Failed, something is wrong! - Please call to the customer care.";
-                    $errorMessage =  "Error ID: ".$error->id." - Status: ".$error->status_code." -  ". "We encountered an issue while processing your request and apologize for any inconvenience this may have caused. Please contact customer support and provide the Error ID: " . $error->id . " for assistance.";
-                    $response->setContent(json_encode(['message' => $errorMessage]));
+
+
 
             }
             else if(($response->getStatusCode() >= 300 && $response->getStatusCode() < 500)) {
@@ -68,13 +66,7 @@ class ResponseMiddleware
                     "message" =>  $response->getContent(),
                 ];
 
-                  $error =   ErrorLog::create($errorLog);
-
-                  $responseData = json_decode($response->getContent(), true);
-                  if (isset($responseData['message'])) {
-                      $responseData['message'] = "Error ID: ".$error->id." - Status: ".$error->status_code." -  ". $responseData['message'];
-                  }
-                  $response->setContent(json_encode($responseData));
+                
 
             }
 

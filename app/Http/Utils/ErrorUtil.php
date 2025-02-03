@@ -50,7 +50,7 @@ trait ErrorUtil
             "ip_address" =>  $request->header('X-Forwarded-For'),
             "request_method" => $request->method()
         ];
-        ErrorLog::create($errorLog);
+     
 
 
         if ($e->getCode() == 422) {

@@ -2890,7 +2890,7 @@ $users = $this->retrieveData($usersQuery, "users.first_Name");
     }
 
 
- 
+
 
     public function getUserActivity(Request $request)
     {
@@ -2930,58 +2930,6 @@ $users = $this->retrieveData($usersQuery, "users.first_Name");
 
 
 
-            $activity = ActivityLog::where("activity", "!=", "DUMMY activity")
-                ->where("description", "!=", "DUMMY description")
-
-                ->when(!empty($request->user_id), function ($query) use ($request) {
-                    return $query->where('user_id', $request->user_id);
-                })
-                ->when(empty($request->user_id), function ($query) use ($request) {
-                    return $query->where('user_id', $request->user()->id);
-                })
-                ->when(!empty($request->search_key), function ($query) use ($request) {
-                    $term = $request->search_key;
-                    return $query->where(function ($subquery) use ($term) {
-                        $subquery->where("activity", "like", "%" . $term . "%")
-                            ->orWhere("description", "like", "%" . $term . "%");
-                    });
-                })
-
-
-
-                ->when(!empty($request->start_date), function ($query) use ($request) {
-                    return $query->where('created_at', ">=", $request->start_date);
-                })
-                ->when(!empty($request->end_date), function ($query) use ($request) {
-                    return $query->where('created_at', "<=", ($request->end_date . ' 23:59:59'));
-                })
-
-                ->when(!empty($request->order_by) && in_array(strtoupper($request->order_by), ['ASC', 'DESC']), function ($query) use ($request) {
-                    return $query->orderBy("id", $request->order_by);
-                }, function ($query) {
-                    return $query->orderBy("id", "DESC");
-                })
-                ->select(
-                    "api_url",
-                    "activity",
-                    "description",
-                    "ip_address",
-                    "request_method",
-                    "device",
-                    "created_at",
-                    "updated_at",
-                    "user",
-                    "user_id",
-                )
-
-
-                ->when(!empty($request->per_page), function ($query) use ($request) {
-                    return $query->paginate($request->per_page);
-                }, function ($query) {
-                    return $query->get();
-                });;
-
-            return response()->json($activity, 200);
         } catch (Exception $e) {
 
             return $this->sendError($e, 500, $request);

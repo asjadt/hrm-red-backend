@@ -30,9 +30,7 @@ $activityLog = [
     "description"=> $description,
     "device" => $request->header('User-Agent')
 ];
-         ActivityLog::create($activityLog);
-        error_log(json_encode($activityLog));
-
+       
 return true;
 
     }
