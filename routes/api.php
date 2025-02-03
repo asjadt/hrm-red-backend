@@ -13,7 +13,6 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\BusinessTierController;
 use App\Http\Controllers\BusinessTimesController;
 use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CustomWebhookController;
 use App\Http\Controllers\DashboardManagementControllerV2;
 use App\Http\Controllers\DepartmentController;
@@ -27,7 +26,7 @@ use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\JobPlatformController;
 use App\Http\Controllers\JobTypeController;
-use App\Http\Controllers\LabelController;
+
 use App\Http\Controllers\LeaveController;
 
 use App\Http\Controllers\ModuleController;
@@ -52,7 +51,6 @@ use App\Http\Controllers\SettingPaymentDateController;
 use App\Http\Controllers\SettingPayrollController;
 use App\Http\Controllers\SocialSiteController;
 use App\Http\Controllers\SystemSettingController;
-use App\Http\Controllers\TaskCategoryController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserAddressHistoryController;
 use App\Http\Controllers\UserAssetController;
@@ -150,18 +148,6 @@ Route::post('/auth/check/business/email', [AuthController::class, "checkBusiness
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // !!!!!!!@@@@@@@@@@@@$$$$$$$$$$$$%%%%%%%%%%%%%%%%^^^^^^^^^^
 // Protected Routes
 // !!!!!!!@@@@@@@@@@@@$$$$$$$$$$$$%%%%%%%%%%%%%%%%^^^^^^^^^^
@@ -205,13 +191,8 @@ Route::delete('/v1.0/dashboard-widgets/{ids}', [DashboardManagementController::c
 
 Route::get('/v1.0/business-user-dashboard', [DashboardManagementController::class, "getBusinessUserDashboardData"]);
 
-Route::get('/v1.0/business-employee-dashboard', [DashboardManagementController::class, "getBusinessEmployeeDashboardData"]);
 
-Route::get('/v2.0/business-employee-dashboard', [DashboardManagementController::class, "getBusinessEmployeeDashboardDataV2"]);
 
-Route::get('/v2.0/business-employee-dashboard/present-hours', [DashboardManagementController::class, "getBusinessEmployeeDashboardDataPresentHours"]);
-
-Route::get('/v2.0/business-employee-dashboard/leaves', [DashboardManagementControllerV2::class, "getBusinessEmployeeDashboardDataLeaves"]);
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // end dashboard section
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,7 +201,7 @@ Route::get('/v2.0/business-employee-dashboard/leaves', [DashboardManagementContr
 
 Route::get('/v2.0/business-manager-dashboard', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardData"]);
 
-Route::get('/v1.0/business-manager-dashboard/other-widgets', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataOtherWidgets"]);
+
 
 
 
@@ -242,10 +223,7 @@ Route::get('/v1.0/business-manager-dashboard/passport-expiries/{duration}', [Das
 Route::get('/v1.0/business-manager-dashboard/pension-expiries/{duration}', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataPensionExpiries"]);
 
 
-
 Route::get('/v1.0/business-manager-dashboard/combined-expiries', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataCombinedExpiries"]);
-
-
 
 
 
@@ -263,9 +241,7 @@ Route::get('/v1.0/business-manager-dashboard/holidays/{status}/{duration}', [Das
 Route::get('/v1.0/business-manager-dashboard/leaves-holidays', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataLeavesAndHolidays"]);
 
 
-Route::get('/v1.0/business-manager-dashboard/pensions/{status}/{duration}', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataPensionsByStatus"]);
 
-Route::get('/v1.0/business-manager-dashboard/pensions', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataPensions"]);
 
 
 
@@ -300,10 +276,7 @@ Route::get('/v1.0/business-manager-dashboard/open-roles-and-total-employee', [Da
 
 
 
-Route::get('/v2.0/business-manager-dashboard/present-absent', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataPresentAbsent"]);
 
-
-Route::get('/v2.0/business-manager-dashboard/present-absent-hours', [DashboardManagementControllerV2::class, "getBusinessManagerDashboardDataPresentAbsentHours"]);
 
 
 
@@ -374,14 +347,11 @@ Route::get('/v1.0/system-settings', [SystemSettingController::class, "getSystemS
 // modules  management section
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Route::put('/v1.0/modules/toggle-active', [ModuleController::class, "toggleActiveModule"]);
+
 
 Route::put('/v1.0/business-modules/enable', [ModuleController::class, "enableBusinessModule"]);
 
 Route::get('/v1.0/business-modules/{business_id}', [ModuleController::class, "getBusinessModules"]);
-
-
-
 
 
 Route::get('/v1.0/modules', [ModuleController::class, "getModules"]);
@@ -514,7 +484,7 @@ Route::get('/v1.0/users/load-data-for-leaves/{id}', [UserManagementController::c
 Route::get('/v1.0/users/load-data-for-attendances/{id}', [UserManagementController::class, "getLoadDataForAttendanceByUserId"]);
 
 
-Route::get('/v1.0/load-global-data-for-attendances', [UserManagementController::class, "getLoadGlobalDataForAttendance"]);
+
 
 Route::get('/v1.0/users/get-disable-days-for-attendances/{id}', [UserManagementController::class, "getDisableDaysForAttendanceByUserId"]);
 
@@ -1074,6 +1044,8 @@ Route::delete('/v1.0/job-platforms/{ids}', [JobPlatformController::class, "delet
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
+
+
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //  social media management section
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1172,12 +1144,6 @@ Route::delete('/v1.0/recruitment-processes/{ids}', [RecruitmentProcessController
 
 
 
-
-
-
-
-
-
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // employment status management section
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1237,28 +1203,17 @@ Route::post('/v1.0/setting-leave', [SettingLeaveController::class, "createSettin
 Route::post('/v1.0/leaves/self', [LeaveController::class, "createSelfLeave"]);
 Route::post('/v1.0/leaves', [LeaveController::class, "createLeave"]);
 Route::put('/v1.0/leaves/approve', [LeaveController::class, "approveLeave"]);
-
 Route::put('/v1.0/leaves/approve/arrears', [LeaveController::class, "approveLeaveRecordArrear"]);
 
 
 
 Route::put('/v1.0/leaves/bypass', [LeaveController::class, "bypassLeave"]);
 Route::put('/v1.0/leaves', [LeaveController::class, "updateLeave"]);
-
-
 Route::get('/v1.0/leaves', [LeaveController::class, "getLeaves"]);
-
 Route::get('/v1.0/leave-arrears', [LeaveController::class, "getLeaveArrears"]);
-
-
-
-
 Route::get('/v2.0/leaves', [LeaveController::class, "getLeavesV2"]);
 Route::get('/v3.0/leaves', [LeaveController::class, "getLeavesV3"]);
 Route::get('/v4.0/leaves', [LeaveController::class, "getLeavesV4"]);
-
-
-
 Route::get('/v1.0/leaves/{id}', [LeaveController::class, "getLeaveById"]);
 Route::get('/v1.0/leaves-get-current-hourly-rate', [LeaveController::class, "getLeaveCurrentHourlyRate"]);
 Route::delete('/v1.0/leaves/{ids}', [LeaveController::class, "deleteLeavesByIds"]);
@@ -1294,17 +1249,11 @@ Route::post('/v1.0/setting-attendance', [SettingAttendanceController::class, "cr
 
 Route::post('/v1.0/attendances/self/check-in', [AttendanceController::class, "createSelfAttendanceCheckIn"]);
 Route::put('/v1.0/attendances/self/check-out', [AttendanceController::class, "createSelfAttendanceCheckOut"]);
-
-
-
 Route::post('/v1.0/attendances', [AttendanceController::class, "createAttendance"]);
 Route::post('/v1.0/attendances/multiple', [AttendanceController::class, "createMultipleAttendance"]);
 Route::put('/v1.0/attendances', [AttendanceController::class, "updateAttendance"]);
-
 Route::put('/v1.0/attendances/approve', [AttendanceController::class, "approveAttendance"]);
-
 Route::put('/v1.0/attendances/approve/arrears', [AttendanceController::class, "approveAttendanceArrear"]);
-
 Route::get('/v1.0/attendances', [AttendanceController::class, "getAttendances"]);
 Route::get('/v2.0/attendances', [AttendanceController::class, "getAttendancesV2"]);
 Route::get('/v3.0/attendances', [AttendanceController::class, "getAttendancesV3"]);
@@ -1315,18 +1264,10 @@ Route::get('/v3.0/attendances', [AttendanceController::class, "getAttendancesV3"
 
 
 Route::get('/v1.0/attendance-arrears', [AttendanceController::class, "getAttendanceArrears"]);
-
-
 Route::get('/v1.0/attendances/{id}', [AttendanceController::class, "getAttendanceById"]);
-
 Route::get('/v1.0/attendances/show/check-in-status', [AttendanceController::class, "getCurrentAttendance"]);
-
-
 Route::delete('/v1.0/attendances/{ids}', [AttendanceController::class, "deleteAttendancesByIds"]);
-
-
 Route::post('/v2.0/attendances/bypass/multiple', [AttendanceController::class, "createMultipleBypassAttendanceV2"]);
-
 Route::post('/v1.0/attendances/bypass/multiple', [AttendanceController::class, "createMultipleBypassAttendanceV1"]);
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1343,11 +1284,8 @@ Route::get('/v1.0/histories/user-right-to-works', [HistoryDetailsController::cla
 Route::get('/v1.0/histories/user-sponsorship-details', [HistoryDetailsController::class, "getUserSponsorshipDetailsHistory"]);
 Route::get('/v1.0/histories/user-pension-details', [HistoryDetailsController::class, "getUserPensionDetailsHistory"]);
 Route::get('/v1.0/histories/user-address-details', [HistoryDetailsController::class, "getUserAddressDetailsHistory"]);
-
 Route::get('/v1.0/histories/user-attendance-details', [HistoryDetailsController::class, "getUserAttendanceDetailsHistory"]);
-
 Route::get('/v1.0/histories/user-leave-details', [HistoryDetailsController::class, "getUserLeaveDetailsHistory"]);
-
 Route::get('/v1.0/histories/user-work-shift', [HistoryDetailsController::class, "getUserWorkShiftHistory"]);
 Route::get('/v1.0/histories/employee-work-shift', [HistoryDetailsController::class, "getEmployeeWorkShiftHistory"]);
 Route::get('/v1.0/histories/user-project', [HistoryDetailsController::class, "getUserProjectHistory"]);
@@ -1389,14 +1327,8 @@ Route::delete('/v1.0/payruns/{ids}', [PayrunController::class, "deletePayrunsByI
 
 Route::post('/v1.0/payrolls', [PayrollController::class, "createPayroll"]);
 Route::get('/v1.0/payrolls', [PayrollController::class, "getPayrolls"]);
-
-
 Route::get('/v1.0/payrolls/report', [PayrollController::class, "getPayrollsReport"]);
-
-
-
 Route::get('/v1.0/pending-payroll-users', [PayrollController::class, "getPendingPayrollUsers"]);
-
 Route::get('/v1.0/payroll-list', [PayrollController::class, "getPayrollList"]);
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1474,16 +1406,11 @@ Route::delete('/v1.0/candidates/{ids}', [CandidateController::class, "deleteCand
 // project  management section
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
 Route::post('/v1.0/projects', [ProjectController::class, "createProject"]);
 Route::put('/v1.0/projects/assign-user', [ProjectController::class, "assignUser"]);
 Route::put('/v1.0/projects/discharge-user', [ProjectController::class, "dischargeUser"]);
 Route::put('/v1.0/projects/assign-project', [ProjectController::class, "assignProject"]);
 Route::put('/v1.0/projects/discharge-project', [ProjectController::class, "dischargeProject"]);
-
-
-
-
 Route::put('/v1.0/projects', [ProjectController::class, "updateProject"]);
 Route::get('/v1.0/projects', [ProjectController::class, "getProjects"]);
 Route::get('/v1.0/projects/{id}', [ProjectController::class, "getProjectById"]);
@@ -1500,49 +1427,6 @@ Route::delete('/v1.0/projects/{ids}', [ProjectController::class, "deleteProjects
 
 
 
-
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// project  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-Route::post('/v1.0/task-categories', [TaskCategoryController::class, "createTaskCategory"]);
-Route::put('/v1.0/task-categories', [TaskCategoryController::class, "updateTaskCategory"]);
-Route::get('/v1.0/task-categories', [TaskCategoryController::class, "getTaskCategories"]);
-Route::get('/v1.0/task-categories/{id}', [TaskCategoryController::class, "getTaskCategoryById"]);
-Route::delete('/v1.0/task-categories/{ids}', [TaskCategoryController::class, "deleteTaskCategoriesByIds"]);
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// end project  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-
-
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// project  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-Route::post('/v1.0/labels', [LabelController::class, "createLabel"]);
-Route::put('/v1.0/labels', [LabelController::class, "updateLabel"]);
-
-
-Route::put('/v1.0/labels/assign', [LabelController::class, "assignLabel"]);
-Route::put('/v1.0/labels/discharge', [LabelController::class, "dischargeLabel"]);
-
-
-
-
-Route::get('/v1.0/labels', [LabelController::class, "getLabels"]);
-Route::get('/v1.0/labels/{id}', [LabelController::class, "getLabelById"]);
-Route::delete('/v1.0/labels/{ids}', [LabelController::class, "deleteLabelsByIds"]);
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// end project  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 
@@ -1569,19 +1453,6 @@ Route::delete('/v1.0/tasks/{ids}', [TaskController::class, "deleteTasksByIds"]);
 
 
 
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// comment  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-Route::post('/v1.0/comments', [CommentController::class, "createComment"]);
-Route::put('/v1.0/comments', [CommentController::class, "updateComment"]);
-Route::get('/v1.0/comments', [CommentController::class, "getComments"]);
-Route::get('/v1.0/comments/{id}', [CommentController::class, "getCommentById"]);
-Route::delete('/v1.0/comments/{ids}', [CommentController::class, "deleteCommentsByIds"]);
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// end comment  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 
@@ -1630,25 +1501,14 @@ Route::delete('/v1.0/products/{id}', [ProductController::class, "deleteProductBy
 
 Route::post('/v1.0/reminders', [ReminderController::class, "createReminder"]);
 Route::put('/v1.0/reminders', [ReminderController::class, "updateReminder"]);
-
 Route::get('/v1.0/reminders-entity-names', [ReminderController::class, "getReminderEntityNames"]);
-
 Route::get('/v1.0/reminders', [ReminderController::class, "getReminders"]);
-
 Route::get('/v1.0/reminders/{id}', [ReminderController::class, "getReminderById"]);
 Route::delete('/v1.0/reminders/{ids}', [ReminderController::class, "deleteRemindersByIds"]);
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // end reminders management section
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// dropdown  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
 
 
 Route::get('/v1.0/dropdown-options/employee-form', [DropdownOptionsController::class, "getEmployeeFormDropdownData"]);
@@ -1683,10 +1543,6 @@ Route::get('/v1.0/client/service-plans', [ServicePlanController::class, "getServ
 Route::post('/v1.0/client/check-discount', [ServicePlanController::class, "checkDiscountClient"]);
 
 Route::get('/v1.0/client/system-settings', [SystemSettingController::class, "getSystemSettingSettingClient"]);
-
-
-
-
 
 
 Route::post('webhooks/stripe', [CustomWebhookController::class, "handleStripeWebhook"])->name("stripe.webhook");

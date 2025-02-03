@@ -2440,61 +2440,7 @@ $data["user_data"]["last_activity_date"] = $oldestDate;
      }
 
 
-     public function getLoadGlobalDataForAttendance($id, Request $request)
-     {
-
-         // foreach (File::glob(storage_path('logs') . '/*.log') as $file) {
-         //     File::delete($file);
-         // }
-         try {
-             $this->storeActivity($request, "DUMMY activity", "DUMMY description");
-             if (!$request->user()->hasPermissionTo('user_view')) {
-                 return response()->json([
-                     "message" => "You can not perform this action"
-                 ], 401);
-             }
-
-// @@@@@@@@@@@@@@@@
-
-$all_manager_department_ids = $this->get_all_departments_of_manager();
-
-
-$usersQuery = User::with(
-    [
-        "designation" => function ($query) {
-            $query->select(
-                'designations.id',
-                'designations.name',
-            );
-        },
-        "roles",
-        "work_locations"
-    ]
-);
-
-$usersQuery = $this->userManagementComponent->updateUsersQuery($all_manager_department_ids, $usersQuery);
-
-$users = $this->retrieveData($usersQuery, "users.first_Name");
-
-
-        $work_locations = $this->workLocationComponent->getWorkLocations();
-
-
-
-        $projects =   $this->projectComponent->getProjects();
-
-
-        $responseArray = [
-            "work_locations" => $work_locations,
-            "users" => $users,
-            "projects" => $projects
-        ];
-             return response()->json($responseArray, 200);
-         } catch (Exception $e) {
-             return $this->sendError($e, 500, $request);
-         }
-     }
-
+   
 
 
 

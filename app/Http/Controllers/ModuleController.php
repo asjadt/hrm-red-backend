@@ -18,42 +18,7 @@ class ModuleController extends Controller
     use ErrorUtil, UserActivityUtil;
 
 
-     public function toggleActiveModule(GetIdRequest $request)
-     {
-
-         try {
-             $this->storeActivity($request, "DUMMY activity","DUMMY description");
-
-             if (!$request->user()->hasPermissionTo('module_update')) {
-                 return response()->json([
-                     "message" => "You can not perform this action"
-                 ], 401);
-             }
-             $request_data = $request->validated();
-
-
-            $module = Module::where([
-                "id" => $request_data["id"]
-            ])
-                ->first();
-            if (!$module) {
-
-                return response()->json([
-                    "message" => "no module found"
-                ], 404);
-            }
-
-
-             $module->update([
-                 'is_enabled' => !$module->is_enabled
-             ]);
-
-             return response()->json(['message' => 'Module status updated successfully'], 200);
-         } catch (Exception $e) {
-             error_log($e->getMessage());
-             return $this->sendError($e, 500, $request);
-         }
-     }
+   
 
 
      public function enableBusinessModule(EnableBusinessModuleRequest $request)
@@ -154,7 +119,7 @@ class ModuleController extends Controller
      }
 
 
- 
+
 
      public function getBusinessModules($business_id,Request $request)
      {
