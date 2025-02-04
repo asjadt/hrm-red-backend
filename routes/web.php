@@ -4,22 +4,13 @@ use App\Http\Controllers\CustomWebhookController;
 
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\DeveloperLoginController;
-use App\Http\Controllers\UpdateDatabaseController;
-use App\Models\Attendance;
-use App\Models\AttendanceHistory;
-use App\Models\AttendanceProject;
-use App\Models\Business;
-use App\Models\DepartmentUser;
+
+
 use App\Models\EmailTemplate;
 use App\Models\EmailTemplateWrapper;
-use App\Models\EmployeeUserWorkShiftHistory;
-use App\Models\Project;
-use App\Models\Role;
+
 use App\Models\User;
-use App\Models\UserWorkLocation;
-use App\Models\WorkShiftDetailHistory;
-use App\Models\WorkShiftHistory;
-use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
@@ -36,19 +27,13 @@ use Spatie\Permission\Models\Permission;
 */
 
 
-
-
-
-
-
-
-
+Route::get("/", function() {
+    return view("welcome");
+});
 
 Route::get("/subscriptions/redirect-to-stripe",[SubscriptionController::class,"redirectUserToStripe"]);
 Route::get("/subscriptions/get-success-payment",[SubscriptionController::class,"stripePaymentSuccess"])->name("subscription.success_payment");
 Route::get("/subscriptions/get-failed-payment",[SubscriptionController::class,"stripePaymentFailed"])->name("subscription.failed_payment");
-
-Route::get("/database-update", [UpdateDatabaseController::class, "updateDatabase"]);
 
 
 
