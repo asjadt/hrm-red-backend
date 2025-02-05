@@ -2370,7 +2370,7 @@ $data["user_data"]["last_activity_date"] = $oldestDate;
             $blocked_dates_collection = $unique_blocked_dates_collection->values()->all();
 
 
-            $colored_dates =  $this->userManagementComponent->getHolodayDetailsV2($user->id,$start_date,$end_date,false);
+            $colored_dates =  $this->userManagementComponent->getHolodayDetailsV2($user->id,$start_date,$end_date,1);
 
 
 
@@ -2440,7 +2440,7 @@ $data["user_data"]["last_activity_date"] = $oldestDate;
      }
 
 
-   
+
 
 
 
