@@ -51,7 +51,7 @@ use App\Http\Controllers\SettingPaymentDateController;
 use App\Http\Controllers\SettingPayrollController;
 use App\Http\Controllers\SocialSiteController;
 use App\Http\Controllers\SystemSettingController;
-use App\Http\Controllers\TaskController;
+
 use App\Http\Controllers\UserAddressHistoryController;
 use App\Http\Controllers\UserAssetController;
 use App\Http\Controllers\UserDocumentController;
@@ -1437,19 +1437,7 @@ Route::delete('/v1.0/projects/{ids}', [ProjectController::class, "deleteProjects
 
 
 
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// project  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Route::post('/v1.0/tasks', [TaskController::class, "createTask"]);
-Route::put('/v1.0/tasks', [TaskController::class, "updateTask"]);
-Route::get('/v1.0/tasks', [TaskController::class, "getTasks"]);
-Route::get('/v1.0/tasks/{id}', [TaskController::class, "getTaskById"]);
-Route::delete('/v1.0/tasks/{ids}', [TaskController::class, "deleteTasksByIds"]);
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// end project  management section
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 
